@@ -11,3 +11,8 @@ uvicorn main:app --reload --port 4040 --host 0.0.0.0
 # --host 监听端口
 
 ```
+
+## 参数
+
+* 路径参数
+* 查询参数
