@@ -10,3 +10,11 @@ git branch -D "branch_name" #强制删除未合并的分支
 git checkout -b branch_name #创建并切换到新的分支
 
 ```
+
+## 暂存区
+
+```bash
+
+git reset #移除暂存区全部文件
+
+```
