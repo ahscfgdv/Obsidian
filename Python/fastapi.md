@@ -16,3 +16,4 @@ uvicorn main:app --reload --port 4040 --host 0.0.0.0
 
 * 路径参数
 * 查询参数
+* 请求体参数
