@@ -23,3 +23,4 @@ from test import test_gui
 
 ```
 
+由于test包在其他的环境变量中存在，
