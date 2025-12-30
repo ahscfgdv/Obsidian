@@ -21,6 +21,8 @@ sys.path.append(str(path_root))
 
 from test import test_gui
 
+['d:\\Project\\RSAI_GUI\\api', 'D:\\Softwares\\MiniConda\\envs\\RSAI_GUI_GPU\\python311.zip', 'D:\\Softwares\\MiniConda\\envs\\RSAI_GUI_GPU\\DLLs', 'D:\\Softwares\\MiniConda\\envs\\RSAI_GUI_GPU\\Lib', 'D:\\Softwares\\MiniConda\\envs\\RSAI_GUI_GPU', 'D:\\Softwares\\MiniConda\\envs\\RSAI_GUI_GPU\\Lib\\site-packages', 'd:\\Project\\RSAI_GUI']
+
 ```
 
-由于test包在其他的环境变量中存在，
+由于test包在其他的环境变量中存在，导致无法导入环境变量最靠后的父目录中的test中的内容
