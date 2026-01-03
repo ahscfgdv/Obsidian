@@ -3,7 +3,14 @@
 
 ```powershell
 
-nuitka .\test_gui.py --standalone --output-dir=dist2 --enable-plugin=pyqt5 --mingw64 --collect-all=rasterio
+nuitka .\test_gui.py `
+--standalone `
+--output-dir=dist2 `
+--enable-plugin=pyqt5 `
+--mingw64 `
+--include-package=rasterio `
+--include-package-data=rasterio `
+--follow-import-to=rasterio
 
 ```
 
