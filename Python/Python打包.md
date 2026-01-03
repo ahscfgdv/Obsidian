@@ -3,7 +3,7 @@
 
 ```powershell
 
-nuitka .\test_gui.py --standalone
+nuitka .\test_gui.py --standalone --output-dir=dist
 
 ```
 
