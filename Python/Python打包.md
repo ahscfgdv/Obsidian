@@ -3,7 +3,7 @@
 
 ```powershell
 
-nuitka .\test_gui.py --standalone --output-dir=dist --enable-plugin=pyqt5 --mingw64
+nuitka .\test_gui.py --standalone --output-dir=dist --enable-plugin=pyqt5 --mingw64 --windows-disable-console
 
 ```
 
