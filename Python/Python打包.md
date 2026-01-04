@@ -35,4 +35,7 @@ Nuitka:WARNING:     Complex topic! More information can be found at
 Nuitka:WARNING: https://nuitka.net/info/scons-backend-failure.html
 Nuitka-Reports: Compilation crash report written to file 'nuitka-crash-report.xml'.
 
+
+解决办法使用--mingw64参数
+
 ```
