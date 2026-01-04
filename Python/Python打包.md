@@ -10,7 +10,8 @@ nuitka .\test_gui.py `
 --mingw64 `
 --include-package=rasterio `
 --include-package-data=rasterio `
---follow-import-to=rasterio
+--follow-import-to=rasterio `
+--windows-disable-console
 
 ```
 
