@@ -13,7 +13,7 @@ nuitka .\test_gui.py `
 --follow-import-to=rasterio `
 --windows-disable-console `
 --noinclude-unittest `
---noinclude-setuptools
+--noinclude-setuptools `
 --onefile
 
 ```
@@ -22,7 +22,7 @@ nuitka .\test_gui.py `
 
 ```powershell
 
-nuitka `
+nuitka .\test_gui.py`
 --standalone `
 --output-dir=dist2 `
 --enable-plugin=pyqt5 `
@@ -32,9 +32,9 @@ nuitka `
 --follow-import-to=rasterio `
 --windows-disable-console `
 --noinclude-unittest `
---noinclude-setuptools
---onefile
---lto=test_gui.py
+--noinclude-setuptools `
+--onefile `
+--lto=yes
 
 ```
 
