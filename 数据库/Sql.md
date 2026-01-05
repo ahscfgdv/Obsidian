@@ -64,6 +64,7 @@ CREATE DATABASE FastAPI_DB; #创建数据库
 Show databases; #展示数据库
 use database; #使用数据库
 show tables; #展示表
+DESCRIBE book; #查询表结构 
 
 ```
 
