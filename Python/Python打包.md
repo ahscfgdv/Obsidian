@@ -28,7 +28,7 @@ nuitka .\test_gui.py`
 --include-package=rasterio `
 --include-package-data=rasterio `
 --follow-import-to=rasterio `
---windows-disable-console `
+--windows-console-mode=disable `
 --module-parameter=torch-disable-jit=yes `
 --lto=yes
 
