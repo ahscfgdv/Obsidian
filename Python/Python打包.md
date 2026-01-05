@@ -14,6 +14,27 @@ nuitka .\test_gui.py `
 --windows-disable-console `
 --noinclude-unittest `
 --noinclude-setuptools
+--onefile
+
+```
+
+**尝试减少打包大小**
+
+```powershell
+
+nuitka `
+--standalone `
+--output-dir=dist2 `
+--enable-plugin=pyqt5 `
+--mingw64 `
+--include-package=rasterio `
+--include-package-data=rasterio `
+--follow-import-to=rasterio `
+--windows-disable-console `
+--noinclude-unittest `
+--noinclude-setuptools
+--onefile
+--lto=test_gui.py
 
 ```
 
