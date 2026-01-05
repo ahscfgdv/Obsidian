@@ -6,3 +6,8 @@
   
 ## 环境管理
 
+```bash
+
+uv venv --python 3.11
+
+```
