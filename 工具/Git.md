@@ -22,3 +22,8 @@ git checkout branch_name #切换到分支
 git reset #移除暂存区全部文件
 
 ```
+
+
+## .gitignore
+
+设置某些文件不经由git管理
