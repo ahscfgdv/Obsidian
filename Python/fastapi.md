@@ -20,6 +20,8 @@ uvicorn main:app --reload --port 4040 --host 0.0.0.0
 
 ## uvicorn
 
+支持异步
+
 ```bash
 
 
