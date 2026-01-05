@@ -18,6 +18,14 @@ uvicorn main:app --reload --port 4040 --host 0.0.0.0
 * 查询参数
 * 请求体参数
 
+## uvicorn
+
+```bash
+
+
+
+```
+
 ## ORM
 
 `pip install sqlalchemy[asyncio] aiomysql`
