@@ -12,8 +12,6 @@ nuitka .\test_gui.py `
 --include-package-data=rasterio `
 --follow-import-to=rasterio `
 --windows-disable-console `
---noinclude-unittest `
---noinclude-setuptools `
 --onefile
 
 ```
@@ -31,7 +29,7 @@ nuitka .\test_gui.py`
 --include-package-data=rasterio `
 --follow-import-to=rasterio `
 --windows-disable-console `
---onefile `
+--module-parameter=torch-disable-jit=yes `
 --lto=yes
 
 ```
