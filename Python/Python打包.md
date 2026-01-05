@@ -11,7 +11,9 @@ nuitka .\test_gui.py `
 --include-package=rasterio `
 --include-package-data=rasterio `
 --follow-import-to=rasterio `
---windows-disable-console
+--windows-disable-console `
+--noinclude-unittest `
+--noinclude-setuptools
 
 ```
 
