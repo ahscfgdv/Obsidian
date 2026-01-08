@@ -30,3 +30,19 @@ mc alias set rustfs http://127.0.0.1:9000 rustfsadmin rustfsadmin
 ```
 
 **文件操作**
+
+```bash
+
+mc ls rustfs
+
+mc mb rustfs/bucket-creation-by-mc #创建桶
+
+mc rb rustfs/bucket-creation-by-mc #删除桶
+
+mc cp file_name rustfs/bucket-creation-by-mc #上传文件
+
+mc rm rustfs/bucket-creation-by-mc/file_name #删除文件
+
+mc get rustfs/bucket-creation-by-mc/file_name ./file_name #下载文件
+
+```
