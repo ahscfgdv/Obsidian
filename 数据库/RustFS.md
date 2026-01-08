@@ -3,6 +3,8 @@
 
 **官网**：`https://rustfs.com.cn/`
 
+先不开启版本控制和对象锁可能存在bug
+
 ## 桶
 
 ## MC操作RustFS
