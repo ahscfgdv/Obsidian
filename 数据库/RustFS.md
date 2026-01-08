@@ -20,3 +20,13 @@ sudo mv mc /usr/local/bin/
 mc --version
 
 ```
+
+**连接**
+
+```bash
+
+mc alias set rustfs http://127.0.0.1:9000 rustfsadmin rustfsadmin
+
+```
+
+**文件操作**
