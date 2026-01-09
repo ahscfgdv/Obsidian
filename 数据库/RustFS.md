@@ -7,7 +7,23 @@
 
 git clone git@github.com:rustfs/rustfs.git
 
-%% 注释掉 %%
+注释掉依赖
+#depends_on:
+#  - otel-collector
+
+docker compose -f docker-compose.yml up -d rustfs
+
+# 解决权限问题
+# Initializing data directories: /data/rustfs0 /data/rustfs1 /data/rustfs2 /data/rustfs3
+# mkdir -p /data/rustfs0
+# mkdir: cannot create directory ‘/data/rustfs0’: Permission denied
+
+
+sudo chown -R 10001:10001 ~/Software/rustfs
+
+
+docker restart rustfs-server
+
 
 ```
 
