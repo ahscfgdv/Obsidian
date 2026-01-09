@@ -1,3 +1,16 @@
+
+## 安装部署
+
+### docker安装部署RustFS
+
+```bash
+
+git clone git@github.com:rustfs/rustfs.git
+
+%% 注释掉 %%
+
+```
+
 ## 分布式对象存储
 
 
