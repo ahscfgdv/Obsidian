@@ -27,6 +27,9 @@ docker restart rustfs-server
 
 ```
 
+
+## 因为Http代理导致通过本机IP访问无法访问
+
 ## 分布式对象存储
 
 
