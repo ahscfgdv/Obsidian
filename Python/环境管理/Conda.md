@@ -1,3 +1,12 @@
+
+## 更新
+
+```bash
+
+conda update anaconda
+
+```
+
 ## 环境管理
 
 ```bash
