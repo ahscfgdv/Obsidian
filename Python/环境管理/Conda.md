@@ -7,3 +7,11 @@ conda env list
 conda activate test
 
 ```
+
+## 缓存清零
+
+```bash
+
+conda clean --all
+
+```
