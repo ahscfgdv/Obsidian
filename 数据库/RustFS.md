@@ -11,7 +11,7 @@ chmod +x install_rustfs.sh
 
 bash ./install_rustfs.sh
 
-#根据提示一步步操作
+# 根据提示一步步操作
 
 ```
 
