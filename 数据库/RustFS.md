@@ -1,7 +1,19 @@
 
 ## 安装部署
 
-## 
+## Linux安装**SNSD(单机单盘)** 模式
+
+```bash
+
+curl -O https://rustfs.com/install_rustfs.sh
+
+chmod +x install_rustfs.sh
+
+bash ./install_rustfs.sh
+
+#根据提示一步步操作
+
+```
 
 ### docker安装部署RustFS
 
