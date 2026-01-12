@@ -19,6 +19,8 @@ conda deactivate
 
 conda remove -n myenv --all -y
 
+conda update -n base conda
+
 ```
 
 ## 缓存清零
