@@ -23,6 +23,14 @@ pip check #检查依赖冲突
 
 ```
 
+```bash
+
+pip cache info
+
+pip cache purge
+
+```
+
 ## 安装 gdal 失败
 
 直接下载whl文件安装
