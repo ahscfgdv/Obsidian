@@ -6,6 +6,10 @@ conda env list
 
 conda activate test
 
+conda deactivate
+
+conda remove -n myenv --all -y
+
 ```
 
 ## 缓存清零
