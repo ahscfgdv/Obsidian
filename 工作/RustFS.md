@@ -42,8 +42,7 @@ PyTorch训练 → WebDataset加载 → 查询MongoDB → 获取S3 URL → 流式
 
 什么数据需要传入mongodb，
 
-表datasets
-
+表datasets 存储数据集的信息
 ```bash
 
   
@@ -63,6 +62,10 @@ updated_at:2026-01-13T09:20:53.433+00:00
 RustFS_Config
 
 ```
+
+表xx_files 存储数据集文件的信息
+
+
 
 从name属性查询返回key连接
 
