@@ -36,3 +36,10 @@ PyTorch训练 → WebDataset加载 → 查询MongoDB → 获取S3 URL → 流式
 数据增强 → 批次组织 → 模型训练
 
 ```
+
+
+一键打包并上传脚本，参数数据集路径
+
+什么数据需要传入mongodb，
+
+key：SYSU_1000/val/label/train-0035.tar
