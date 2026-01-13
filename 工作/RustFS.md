@@ -42,4 +42,30 @@ PyTorch训练 → WebDataset加载 → 查询MongoDB → 获取S3 URL → 流式
 
 什么数据需要传入mongodb，
 
+表datasets
+
+```bash
+
+  
+# 原始
+name:"SYSU_1000"
+
+#改为
+name:"SYSU_1000/train/A"
+
+version:"v1"
+
+description:"Auto uploaded from RustFSManager"
+
+updated_at:2026-01-13T09:20:53.433+00:00
+
+添加
+RustFS_Config
+
+```
+
+从name属性查询返回key连接
+
+把key分为train和val再分为A，B，Label传入dataloader进行训练
+
 key：SYSU_1000/val/label/train-0035.tar
