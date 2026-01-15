@@ -11,3 +11,7 @@
 
 **安装位置**：/home/remoteuser/miniconda3
 
+[[../../Clippings/RustFS 单机单盘安装  RustFS 文档中心 1.md#单机单盘模式（SNSD， Single Node Single Disk）#]]
+
+
+
