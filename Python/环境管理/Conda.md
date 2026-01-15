@@ -1,4 +1,24 @@
 
+## 安装
+
+### Linux安装Minicoda
+
+```bash
+
+mkdir -p ~/miniconda3
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+# -b 批处理模式 (Batch mode)，不会询问许可协议，直接同意。 
+# -u 更新已存在的安装 (Update)。
+# -p 指定安装路径 (Path)。
+
+~/miniconda3/bin/conda init bash
+
+source ~/.bashrc
+```
+
 ## 更新
 
 ```bash

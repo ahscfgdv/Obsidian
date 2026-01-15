@@ -7,4 +7,7 @@
 
 ### Miniconda
 
+**Version**：25.11.1
+
+**安装位置**：/home/remoteuser/miniconda3
 
