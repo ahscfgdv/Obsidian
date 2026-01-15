@@ -11,9 +11,13 @@
 
 **安装位置**：/home/remoteuser/miniconda3
 
-[Linux安装Minicoda](../../Python/环境管理/Conda.md#Linux安装Minicoda)
+**安装方式** ：[Linux安装Minicoda](../../Python/环境管理/Conda.md#Linux安装Minicoda)
 
 ### Git
+
+**Version**：2.43.0
+
+**安装方式**：`apt install git`
 
 
 
