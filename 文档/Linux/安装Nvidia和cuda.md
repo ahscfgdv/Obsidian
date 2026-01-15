@@ -10,3 +10,5 @@ ubuntu-drivers devices #查看推荐的驱动版本
 apt install nvidia-driver-580-open
 
 ```
+
+[Linux网络安装Cuda](../../工具/Cuda.md#Linux网络安装)
