@@ -1,6 +1,5 @@
 
-UV和Conda无法混用
-
+https://docs.astral.sh/uv/
 ## 安装
 
 * window：`powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
