@@ -13,5 +13,6 @@ uv init server #创建一个项目
 uv python pin 3.11 #固定python版本不会直接添加到虚拟环境中
 uv sync #同步虚拟环境中的python版本
 uv add fastapi uvicorn langchain #安装包
+source .venv/bin/activate #激活虚拟环境不推荐使用
 
 ```
