@@ -14,7 +14,9 @@ bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
 # -u 更新已存在的安装 (Update)。
 # -p 指定安装路径 (Path)。
 
-~/miniconda3/bin/conda init bash
+~/miniconda3/bin/conda init bash #初始化conda
+
+conda init --reverse bash #取消conda初始化
 
 source ~/.bashrc
 ```
