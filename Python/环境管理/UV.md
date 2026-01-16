@@ -4,7 +4,7 @@ UV和Conda无法混用
 ## 安装
 
 * window：`powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
-* linux：``
+* linux：`curl -LsSf https://astral.sh/uv/install.sh | sh`
   
 ## 环境管理
 
