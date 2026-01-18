@@ -52,3 +52,12 @@ conda update -n base conda
 conda clean --all
 
 ```
+
+## 配置
+
+```bash
+
+conda config --set auto_activate_base false
+# 不自动激活base,保留conda命令
+
+```
