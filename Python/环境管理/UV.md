@@ -31,5 +31,17 @@ C:\Users\ljx\AppData\Local\uv\cache
 
 
 ```
+
+**项目中配置镜像源**
+
+```toml
+
+[tool.uv]
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+```
+
 ## warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
 
