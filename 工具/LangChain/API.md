@@ -5,10 +5,12 @@
 如果把 LangChain 比作一台电脑，`langchain_community` 是各种外接设备（鼠标、键盘、打印机），那么 **`langchain_core` 就是主板和操作系统内核**。它不包含具体的第三方工具集成，而是定义了所有组件必须遵守的**标准接口**和**基本抽象**。
 ### prompts
 
-* FewShotPromptTemplate：FewShotPromptTemplate 的作用是构建包含少量示例（即“少样本”）的提示词，通过让大模型“看例子学习”，引导其按照指定的格式、风格或逻辑生成更准确的回复。
+* **FewShotPromptTemplate：** 的作用是构建包含少量示例（即“少样本”）的提示词，通过让大模型“看例子学习”，引导其按照指定的格式、风格或逻辑生成更准确的回复。
   **返回类型:** 纯文本
-* FewShotChatMessagePromptTemplate
+* **FewShotChatMessagePromptTemplate**
   **返回类型:** 消息对象列表
+*  **PromptTemplate:** 带有填空题的标准公文模版”。它的核心作用是将静态的文本结构与动态的用户输入分离开来，让提示词的生成变得标准化、可复用且易于管理。
+	* **partial:**  方法的主要作用是“预填充”提示词模版中的部分变量，并返回一个新的、待完成的提示词模版对象。
 
 ### messages
 * HumanMessage **（人类消息）：** 它是**用户输入**，代表你（或最终用户）向 AI 提出的具体问题、指令或对话内容。
