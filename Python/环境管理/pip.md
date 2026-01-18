@@ -20,6 +20,7 @@ pip freeze > requirements.txt
 pip list
 pip show torch
 pip check #检查依赖冲突
+pip config list
 
 ```
 
