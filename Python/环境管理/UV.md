@@ -17,5 +17,19 @@ source .venv/bin/activate #激活虚拟环境不推荐使用
 
 ```
 
+## 配置
+
+```bash
+
+uv cache dir
+C:\Users\ljx\AppData\Local\uv\cache
+
+设置环境变量
+# 假设你想把缓存放在 D:\uv_cache
+[System.Environment]::SetEnvironmentVariable("UV_CACHE_DIR", "D:\uv_cache", "User")
+
+
+
+```
 ## warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
 
