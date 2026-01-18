@@ -4,6 +4,7 @@
 ```bash
 
 https://mirrors.ustc.edu.cn/pypi/ #中科大
+https://mirrors.aliyun.com/pypi/simple #阿里源
 
 ```
 
