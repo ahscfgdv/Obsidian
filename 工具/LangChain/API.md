@@ -22,6 +22,10 @@
 **SemanticSimilarityExampleSelector:**  是 LangChain 中用于 Few-Shot（少样本）提示工程的一个智能组件，旨在根据语义相似度动态筛选最佳示例。
 
 它通过 Embedding 模型将用户的**当前输入**和预设的**示例库**转化为向量，并计算它们之间的距离（通常是余弦相似度），从而自动从大量样本中检索出与当前问题**最相关**的 K 个示例插入到 Prompt 中。这种机制不仅能显著节省 Token（无需把所有例子都塞进去），还能让大模型参考最贴切的案例进行推理，从而大幅提升输出的准确性和风格一致性。
+
+### output_parsers
+
+
 ## langchain_openai
 
 ### ChatOpenAI
