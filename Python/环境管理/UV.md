@@ -16,3 +16,6 @@ uv add fastapi uvicorn langchain #安装包
 source .venv/bin/activate #激活虚拟环境不推荐使用
 
 ```
+
+## warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+
