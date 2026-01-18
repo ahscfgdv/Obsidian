@@ -3,7 +3,11 @@
 **IP**：192.168.100.28
 **Linux内核版本**：6.14.0-37-generic
 
-## 软件
+## 用户
+
+**lcx**
+**remoteuser**
+## 系统软件
 
 ### Miniconda
 
@@ -19,6 +23,10 @@
 
 **Version**：0.9.24
 **安装方式**：`apt install xrdp -y`
+
+## ollama
+
+
 
 
 
