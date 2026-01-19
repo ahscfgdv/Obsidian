@@ -4,3 +4,7 @@
 ssh-keygen -t ed25519 -C "your_email@example.com"
 # ed25519
 ```
+
+## 免密连接
+
+上传公钥到服务器.ssh目录的authorized_keys中
