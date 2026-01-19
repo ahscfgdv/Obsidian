@@ -128,3 +128,98 @@ print(result)       # "为什么程序员总是分不清万圣节和圣诞节？
 **`langchain_community` 是 LangChain 生态架构中专门用于存放所有第三方集成（Integrations）的独立 Python 包。**
 
 它旨在将 LangChain 的核心抽象逻辑（`langchain-core`）与具体的外部工具实现解耦，汇集了由开源社区和合作伙伴维护的数以百计的组件——涵盖了各类**大语言模型接口**（如 OpenAI、Hugging Face）、**向量数据库**（如 Chroma、FAISS）、**文档加载器**以及**搜索工具**等，使开发者能够通过标准化的接口，“开箱即用”地将 LangChain 应用连接到现实世界的各种服务与私有数据源中。
+## LCEL
+
+在 LangChain 中，`|` 符号被称为 **Pipe Operator（管道操作符）**。
+
+它是 **LCEL (LangChain Expression Language)** 的核心语法。简单来说，它的作用是将左边组件的**输出**（Output），直接作为右边组件的**输入**（Input）传递下去。
+
+这就好比 Unix/Linux 命令中的管道（如 `ls | grep .txt`），或者工厂里的流水线。
+
+---
+
+### 1. 数据流向图解
+
+在你提供的代码 `chain = prompt_template | chat_model | parser` 中，数据是这样流动的：
+
+代码段
+
+```
+graph LR
+    A[用户输入 (字典)] -->|输入| B(Prompt Template)
+    B -->|生成 PromptValue| C(Chat Model)
+    C -->|生成 Message| D(Output Parser)
+    D -->|解析后的数据| E[最终结果]
+```
+
+1. **`prompt_template`**: 接收用户的变量（例如 `{"topic": "AI"}`），将其组装成完整的提示词对象（PromptValue）。
+    
+2. **`|` (传递)**: 将这个 PromptValue 传给模型。
+    
+3. **`chat_model`**: 接收 PromptValue，调用 LLM，返回一个消息对象（AIMessage）。
+    
+4. **`|` (传递)**: 将这个 AIMessage 传给解析器。
+    
+5. **`parser`**: 接收消息对象，提取其中的文本内容，将其转换为字符串、JSON 或其他格式。
+    
+
+---
+
+### 2. 为什么要这么写？
+
+如果没有 `|` 符号，你可能需要写成嵌套函数调用的形式，代码可读性会变差：
+
+**❌ 不使用 `|` (旧式写法/手动调用)**
+
+Python
+
+```
+# 代码不仅冗长，而且阅读顺序是从里到外，不直观
+final_result = parser.invoke(
+    chat_model.invoke(
+        prompt_template.invoke({"topic": "AI"})
+    )
+)
+```
+
+**✅ 使用 `|` (LCEL 写法)**
+
+Python
+
+```
+# 阅读顺序从左到右，符合直觉：先提示词，再模型，再解析
+chain = prompt_template | chat_model | parser
+final_result = chain.invoke({"topic": "AI"})
+```
+
+---
+
+### 3. 技术原理 (Under the Hood)
+
+在 Python 层面，LangChain 利用了 **运算符重载 (Operator Overloading)**。
+
+- LangChain 中的核心组件（Prompt, Model, Parser, Retriever 等）都继承自一个基类：**`Runnable`**。
+    
+- `Runnable` 类重写了 Python 的 `__or__` 魔术方法。
+    
+- 当你执行 `A | B` 时，实际上 Python 执行的是 `A.__or__(B)`，LangChain 在内部将其转换成了一个 `RunnableSequence`（可运行序列），负责按顺序管理数据的输入输出。
+    
+
+### 4. 总结
+
+在 `chain = prompt_template | chat_model | parser` 中：
+
+- **`|` 的作用**：连接组件，构建流水线。
+    
+- **左侧**：是生产者（Producer）。
+    
+- **右侧**：是消费者（Consumer）。
+    
+
+---
+
+### 下一步建议
+
+既然你已经了解了基本的线性链（Linear Chain），你可能会遇到需要“并行处理”或者“透传参数”的情况。
+
+**您想了解如何使用 `RunnableParallel` (并行运行) 或 `RunnablePassthrough` (参数透传) 吗？**
