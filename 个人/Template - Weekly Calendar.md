@@ -35,16 +35,19 @@ let hitokotoContent = "正在加载金句..."; // 默认文案
 try {
     // 参数说明：c=a(动画), c=b(漫画), c=c(游戏), c=d(文学), c=h(影视), c=i(诗词)
     // encode=json: 获取详细信息以便组合出处
-    const apiUrl = "https://v1.hitokoto.cn/?c=a&c=b&c=c&c=d&c=h&c=i&encode=json";
+    const apiUrl = "https://v1.hitokoto.cn/?c=b&c=c&c=d&c=h&c=i&encode=json";
     
     // 发起网络请求
-    const response = await tp.web.request(apiUrl);
-    const data = JSON.parse(response);
+    const response = await fetch(apiUrl);
+    // 检查网络状态 
+    if (!response.ok) { throw new Error("Network response was not ok"); } 
+    // 关键修复点：直接使用 .json() 方法，而不是 JSON.parse() 
+    const data = await response.json();
     
     // 组合成 "句子 —— 出处" 的格式
     // 如果没有作者(from_who)，就只显示出处(from)
-    const author = data.from_who ? ` (${data.from_who})` : "";
-    hitokotoContent = `${data.hitokoto} —— 《${data.from}》${author}`;
+    const author = data.from_who ? ` (${data.from_who})` : "佚名";
+    hitokotoContent = `${data.hitokoto} —— 《${data.from}》 -- ${author}`;
     
 } catch (error) {
     console.error("一言API请求失败:", error);
