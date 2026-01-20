@@ -7,9 +7,20 @@
 镜像存放在nas的`/gongxiang/AI项目组/刘佳璇`
 ## 2.给服务器安装esxi系统
 
-
-
-##### 密码 HBYB@123
+1. BMC挂载镜像
+	 ![](assets/浪潮SA5212M5服务器BMC安装ESXI系统/file-20260120113908752.png)
+2.  开启系统按F11进入启动项
+	 ![](assets/浪潮SA5212M5服务器BMC安装ESXI系统/file-20260120114048190.png)
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 @123
 
 ![](https://m8dj7k0ne1.feishu.cn/space/api/box/stream/download/asynccode/?code=YTgxYjVjMDk3ZDI0YjY2MDU0MWU0ZWU2MzI3N2IxZjVfREpXMTZ5OUo1clBEREtWMVUyMm1zV1hDbU1MclZVT3FfVG9rZW46Rkp3eWJOUTlwb3NoMzl4RGtaTGNFVXZHbm1jXzE3Njg4Nzk0MzE6MTc2ODg4MzAzMV9WNA)
 
