@@ -1,28 +1,37 @@
 <%*
-/* 核心逻辑：从文件名解析日期，确保点击"未来/过去"的周也能生成正确日期 */
+/* 核心逻辑：从文件名解析日期 */
 const fileName = tp.file.title;
 let refDate;
 
-// 检查文件名是否符合 "2026-W04" 这种 ISO 周格式
-// 如果不符合（比如你手动新建未命名文件），则默认使用当前时间
+// 1. 确定基准日期
 if (/^\d{4}-W\d{2}$/.test(fileName)) {
     refDate = moment(fileName, "gggg-[W]ww");
 } else {
     refDate = moment(); 
 }
 
-// 计算这一周的周一和周日
-const monday = refDate.clone().startOf('isoWeek').format("YYYY-MM-DD");
-const sunday = refDate.clone().endOf('isoWeek').format("YYYY-MM-DD");
+// 2. 基础变量计算
+const monday = refDate.clone().startOf('isoWeek');
+const sunday = refDate.clone().endOf('isoWeek');
 const currentYear = refDate.format("YYYY");
 const currentWeek = refDate.format("WW");
 const prevWeek = refDate.clone().subtract(1, 'weeks').format("gggg-[W]ww");
 const nextWeek = refDate.clone().add(1, 'weeks').format("gggg-[W]ww");
+
+// 3. 【新增】自动生成每日计划模块
+// 循环 7 次，生成每一天的标题（格式：01-19 Monday）
+let dailySection = "";
+for (let i = 0; i < 7; i++) {
+    let dayCursor = monday.clone().add(i, 'days');
+    // 如果想要中文星期，需确保 Obsidian 设置为中文，或强制使用 .locale('zh-cn')
+    let dateStr = dayCursor.format("MM-DD dddd"); 
+    dailySection += `### ${dateStr}\n\n- [ ] \n\n`;
+}
 _%>
 # 📅 <% currentYear %>-W<% currentWeek %> 周记
 
-**时间跨度**：[[<% monday %>]] 至 [[<% sunday %>]]
-**上一周**：[[<% prevWeek %>]] | **下一周**：[[<% nextWeek %>]]
+**时间跨度**：[[<% monday.format("YYYY-MM-DD") %>]] 至 [[<% sunday.format("YYYY-MM-DD") %>]]
+**导航**：[[<% prevWeek %>|⏪ 上一周]] | [[<% nextWeek %>|⏩ 下一周]]
 **标签**：#Weekly #Review
 
 ---
@@ -33,6 +42,14 @@ _%>
 > 1. 
 > 2. 
 > 3. 
+
+---
+
+## 📅 每日记录 (Daily Log)
+
+<% dailySection %>
+
+---
 
 ## 📉 复盘与反思 (Reflections)
 
@@ -47,7 +64,7 @@ _%>
 
 | 项目 | 进度 | 状态 | 备注 |
 | :--- | :--- | :--- | :--- |
-| **CS架构问答系统** | ⬛⬛⬜⬜⬜ | 🟡 开发中 | *Vue3前端页面搭建* |
+| **CS架构问答系统** | ⬛⬛⬛⬜⬜ | 🟡 开发中 | *Vue3前端页面搭建* |
 | **Linux/运维** | ⬛⬛⬛⬜⬜ | 🟢 正常 | *ESXi维护* |
 | **AI学习** | ⬛⬜⬜⬜⬜ | 🔴 待启动 | *LangChain研究* |
 
@@ -56,20 +73,6 @@ _%>
 ## 📥 输入与输出
 
 - 📚 **阅读/学习**：
-	
 - 📝 **代码/笔记**：
-	
 
 ---
-
-## 🔭 下周规划 (Next Week)
-### 🎯 核心目标
-
-1. [ ] 
-       
-2. [ ] 
-       
-
-### 🗓️ 待办清单
-- [ ]
-- 
