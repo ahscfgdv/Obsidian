@@ -8,4 +8,6 @@
 	 密码：```7`5;!eBKL%qY!Rh```
 3. 访问
 	 `https://support.broadcom.com/web/ecx/solutiondetails?patchId=15939`
-	 
+	 ![](assets/浪潮SA5212M5服务器BMC安装ESXI系统/file-20260120110716669.png)
+
+## 登录浪潮服务器BMC管理界面
