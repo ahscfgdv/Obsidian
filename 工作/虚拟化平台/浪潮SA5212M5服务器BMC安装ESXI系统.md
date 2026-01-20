@@ -4,7 +4,7 @@
 
 ![](assets/浪潮SA5212M5服务器BMC安装ESXI系统/file-20260120112631340.png)
 
-
+镜像存放在nas的`/gongxiang/AI项目组/刘佳璇`
 ## 2.给服务器安装esxi系统
 
 
