@@ -1,16 +1,15 @@
 <%*
-/* 核心逻辑：从文件名解析日期 */
+// ==========================================
+// 1. 日期计算逻辑 (保持不变)
+// ==========================================
 const fileName = tp.file.title;
 let refDate;
-
-// 1. 确定基准日期
 if (/^\d{4}-W\d{2}$/.test(fileName)) {
     refDate = moment(fileName, "gggg-[W]ww");
 } else {
     refDate = moment(); 
 }
 
-// 2. 基础变量计算
 const monday = refDate.clone().startOf('isoWeek');
 const sunday = refDate.clone().endOf('isoWeek');
 const currentYear = refDate.format("YYYY");
@@ -18,14 +17,38 @@ const currentWeek = refDate.format("WW");
 const prevWeek = refDate.clone().subtract(1, 'weeks').format("gggg-[W]ww");
 const nextWeek = refDate.clone().add(1, 'weeks').format("gggg-[W]ww");
 
-// 3. 【新增】自动生成每日计划模块
-// 循环 7 次，生成每一天的标题（格式：01-19 Monday）
+// ==========================================
+// 2. 每日计划生成逻辑 (保持不变)
+// ==========================================
 let dailySection = "";
 for (let i = 0; i < 7; i++) {
     let dayCursor = monday.clone().add(i, 'days');
-    // 如果想要中文星期，需确保 Obsidian 设置为中文，或强制使用 .locale('zh-cn')
+    // 如果需要中文星期，可改为 dayCursor.locale('zh-cn').format("MM-DD dddd")
     let dateStr = dayCursor.format("MM-DD dddd"); 
     dailySection += `### ${dateStr}\n\n- [ ] \n\n`;
+}
+
+// ==========================================
+// 3. 【新增】一言 API 获取逻辑
+// ==========================================
+let hitokotoContent = "正在加载金句..."; // 默认文案
+try {
+    // 参数说明：c=a(动画), c=b(漫画), c=c(游戏), c=d(文学), c=h(影视), c=i(诗词)
+    // encode=json: 获取详细信息以便组合出处
+    const apiUrl = "https://v1.hitokoto.cn/?c=a&c=b&c=c&c=d&c=h&c=i&encode=json";
+    
+    // 发起网络请求
+    const response = await tp.web.request(apiUrl);
+    const data = JSON.parse(response);
+    
+    // 组合成 "句子 —— 出处" 的格式
+    // 如果没有作者(from_who)，就只显示出处(from)
+    const author = data.from_who ? ` (${data.from_who})` : "";
+    hitokotoContent = `${data.hitokoto} —— 《${data.from}》${author}`;
+    
+} catch (error) {
+    console.error("一言API请求失败:", error);
+    hitokotoContent = "所谓无底深渊，下去，也是前程万里。 —— 《木心》 (网络请求失败，这是备用金句)";
 }
 _%>
 # 📅 <% currentYear %>-W<% currentWeek %> 周记
@@ -38,6 +61,9 @@ _%>
 
 ## 🌈 本周高光 (Highlights)
 
+> [!QUOTE] 本周金句
+> <% hitokotoContent %>
+
 > [!SUCCESS] 成就与进展
 > 1. 
 > 2. 
@@ -48,7 +74,6 @@ _%>
 ## 📅 每日记录 (Daily Log)
 
 <% dailySection %>
-
 ---
 
 ## 📉 复盘与反思 (Reflections)
@@ -78,3 +103,9 @@ _%>
 	
 
 ---
+
+## 🔭 下周规划 (Next Week)
+
+### 🎯 核心目标
+1. [ ] 
+2. [ ] 
