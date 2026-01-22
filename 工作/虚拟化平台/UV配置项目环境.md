@@ -225,7 +225,13 @@ endlocal
 Plaintext
 
 ```
-
+|-- module
+|-- python
+|-- utils
+|-- __pycache__
+|-- app_run.bat
+|-- test.py
+|-- test_gui.py
 ```
 
 ---
@@ -243,3 +249,7 @@ Plaintext
 # 项目所需资料
 
 存放在`/gongxiang/AI项目组/刘佳璇`
+```
+python-3.13.11-embed-amd64.zip
+gdal-3.11.4-cp311-cp311-win_amd64.whl
+```
