@@ -5,12 +5,12 @@
 
 ## 在项目中初始化环境
 
-1. UV初始化
+### 1.UV初始化
 ```
 uv init
 uv python pin 3.11
 ```
-2. 修改uv 项目的pyproject.toml文件
+### 2. 修改uv 项目的pyproject.toml文件
 ```toml
 [project]
 name = "rsai-gui"
@@ -46,3 +46,8 @@ torchvision = { index = "pytorch" }
 gdal = { path = "C:/Users/ljx/Downloads/gdal-3.11.4-cp311-cp311-win_amd64.whl" }
 # 手动下载的gdal包路径
 ```
+
+同步配置文件
+
+`uv sync`
+
