@@ -154,7 +154,7 @@ uv pip compile pyproject.toml -o requirements.txt
 PowerShell
 
 ```
-uv pip install -r requirements.txt --python dist/python/python.exe --extra-index-url https://download.pytorch.org/whl/cu124
+uv pip install -r requirements.txt --python dist/python/python.exe --extra-index-url https://download.pytorch.org/whl/cu130
 ```
 
 ### 2.4 代码迁移与路径修正
