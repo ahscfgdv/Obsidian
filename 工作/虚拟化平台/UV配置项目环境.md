@@ -54,7 +54,7 @@ gdal = { path = "C:/Users/ljx/Downloads/gdal-3.11.4-cp311-cp311-win_amd64.whl" }
 
 ---
 
-## 制作绿色便携版 (Portable Build)
+## 第二章：制作绿色便携版 (Portable Build)
 
 **目标**：构建一个独立的 `dist` 文件夹，包含 Python 解释器、所有依赖库（PyTorch/GDAL等）和源代码。该文件夹可直接拷贝到任何 Windows 电脑（即便是纯净系统）运行，无需配置环境。
 
@@ -68,9 +68,10 @@ gdal = { path = "C:/Users/ljx/Downloads/gdal-3.11.4-cp311-cp311-win_amd64.whl" }
     
     - **版本要求**：必须与开发环境一致（建议 3.11.9）。
         
-    - **下载地址**：[Python 3.11.9 Embeddable](https://www.google.com/search?q=https://www.python.org/ftp/python/3.11.9/python-3.11.9-embed-amd64.zip)
-        
-2. **解压与重命名**：
+    - **下载地址**：[https://www.python.org/downloads/release/python-3119/](https://www.python.org/downloads/windows/)
+         搜索python3.11.9下载系统对应架构的版本
+         ![](assets/UV配置项目环境/file-20260122095506078.png)
+1. **解压与重命名**：
     
     - 在项目根目录下新建文件夹 `dist`。
         
