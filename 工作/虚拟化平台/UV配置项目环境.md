@@ -191,7 +191,7 @@ import torch
 
 为了实现“点击即用”，并在不同电脑上自动识别路径，我们需要编写一个批处理脚本。
 
-在 `dist` 目录下新建 **`启动程序.bat`**：
+在 `dist` 目录下新建 **`app_run.bat`**：
 
 代码段
 
@@ -229,11 +229,10 @@ Plaintext
 ```
 dist/
 ├── python/               [文件夹] 包含 python.exe, Lib, site-packages
-├── testabc/              [文件夹] 你的自定义包 (如果有)
+|── 
 ├── test_gui.py           [文件] 主入口 (已加 sys.path 补丁)
 ├── test.py               [文件] 依赖代码
-├── vc_redist.x64.exe     [文件] (可选但推荐) 微软常用运行库安装包
-└── 启动程序.bat          [文件] 双击运行的入口
+└── app_run.bat.bat          [文件] 双击运行的入口
 ```
 
 > **特别提示**：为了防止目标电脑（纯净 Win10/11）缺失 C++ 运行库导致 PyTorch/GDAL 报错，强烈建议下载 `VC_redist.x64.exe` 并放入 `dist` 目录，备注“如果运行报错请先安装此文件”。
@@ -249,3 +248,7 @@ dist/
 ## 加载torch的DLL库失败
 
 修改test_gui的导入顺序先导入torch再导入pyqt
+
+# 项目所需资料
+
+存放在
