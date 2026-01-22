@@ -89,36 +89,6 @@
 
 ---
 
-### 代码示例：如何在一个链中使用解析器
-
-解析器通常是 Chain 的**最后一环**。以下是使用 `StrOutputParser` 的极简示例：
-
-Python
-
-```
-from langchain_core.output_parsers import StrOutputParser
-from langchain_openai import ChatOpenAI
-from langchain_core.prompts import PromptTemplate
-
-# 1. 定义模型
-model = ChatOpenAI()
-
-# 2. 定义解析器
-parser = StrOutputParser()
-
-# 3. 构建链 (Prompt -> Model -> Parser)
-# 这里的 "|" 是 LCEL 的管道符号
-chain = PromptTemplate.from_template("讲个关于{topic}的笑话") | model | parser
-
-# 4. 调用
-result = chain.invoke({"topic": "程序员"})
-
-# result 直接就是字符串，不需要再 .content 了
-print(type(result)) # <class 'str'>
-print(result)       # "为什么程序员总是分不清万圣节和圣诞节？因为 Oct 31 == Dec 25"
-```
-
-**您想看一段 `PydanticOutputParser` 的代码吗？这在做信息提取（比如从简历中提取字段）时非常有用。**
 ## langchain_openai
 
 ### ChatOpenAI
@@ -128,6 +98,11 @@ print(result)       # "为什么程序员总是分不清万圣节和圣诞节？
 **`langchain_community` 是 LangChain 生态架构中专门用于存放所有第三方集成（Integrations）的独立 Python 包。**
 
 它旨在将 LangChain 的核心抽象逻辑（`langchain-core`）与具体的外部工具实现解耦，汇集了由开源社区和合作伙伴维护的数以百计的组件——涵盖了各类**大语言模型接口**（如 OpenAI、Hugging Face）、**向量数据库**（如 Chroma、FAISS）、**文档加载器**以及**搜索工具**等，使开发者能够通过标准化的接口，“开箱即用”地将 LangChain 应用连接到现实世界的各种服务与私有数据源中。
+
+## langchain_classic
+
+## memory
+
 ## LCEL
 
 在 LangChain 中，`|` 符号被称为 **Pipe Operator（管道操作符）**。
