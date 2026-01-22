@@ -161,8 +161,8 @@ uv pip install -r requirements.txt --python dist/python/python.exe --extra-index
 
 #### A. 复制代码
 
-将项目根目录下的所有源代码（`.py`）和资源文件夹（如 `assets`, `config`）复制到 `dist` 根目录下。
-
+![](assets/UV配置项目环境/file-20260122100841748.png)
+复制所选文件到dist文件夹中
 #### B. 修正模块导入路径 (sys.path)
 
 由于嵌入版 Python 不会自动将当前脚本所在目录加入搜索路径，导致无法导入同级模块（如 `import testabc` 报错）。
