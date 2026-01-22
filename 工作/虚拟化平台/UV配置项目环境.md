@@ -133,7 +133,7 @@ uv pip compile pyproject.toml -o requirements.txt
     
     ```
     # 替换为你存放 whl 文件的实际路径
-    uv pip install "D:\Downloads\GDAL-3.8.4-cp311-cp311-win_amd64.whl" --python dist/python/python.exe
+    uv pip install "C:\Users\ljx\Downloads\gdal-3.11.4-cp311-cp311-win_amd64.whl" --python dist/python/python.exe
     ```
     
 2. **安装 PyTorch (指定 CUDA 源)**：
@@ -141,7 +141,7 @@ uv pip compile pyproject.toml -o requirements.txt
     PowerShell
     
     ```
-    uv pip install torch torchvision --python dist/python/python.exe --extra-index-url https://download.pytorch.org/whl/cu124
+    uv pip install torch torchvision --python dist/python/python.exe --extra-index-url https://download.pytorch.org/whl/cu130
     ```
     
 
