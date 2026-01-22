@@ -51,7 +51,6 @@ gdal = { path = "C:/Users/ljx/Downloads/gdal-3.11.4-cp311-cp311-win_amd64.whl" }
 
 `uv sync`
 
-
 ---
 
 ## 第二章：制作绿色便携版 (Portable Build)
@@ -105,7 +104,6 @@ gdal = { path = "C:/Users/ljx/Downloads/gdal-3.11.4-cp311-cp311-win_amd64.whl" }
     import site  <-- 确保这一行生效
     ```
     
-
 ### 2.3 向绿色版注入依赖库
 
 我们将使用 `uv` 将开发环境中的依赖“灌入”这个独立的 Python 文件夹中。由于 GDAL 和 PyTorch 的特殊性，必须分步安装。
@@ -227,15 +225,8 @@ endlocal
 Plaintext
 
 ```
-dist/
-├── python/               [文件夹] 包含 python.exe, Lib, site-packages
-|── 
-├── test_gui.py           [文件] 主入口 (已加 sys.path 补丁)
-├── test.py               [文件] 依赖代码
-└── app_run.bat.bat          [文件] 双击运行的入口
-```
 
-> **特别提示**：为了防止目标电脑（纯净 Win10/11）缺失 C++ 运行库导致 PyTorch/GDAL 报错，强烈建议下载 `VC_redist.x64.exe` 并放入 `dist` 目录，备注“如果运行报错请先安装此文件”。
+```
 
 ---
 
@@ -251,4 +242,4 @@ dist/
 
 # 项目所需资料
 
-存放在
+存放在`/gongxiang/AI项目组/刘佳璇`
