@@ -6,7 +6,7 @@
 [RustFS](../数据库/RustFS.md)
 
 引用并展示
-`![[]]`
+`![[文件名#章节标题]]`
 ![Synology Inc.](Synology%20Inc.)
 
 **引用文件中的标题**
