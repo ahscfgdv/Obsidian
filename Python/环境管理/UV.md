@@ -9,11 +9,17 @@ https://docs.astral.sh/uv/
 
 ## Python版本
 
-```cmd
+* `uv python list` : 查看可用的 Python 版本。
+* `uv python find` : 查找已安装的 Python 版本。
+* `uv python install` : 安装 Python 版本。
+* `uv python uninstall` : 卸载一个 Python 版本。
+* `uv python pin` : 将当前项目固定以使用特定 Python 版本。
 
+## 脚本
 
-
-```
+- `uv run` : 运行一个脚本。
+- `uv add --script` : 向一个脚本添加依赖。
+- `uv remove --script` : 从一个脚本移除依赖。
   
 ## 环境管理
 
