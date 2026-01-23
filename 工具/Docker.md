@@ -35,3 +35,15 @@ sudo systemctl restart docker #重启docker
 
 docker info #查看docker配置
 ```
+
+## 设置linux无需sudo
+
+**将用户添加到docker用户组**
+
+```bash
+
+sudo usermod -aG docker $USER
+
+newgrp docker
+
+```
