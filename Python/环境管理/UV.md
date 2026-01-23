@@ -4,6 +4,16 @@ https://docs.astral.sh/uv/
 
 * window：`powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
 * linux：`curl -LsSf https://astral.sh/uv/install.sh | sh`
+
+# 基础功能
+
+## Python版本
+
+```cmd
+
+
+
+```
   
 ## 环境管理
 
