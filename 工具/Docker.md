@@ -29,5 +29,9 @@
 
 ```bash
 
+sudo systemctl daemon-reload #重启daemon进程 
+sudo systemctl restart docker #重启docker
 
+
+docker info #查看docker配置
 ```
