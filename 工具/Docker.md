@@ -5,5 +5,23 @@
 
 ## 配置镜像源
 
-1. **临时换源**
-	 `sudo docker pull docker.m.daocloud.io/hello-world`
+### **临时换源**
+
+`sudo docker pull docker.m.daocloud.io/hello-world`
+
+### **修改配置文件**
+
+`sudo vim /etc/docker/daemon.json`
+ 
+```
+{
+    "registry-mirrors": [
+        "https://registry.docker-cn.com",
+        "https://docker.mirrors.ustc.edu.cn",
+        "https://hub-mirror.c.163.com",
+        "https://mirror.baidubce.com",
+        "https://ccr.ccs.tencentyun.com"
+    ]
+}
+```
+ 
