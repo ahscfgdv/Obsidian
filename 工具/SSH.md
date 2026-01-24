@@ -8,3 +8,11 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 ## 免密连接
 
 上传公钥到服务器.ssh目录的authorized_keys中
+
+# Commnd
+
+```bash
+
+ssh 192.168.100.27 -l hbyb #指定连接用户名
+
+```
