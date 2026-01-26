@@ -348,4 +348,113 @@ graph TD
     
 - `max_split_char_number`: 触发切分的长度阈值。
 
-# 3. 
+# 3. 向量检索服务模块文档
+
+这份文档详细说明了 `VectorStoreService` 类的逻辑。该模块的主要作用是**封装 Chroma 向量数据库的读取操作**，并将静态的数据库对象转换为可用于 LangChain 流程（Chain）的动态检索器（Retriever）。
+
+---
+
+## 1. 模块概述
+
+该模块封装了一个名为 `VectorStoreService` 的服务类。它的核心职责并非“写入”数据，而是**加载**已有的本地向量数据，并提供一个标准化的接口（Retriever）供上层应用进行语义搜索。
+
+它是 RAG（检索增强生成）系统中的**检索（Retrieval）** 环节的核心组件。
+
+## 2. 核心类：`VectorStoreService`
+
+### 2.1 初始化逻辑 (`__init__`)
+
+构造函数负责建立与本地 Chroma 数据库的连接。
+
+- **输入参数**: `embedding` (嵌入模型实例)
+    
+    - 必须传入与构建知识库时**完全一致**的 Embedding 模型对象（例如 DashScope, Ollama 等）。如果不一致，会导致检索出的向量空间不匹配，无法搜到正确结果。
+        
+- **核心操作**:
+    
+    - 实例化 `langchain_chroma.Chroma` 对象。
+        
+    - **`persist_directory`**: 指定从哪里读取数据（必须与之前入库时的路径一致）。
+        
+    - **`collection_name`**: 指定读取哪一张“表”（集合）。
+        
+
+### 2.2 获取检索器 (`get_retriever`)
+
+此方法将向量库对象转换为检索器对象，这是 LangChain LCEL 调用的关键步骤。
+
+- **返回值**: `VectorStoreRetriever` 对象。
+    
+- **搜索参数配置 (`search_kwargs`)**:
+    
+    - 代码中使用 `{"k": config.similarity_threshold}` 来配置检索行为。
+        
+    - **关键逻辑说明**: 这里的参数 `k` 代表 **"Top K"**，即每次检索返回最相似的文档数量。
+        
+    - _注意：配置变量名为 `similarity_threshold`（通常暗示相似度阈值），但在代码中被赋值给了 `k`（返回数量）。这意味着该配置项实际上是在控制返回几条数据（例如 3 或 4 条）。_
+        
+
+---
+
+## 3. 逻辑流程图 (Workflow)
+
+代码段
+
+```
+graph TD
+    subgraph Init [初始化阶段]
+        Config[读取 config_data] --> Path(获取持久化路径 persist_directory)
+        Embedding[传入 Embedding 模型] --> ChromaObj[初始化 Chroma 对象]
+        Path --> ChromaObj
+    end
+
+    subgraph Runtime [运行时: get_retriever]
+        ChromaObj --> AsRetriever[调用 .as_retriever()]
+        ConfigK[读取 config.similarity_threshold] --> SetK{设置参数 k}
+        SetK --> AsRetriever
+        AsRetriever --> RetrieverObj[返回 Retriever 对象]
+    end
+
+    subgraph UserCall [调用示例]
+        Query["用户提问: 体重180斤..."] --> RetrieverObj
+        RetrieverObj --> VectorSearch[向量相似度搜索]
+        VectorSearch --> Result[返回 Top K 个 Document]
+    end
+```
+
+---
+
+## 4. `if __name__ == '__main__':` 测试逻辑
+
+代码底部的测试模块展示了该服务的实际调用方式：
+
+1. **模型准备**: 引入 `DashScopeEmbeddings` 并使用 `text-embedding-v4` 模型（这是阿里云通义千问的嵌入模型）。
+    
+2. **服务实例化**:
+    
+    - `VectorStoreService(...)`: 传入嵌入模型，连接本地数据库。
+        
+    - `.get_retriever()`: 立即获取检索器接口。
+        
+3. **模拟检索**:
+    
+    - 调用 `retriever.invoke("我的体重180斤，尺码推荐")`。
+        
+    - 系统会将这句话转化为向量，在数据库中查找最相似的 `k` 条记录（比如衣服尺码对照表），并打印结果。
+        
+
+---
+
+## 5. 依赖配置说明 (`config_data`)
+
+该代码强依赖 `config_data` 模块中的以下变量，使用前需确保配置正确：
+
+|**配置项**|**作用**|**逻辑影响**|
+|---|---|---|
+|`collection_name`|集合名称|类似于 SQL 中的表名，读写必须一致。|
+|`persist_directory`|持久化目录|数据库文件在硬盘上的存储文件夹路径。|
+|`similarity_threshold`|**返回数量 (Top K)**|决定检索器一次返回几条参考文档（注意代码中将其赋给了 `k`）。|
+
+## 6. 总结
+
+这段代码实现了 **"搜索接口"** 的功能。如果把之前的入库脚本比作“把书放进图书馆”，那么这段代码就是“图书管理员”。它不关心书是怎么来的，只负责根据用户的描述（Embedding），从指定的书架（Collection）上，拿出最相关的几本书（Top K Documents）。
