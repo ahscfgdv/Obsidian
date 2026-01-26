@@ -639,3 +639,190 @@ print(response2.content) # AI 应该能回答 "你是小明"
     - **性能瓶颈**：每次写入都是“全量重写”（Read-Modify-Write），如果对话历史非常长（例如几万字），读写文件会变慢。
         
     - **并发问题**：如果多个线程同时操作同一个 `session_id` 的文件，可能会导致数据覆盖或损坏（即非线程安全）。但在个人使用的本地应用中通常不是问题。
+
+# 5. Rag系统逻辑
+
+这份文档详细说明了 `rag_service.py` 模块的逻辑。该模块实现了一个**带有对话记忆功能的 RAG（检索增强生成）服务**，它将向量检索、历史记录管理和 LLM 推理通过 LangChain LCEL 组装成一条完整的执行链。
+
+---
+
+## 1. 模块概述
+
+`RagService` 类是整个智能问答系统的“大脑”。它集成了以下核心能力：
+
+- **知识检索**: 调用 `VectorStoreService` 从本地向量库中查找相关资料。
+    
+- **对话记忆**: 通过 `file_history_store` 自动管理用户的历史对话记录。
+    
+- **流程编排**: 使用 LangChain LCEL (LangChain Expression Language) 定义数据的流转逻辑。
+    
+
+## 2. 核心类：`RagService`
+
+### 2.1 初始化 (`__init__`)
+
+初始化阶段主要完成组件的装配：
+
+1. **向量服务**: 实例化 `VectorStoreService`，使用 Ollama 的 Embedding 模型。
+    
+2. **LLM 模型**: 初始化 `ChatOllama`，设置 `temperature=0` 以保证回答的严谨性。
+    
+3. **Prompt 模板**: 定义了包含三个部分的提示词：
+    
+    - **System**: 强调基于 `{context}` (参考资料) 回答。
+        
+    - **History**: 使用 `MessagesPlaceholder("history")` 占位符，LangChain 会自动在此填入历史对话。
+        
+    - **User**: 用户的实际提问 `{input}`。
+        
+
+### 2.2 核心执行链 (`__get_chain`)
+
+这是代码中最复杂的部分，使用了 LCEL 将各个环节串联起来。
+
+#### A. 辅助函数 (Lambda)
+
+为了适配数据格式，定义了三个内部函数：
+
+1. **`format_document(docs)`**:
+    
+    - **输入**: 检索到的 `Document` 对象列表。
+        
+    - **输出**: 拼接后的字符串。
+        
+    - **逻辑**: 将每个文档的内容 (`page_content`) 和元数据 (`metadata`) 格式化为易读的文本块。
+        
+2. **`format_for_retriever(value)`**:
+    
+    - **作用**: 从上游传入的字典中提取用户的问题字符串，传给检索器。
+        
+    - **逻辑**: 返回 `value["input"]`。
+        
+3. **`format_for_prompt_template(value)`**:
+    
+    - **作用**: **数据清洗与重组**。这是连接“检索阶段”和“Prompt填充阶段”的桥梁。
+        
+    - **原因**: 由于使用了 `RunnableParallel`（即那个字典结构 `{...}`），数据被嵌套了一层。
+        
+    - **逻辑**:
+        
+        - 用户问题来自 `value["input"]["input"]`。
+            
+        - 历史记录来自 `value["input"]["history"]`。
+            
+        - 参考资料来自 `value["context"]`。
+            
+        - 最终返回一个扁平的字典，供 `prompt_template` 使用。
+            
+
+#### B. LCEL 链结构详解
+
+该链条由**内部逻辑链**和**外部记忆包装器**组成。
+
+**1. 内部逻辑链 (`chain`)**:
+
+Python
+
+```
+chain = (
+    # 第一步：并行处理 (RunnableParallel)
+    # 输入数据结构示例: {'input': '你好', 'history': [HumanMessage(...), AIMessage(...)]}
+    {
+        # 1.1 透传原始输入 (包含 input 和 history)
+        "input": RunnablePassthrough(), 
+        
+        # 1.2 检索分支: 提取问题 -> 检索 -> 格式化文档
+        "context": RunnableLambda(format_for_retriever) | retriever | format_document
+    } 
+    # 第二步：数据重组 (解包嵌套字典)
+    | RunnableLambda(format_for_prompt_template) 
+    # 第三步：填充 Prompt -> 打印调试 -> LLM -> 解析字符串
+    | self.prompt_template | print_prompt | self.chat_model | StrOutputParser()
+)
+```
+
+**2. 外部记忆包装 (`conversation_chain`)**:
+
+使用 `RunnableWithMessageHistory` 包裹上述链条。
+
+- **作用**: 自动根据 `session_id` 读取历史记录，注入到输入字典的 `history` 键中；并在执行结束后，自动保存新的对话到文件。
+    
+
+---
+
+## 3. 数据流向图 (Data Flow)
+
+下面的流程图展示了一次调用中，数据是如何在各个组件间流转的：
+
+代码段
+
+```
+graph TD
+    UserStart[用户调用 chain.invoke] -->|{"input": "问题", session_id: "001"}| HistoryWrapper[RunnableWithMessageHistory]
+    
+    subgraph HistoryWrapper Logic
+        HistoryWrapper -->|读取文件| LoadHistory[加载历史记录]
+        LoadHistory -->|注入 history| InputDict[输入字典: {input: "问题", history: [...]}]
+    end
+    
+    InputDict --> ParallelStep{RunnableParallel 并行处理}
+    
+    subgraph Context Branch [检索分支]
+        ParallelStep -->|提取 input| Retriever[检索器]
+        Retriever -->|返回 Docs| FormatDocs[format_document]
+        FormatDocs -->|生成字符串| ContextStr["文档片段: ..."]
+    end
+    
+    subgraph Passthrough Branch [透传分支]
+        ParallelStep -->|保持原样| RawInput[输入字典: {input:..., history:...}]
+    end
+    
+    ContextStr & RawInput --> Merge[合并结果]
+    Merge -->|数据结构: {context: "...", input: {input: "...", history: ...}}| Reformat[format_for_prompt_template]
+    
+    Reformat -->|扁平化字典: {input, context, history}| Prompt[填充 PromptTemplate]
+    Prompt --> LLM[ChatOllama 推理]
+    LLM --> Output[StrOutputParser]
+    
+    Output --> HistoryWrapper
+    HistoryWrapper -->|保存 input 和 output| SaveHistory[写入历史文件]
+    SaveHistory --> FinalResult[返回给用户]
+```
+
+---
+
+## 4. 调用示例说明
+
+在 `if __name__ == '__main__':` 中：
+
+Python
+
+```
+session_config = {
+    "configurable": {
+        "session_id": "user_001", # 指定会话ID
+    }
+}
+# 调用时只需传入 input，history 由包装器自动处理
+res = RagService().chain.invoke(
+    {"input": "使命召唤19现代战争2游戏卡顿如何解决？"}, 
+    session_config
+)
+```
+
+1. **会话隔离**: 修改 `session_id` 即可切换不同用户的记忆空间。
+    
+2. **执行结果**:
+    
+    - 控制台会先打印出完整的 Prompt（包含系统指令、历史记录、检索到的文档）。
+        
+    - 最后打印出 AI 的回答。
+        
+
+## 5. 关键设计点总结
+
+1. **解耦**: 向量检索逻辑被封装在 `VectorStoreService` 中，记忆存储逻辑被封装在 `file_history_store` 中，`RagService` 只负责组装。
+    
+2. **数据清洗**: 使用 `RunnableLambda` 解决了 LangChain 并行链产生的数据嵌套问题，确保 Prompt 模板能接收到正确的参数。
+    
+3. **调试友好**: 加入了 `print_prompt` 环节，可以在控制台直观地看到发给 LLM 的最终提示词，方便排查 Prompt 注入问题。
