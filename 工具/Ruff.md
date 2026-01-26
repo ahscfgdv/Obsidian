@@ -15,6 +15,8 @@ ruff format
 
 ## VSCode
 
+通过SSH远程连接无法使用Ruff
+
 1. 安装Ruff扩展
 2. 打开配置文件添加
 ```json
@@ -26,3 +28,4 @@ ruff format
 	"source.organizeImports": "explicit" 
 },
 ```
+
