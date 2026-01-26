@@ -168,3 +168,184 @@ graph TD
 - **Transform (转换)**: 增加文件名作为语义上下文，清洗格式。
     
 - **Load (加载)**: 将清洗后的数据加载到向量知识库服务中。
+
+
+# 2. 向量知识库服务模块
+
+这份文档详细说明了 `knowledge_base.py` 模块的逻辑。该模块主要实现了一个**基于 ChromaDB 和 Ollama 的本地向量知识库服务**，具备内容去重、文本切分和向量持久化存储的功能。
+
+---
+
+## 1. 模块概述
+
+该模块封装了 `KnowledgeBaseService` 类，用于管理本地知识库的核心操作。其主要职责是将纯文本数据（String）经过清洗、去重、切分后，通过 Embedding 模型转化为向量，并存储在 Chroma 向量数据库中。
+
+## 2. 核心功能特性
+
+- **内容去重 (MD5 Deduplication)**: 通过计算文本内容的 MD5 哈希值，防止相同的内容重复存入数据库。
+    
+- **智能切分 (Smart Splitting)**: 使用递归字符切分器 (`RecursiveCharacterTextSplitter`) 将长文本切分为适合模型处理的片段。
+    
+- **向量化存储 (Vector Storage)**: 集成 `Chroma` 数据库和 `OllamaEmbeddings`，实现文本到向量的转换与持久化。
+    
+- **元数据管理 (Metadata)**: 为存储的每一段文本自动附加来源、创建时间和操作人信息。
+    
+
+---
+
+## 3. 详细逻辑流程
+
+### 3.1 辅助函数：MD5 去重机制
+
+为了避免重复处理相同的文本，模块利用本地文件 (`config.md5_path`) 记录已处理内容的指纹。
+
+1. **`get_string_md5(input_str)`**:
+    
+    - 接收输入字符串，编码为 utf-8 字节流。
+        
+    - 利用 `hashlib.md5` 计算出 32 位十六进制的 MD5 字符串。
+        
+2. **`check_md5(md5_str)`**:
+    
+    - 检查记录文件是否存在。如果不存则创建并返回 `False`（未处理）。
+        
+    - 如果存在，逐行读取文件内容，比对传入的 MD5 值。
+        
+    - **逻辑**: 如果在文件中找到了该 MD5，说明该内容之前已经入库过，返回 `True`；否则返回 `False`。
+        
+3. **`save_md5(md5_str)`**:
+    
+    - 将新的 MD5 值追加写入到记录文件的末尾，作为已处理的标记。
+        
+
+### 3.2 核心类：`KnowledgeBaseService`
+
+#### 初始化 (`__init__`)
+
+在实例化服务时，执行以下配置：
+
+1. **目录检查**: 确保向量库的持久化存储目录 (`config.persist_directory`) 存在。
+    
+2. **向量库实例 (`self.chroma`)**:
+    
+    - 初始化 Chroma 客户端。
+        
+    - 指定 Embedding 模型为 `OllamaEmbeddings` (模型名称来自 config)。
+        
+    - 设置持久化目录，确保数据重启不丢失。
+        
+3. **文本切分器 (`self.spliter`)**:
+    
+    - 初始化 `RecursiveCharacterTextSplitter`。
+        
+    - 配置 `chunk_size` (块大小) 和 `chunk_overlap` (重叠长度) 以保持语义连贯性。
+        
+
+#### 上传与入库 (`upload_by_str`)
+
+这是该模块最核心的业务函数，接收文本数据和文件名。
+
+**执行步骤：**
+
+1. **计算指纹**: 调用 `get_string_md5` 计算当前文本的 MD5。
+    
+2. **去重校验**:
+    
+    - 调用 `check_md5`。
+        
+    - 如果返回 `True`，直接返回提示 `"[跳过]内容已经存在知识库中"`，**终止流程**。
+        
+3. **文本处理**:
+    
+    - 判断文本长度是否超过阈值 (`config.max_split_char_number`)。
+        
+    - **超过阈值**: 调用切分器 `self.spliter.split_text` 将长文本切分为多个片段 (`knowledge_chunks`)。
+        
+    - **未超阈值**: 将原文本直接作为唯一的片段。
+        
+4. **构建元数据**:
+    
+    - 为每个片段准备 Metadata 字典，包含：
+        
+        - `source`: 文件名。
+            
+        - `create_time`: 当前系统时间。
+            
+        - `operator`: 操作员（代码中固定为 "刘"）。
+            
+5. **向量化与存储**:
+    
+    - 调用 `self.chroma.add_texts`。
+        
+    - Chroma 内部会自动调用 Ollama 模型将 `knowledge_chunks` 转换为向量。
+        
+    - 将向量、文本内容和元数据一起存入本地数据库。
+        
+6. **记录指纹**:
+    
+    - 入库成功后，调用 `save_md5` 将当前文本的 MD5 写入记录文件。
+        
+7. **返回结果**: 返回成功提示信息。
+    
+
+---
+
+## 4. 逻辑流程图 (Workflow)
+
+代码段
+
+```
+graph TD
+    Start[调用 upload_by_str] --> CalcMD5[计算文本 MD5]
+    CalcMD5 --> CheckMD5{check_md5: 是否已存在?}
+    
+    CheckMD5 -- 是 (True) --> Skip[返回: 跳过，内容已存在]
+    
+    CheckMD5 -- 否 (False) --> CheckLen{文本长度 > max_split?}
+    
+    CheckLen -- 是 --> Split[使用 Spliter 切分文本]
+    CheckLen -- 否 --> NoSplit[保持原文本]
+    
+    Split --> MakeMeta[构建 Metadata (时间/来源)]
+    NoSplit --> MakeMeta
+    
+    MakeMeta --> Embed[调用 Chroma & Ollama 进行向量化]
+    Embed --> SaveDB[存入向量数据库]
+    
+    SaveDB --> RecordMD5[调用 save_md5 记录指纹]
+    RecordMD5 --> Success[返回: 成功载入]
+```
+
+
+---
+
+## 5. 数据结构说明
+
+### 5.1 存储在 Chroma 中的数据形态
+
+对于每一条入库的知识，Chroma 会存储以下结构：
+
+|**字段**|**说明**|**示例**|
+|---|---|---|
+|**Document**|切分后的实际文本内容|"周杰轮222"|
+|**Embedding**|文本对应的向量数据|`[-0.012, 0.821, ...]` (由 Ollama 生成)|
+|**Metadata**|辅助信息字典|`{'source': 'testfile', 'create_time': '2025-01-26...', 'operator': '刘'}`|
+|**ID**|唯一标识符|UUID (自动生成)|
+
+### 5.2 依赖配置 (`config_data`)
+
+代码严重依赖 `config_data` 模块，预期该配置包含以下关键变量：
+
+- `md5_path`: MD5 记录文件的路径。
+    
+- `persist_directory`: Chroma 数据库的存储路径。
+    
+- `collection_name`: 向量库集合名称。
+    
+- `EMBED_MODEL`: 使用的 Embedding 模型名称 (如 `nomic-embed-text` 或 `qwen`).
+    
+- `chunk_size` / `chunk_overlap`: 切分参数。
+    
+- `max_split_char_number`: 触发切分的长度阈值。
+
+# 3. 
