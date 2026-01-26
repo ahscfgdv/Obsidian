@@ -458,3 +458,184 @@ graph TD
 ## 6. 总结
 
 这段代码实现了 **"搜索接口"** 的功能。如果把之前的入库脚本比作“把书放进图书馆”，那么这段代码就是“图书管理员”。它不关心书是怎么来的，只负责根据用户的描述（Embedding），从指定的书架（Collection）上，拿出最相关的几本书（Top K Documents）。
+
+
+# 4. 本地文件聊天记录存储模块文档
+
+
+这份文档详细说明了您提供的 Python 代码逻辑。该模块实现了一个**基于本地文件的持久化聊天记录存储器**，它遵循 LangChain 的标准接口设计，用于让 AI 记住之前的对话内容。
+
+---
+
+## 1. 模块概述
+
+该模块定义了一个自定义的聊天记录管理类 `FileChatMessageHistory`，它继承自 LangChain 的 `BaseChatMessageHistory`。
+
+**核心功能**：
+
+- **持久化**：将内存中的聊天记录保存到本地硬盘的 JSON 文件中。
+    
+- **会话隔离**：通过 `session_id` 区分不同用户的对话，每个用户对应一个独立的文件。
+    
+- **序列化与反序列化**：自动在 LangChain 的 `Message` 对象（如 `HumanMessage`, `AIMessage`）和 JSON 数据之间转换。
+    
+
+## 2. 核心组件详解
+
+### 2.1 辅助工厂函数：`get_history`
+
+Python
+
+```
+def get_history(session_id):
+    return FileChatMessageHistory(session_id, "./chat_history")
+```
+
+- **作用**：这是一个**工厂函数**。
+    
+- **使用场景**：在使用 LangChain 的 `RunnableWithMessageHistory` 时，需要传入一个回调函数来获取历史记录。这个函数就是用来告诉 LangChain：“去 `./chat_history` 文件夹里找对应 `session_id` 的记录”。
+    
+
+### 2.2 核心类：`FileChatMessageHistory`
+
+该类负责具体的读写逻辑，主要包含以下四个部分：
+
+#### A. 初始化 (`__init__`)
+
+- **输入**：`session_id` (会话ID), `storage_path` (存储目录)。
+    
+- **逻辑**：
+    
+    1. 拼接完整的文件路径。例如：`./chat_history/user_123`。
+        
+    2. 调用 `os.makedirs` 确保父目录存在。如果目录不存在，会自动创建，防止写入时报错。
+        
+
+#### B. 写入消息 (`add_messages`)
+
+每当产生新对话（用户提问或 AI 回答）时，LangChain 会自动调用此方法。
+
+- **流程**：
+    
+    1. **读取旧数据**：`list(self.messages)` 获取当前文件里已有的消息。
+        
+    2. **合并**：`extend(messages)` 将新消息追加到旧消息列表中。
+        
+    3. **序列化 (关键)**：
+        
+        - 由于 `HumanMessage` 等对象是 Python 类实例，无法直接存入 JSON。
+            
+        - 代码使用 `message_to_dict` 将对象转为字典（例如 `{'type': 'human', 'content': '你好'}`）。
+            
+    4. **写入文件**：使用 `json.dump` 以覆盖模式 (`w`) 将完整的列表写入文件。
+        
+
+#### C. 读取消息 (`messages` 属性)
+
+这是一个被 `@property` 装饰的方法，外部调用 `history.messages` 时会自动触发。
+
+- **流程**：
+    
+    1. 尝试以只读模式 (`r`) 打开文件。
+        
+    2. **反序列化 (关键)**：
+        
+        - 使用 `json.load` 读取出列表字典。
+            
+        - 使用 `messages_from_dict` 将字典还原回 LangChain 的 `Message` 对象。
+            
+    3. **异常处理**：如果文件不存在 (`FileNotFoundError`)，说明是新会话，返回空列表 `[]`。
+        
+
+#### D. 清空记录 (`clear`)
+
+- **逻辑**：直接以写入模式打开文件并写入一个空列表 `[]`，从而清空该会话的所有记忆。
+    
+
+---
+
+## 3. 数据流向图 (Workflow)
+
+代码段
+
+```
+graph LR
+    subgraph Memory Process
+    User[用户输入/AI输出] --> Obj[Message 对象]
+    Obj -->|add_messages| Serialize[序列化: message_to_dict]
+    Serialize --> Dict[Python 字典]
+    Dict -->|json.dump| File[(本地 JSON 文件)]
+    
+    File -->|json.load| DictList[字典列表]
+    DictList -->|messages 属性| Deserialize[反序列化: messages_from_dict]
+    Deserialize --> Restore[还原 Message 对象]
+    Restore --> Chain[LangChain 上下文]
+    end
+```
+
+---
+
+## 4. 如何在项目中使用
+
+这个类通常配合 LangChain 的 `RunnableWithMessageHistory` 一起使用。
+
+### 示例代码
+
+Python
+
+```
+from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_ollama import ChatOllama
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+
+# 1. 导入你写的这个模块
+# from your_module import get_history 
+
+# 2. 定义简单的链
+model = ChatOllama(model="qwen2.5")
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "你是一个助手"),
+    MessagesPlaceholder(variable_name="history"), # 占位符，用于填充历史记录
+    ("human", "{input}"),
+])
+chain = prompt | model
+
+# 3. 包装链，赋予其记忆能力
+chain_with_history = RunnableWithMessageHistory(
+    chain,
+    get_session_history=get_history,  # <--- 这里传入你的工厂函数
+    input_messages_key="input",
+    history_messages_key="history",
+)
+
+# 4. 调用（指定 session_id）
+# 第一次对话：会创建 ./chat_history/user_1 文件
+response1 = chain_with_history.invoke(
+    {"input": "我是小明"},
+    config={"configurable": {"session_id": "user_1"}}
+)
+print(response1.content) 
+
+# 第二次对话：会自动读取 ./chat_history/user_1 中的内容
+response2 = chain_with_history.invoke(
+    {"input": "我叫什么名字？"},
+    config={"configurable": {"session_id": "user_1"}}
+)
+print(response2.content) # AI 应该能回答 "你是小明"
+```
+
+## 5. 优缺点分析
+
+- **优点**：
+    
+    - **实现简单**：无需安装 Redis、Postgres 等数据库，利用本地文件系统即可运行。
+        
+    - **可移植性强**：代码拷贝到任何支持 Python 的环境都能跑。
+        
+    - **易于调试**：存储的是 JSON 文本文件，可以直接打开查看历史记录内容。
+        
+- **缺点**：
+    
+    - **性能瓶颈**：每次写入都是“全量重写”（Read-Modify-Write），如果对话历史非常长（例如几万字），读写文件会变慢。
+        
+    - **并发问题**：如果多个线程同时操作同一个 `session_id` 的文件，可能会导致数据覆盖或损坏（即非线程安全）。但在个人使用的本地应用中通常不是问题。
