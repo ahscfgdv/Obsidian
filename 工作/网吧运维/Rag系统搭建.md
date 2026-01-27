@@ -826,3 +826,218 @@ res = RagService().chain.invoke(
 2. **数据清洗**: 使用 `RunnableLambda` 解决了 LangChain 并行链产生的数据嵌套问题，确保 Prompt 模板能接收到正确的参数。
     
 3. **调试友好**: 加入了 `print_prompt` 环节，可以在控制台直观地看到发给 LLM 的最终提示词，方便排查 Prompt 注入问题。
+
+
+---
+
+# 6. RAG 智能问答系统 API 服务文档 (`main.py`)
+
+## 1. 系统概述
+
+该模块充当 **API 网关** 的角色。它不负责具体的 AI 推理逻辑（这部分由 `RagService` 完成），而是负责处理 HTTP 请求、参数校验、跨域资源共享 (CORS) 以及响应数据的格式化（包括流式和非流式）。
+
+## 2. 核心架构与逻辑
+
+### 2.1 全局服务初始化
+
+代码采用了 **单例模式 (Singleton)** 的思想来初始化 `RagService`。
+
+Python
+
+```
+try:
+    rag_service = RagService() # 全局变量
+    print("✅ RAG Service 初始化成功")
+except Exception as e:
+    ...
+```
+
+- **逻辑**：在服务启动时（`if __name__ == "__main__"` 或 uvicorn 启动时）立即加载模型和向量库。
+    
+- **目的**：避免每次用户请求时都重新加载庞大的 Embedding 模型和 LLM，从而显著降低接口响应延迟。
+    
+
+### 2.2 跨域配置 (CORS)
+
+Python
+
+```
+app.add_middleware(CORSMiddleware, allow_origins=["*"], ...)
+```
+
+- **作用**：允许浏览器中的前端页面（例如运行在 `localhost:8080` 的 Vue 应用）跨域调用本服务（运行在 `localhost:8000`）。没有这个配置，浏览器会拦截请求。
+    
+
+---
+
+## 3. 数据模型 (Input Schema)
+
+使用 Pydantic 定义了请求体，确保输入数据类型安全。
+
+|**字段名**|**类型**|**必填**|**说明**|**示例**|
+|---|---|---|---|---|
+|**`question`**|`str`|是|用户的问题文本|"显卡驱动怎么更新？"|
+|**`session_id`**|`str`|否|会话唯一标识，默认为 `user_default`|"user_10086"|
+
+---
+
+## 4. API 接口详解
+
+该服务提供了两个核心接口，分别对应两种不同的交互体验。
+
+### 4.1 普通对话接口 (`/chat`)
+
+- **URL**: `/chat`
+    
+- **Method**: `POST`
+    
+- **类型**: 同步阻塞 (Synchronous/Blocking)
+    
+- **逻辑**:
+    
+    1. 接收 JSON 请求。
+        
+    2. 调用 `rag_service.chain.invoke()`。此时服务器线程会**等待** LLM 生成完整的答案。
+        
+    3. LLM 生成完毕后，将完整结果封装为 JSON 返回。
+        
+- **适用场景**: 内部测试、不需要打字机效果的简单 UI、后台批量处理。
+    
+
+### 4.2 流式对话接口 (`/chat/stream`)
+
+- **URL**: `/chat/stream`
+    
+- **Method**: `POST`
+    
+- **类型**: 异步流式 (Asynchronous Streaming)
+    
+- **协议**: **SSE (Server-Sent Events)**
+    
+- **逻辑**:
+    
+    1. 接收请求后，立即建立长连接。
+        
+    2. 利用 `async def` 定义生成器。
+        
+    3. 通过 `rag_service.chain.stream()` 获取 LLM 生成的每一个字符片段 (Token)。
+        
+    4. **格式化**: 将片段封装为 SSE 标准格式：`data: {"answer": "字"}\n\n`。
+        
+    5. **结束**: 发送 `data: [DONE]\n\n` 告知前端结束。
+        
+- **适用场景**: 类似 ChatGPT 的实时交互体验，用户可以看着字一个个蹦出来。
+    
+
+---
+
+## 5. 数据流向图 (Data Flow)
+
+代码段
+
+```
+graph LR
+    Client[前端客户端]
+    
+    subgraph FastAPI Server
+        Gateway[API 网关 / main.py]
+        Schema[ChatRequest 校验]
+        SSE[流式响应生成器]
+    end
+    
+    subgraph Backend Logic
+        RAG[RagService]
+        Chain[LangChain 执行链]
+    end
+
+    Client -->|POST /chat/stream| Gateway
+    Gateway --> Schema
+    Schema -->|验证通过| RAG
+    RAG -->|调用| Chain
+    
+    Chain -- "Token流 (字, 字...)" --> SSE
+    SSE -- "SSE事件 (data: {...})" --> Client
+```
+
+---
+
+## 6. 如何对接前端
+
+### 6.1 前端调用 `/chat` (普通)
+
+前端收到的是标准的 JSON 对象：
+
+JSON
+
+```
+{
+    "code": 200,
+    "data": {
+        "answer": "这是完整的回答内容...",
+        "session_id": "user_123"
+    },
+    "message": "success"
+}
+```
+
+### 6.2 前端调用 `/chat/stream` (流式)
+
+前端需要使用 `fetch` 或 `EventSource` (仅限 GET，POST 需用 fetch adapter) 来接收数据。
+
+**返回的数据流格式示例**：
+
+Plaintext
+
+```
+data: {"answer": "你"}
+
+data: {"answer": "好"}
+
+data: {"answer": "，"}
+
+data: {"answer": "我"}
+
+data: {"answer": "是"}
+
+data: [DONE]
+```
+
+前端开发人员需要监听 `onmessage` 事件，解析 `data` 后的 JSON 字符串并拼接到界面上。
+
+---
+
+## 7. 启动与运行
+
+1. **依赖安装**:
+    
+    确保已安装 FastAPI 相关库：
+    
+    Bash
+    
+    ```
+    pip install fastapi uvicorn pydantic
+    ```
+    
+2. **启动命令**:
+    
+    Bash
+    
+    ```
+    python main.py
+    ```
+    
+    或者直接使用 uvicorn：
+    
+    Bash
+    
+    ```
+    uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    ```
+    
+    - `--host 0.0.0.0`: 允许局域网内其他电脑访问。
+        
+    - `--reload`: 代码修改后自动重启（开发模式）。
+        
+3. **API 文档**:
+    
+    启动成功后，访问浏览器：`http://localhost:8000/docs` 即可看到自动生成的 Swagger UI 调试界面。
