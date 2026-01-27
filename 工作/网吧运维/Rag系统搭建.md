@@ -1041,3 +1041,158 @@ data: [DONE]
 3. **API 文档**:
     
     启动成功后，访问浏览器：`http://localhost:8000/docs` 即可看到自动生成的 Swagger UI 调试界面。
+
+---
+
+# 7. RAG 智能问答前端文档 (`App.vue`)
+
+## 1. 项目概述
+
+该前端界面是一个现代化的聊天窗口，旨在提供类似 ChatGPT 的交互体验。它充当了用户与 RAG 后端服务之间的桥梁，负责发送用户指令、渲染 Markdown 格式的回答，并处理复杂的流式数据响应。
+
+## 2. 技术栈
+
+- **Vue 3**: 使用 `<script setup>` 语法糖的组合式 API。
+    
+- **Element Plus**: 负责 UI 组件（布局容器、按钮、输入框、加载图标）。
+    
+- **Markdown-it**: 将后端返回的 Markdown 文本（如代码块、加粗）渲染为 HTML。
+    
+- **Fetch API**: 原生网络请求库，用于处理 SSE（Server-Sent Events）流式数据。
+    
+
+---
+
+## 3. 核心逻辑详解
+
+### 3.1 状态管理 (Reactive State)
+
+代码使用 `ref` and `reactive` 定义了以下核心状态：
+
+|**变量名**|**类型**|**说明**|
+|---|---|---|
+|`inputMessage`|`ref(String)`|双向绑定底部输入框的内容。|
+|`chatHistory`|`reactive(Array)`|存储聊天记录列表。格式：`[{ role: 'user/ai', content: '...' }]`。|
+|`isStreamMode`|`ref(Boolean)`|控制开关。`true` 调用流式接口，`false` 调用普通接口。|
+|`isLoading`|`ref(Boolean)`|用于禁用发送按钮并显示加载动画，防止重复提交。|
+|`sessionId`|`ref(String)`|页面加载时随机生成的 ID，用于后端区分对话历史。|
+
+### 3.2 核心难点：流式响应处理 (`handleStreamRequest`)
+
+这是实现“打字机效果”的关键函数。它绕过了传统的 Axios（因为 Axios 对流处理支持较繁琐），直接使用原生 `fetch`。
+
+**执行流程：**
+
+1. **占位**：在发送请求前，先在 `chatHistory` 中 push 一个空的 AI 消息对象。获取其索引 `aiMsgIndex`。
+    
+2. **请求**：向 `/chat/stream` 发起 POST 请求。
+    
+3. **读取流**：
+    
+    - `response.body.getReader()`: 获取二进制流读取器。
+        
+    - `decoder.decode()`: 将二进制数据 (`Uint8Array`) 解码为 UTF-8 字符串。
+        
+4. **解析循环 (`while(true)`)**:
+    
+    - 不断读取数据块 (`chunk`)。
+        
+    - **处理粘包/拆包**：由于网络原因，一次可能收到多条 SSE 消息，代码使用 `split('\n\n')` 分割数据。
+        
+    - **提取内容**：去除 `data:` 前缀，解析 JSON，获取 `answer` 字段。
+        
+    - **实时更新**：`chatHistory[aiMsgIndex].content += data.answer`。Vue 的响应式系统会立即将新字符渲染到屏幕上。
+        
+
+### 3.3 普通响应处理 (`handleNormalRequest`)
+
+逻辑相对简单：
+
+1. 发送请求到 `/chat`。
+    
+2. `await` 等待服务器处理完毕（此时界面会显示“正在思考中...”）。
+    
+3. 收到完整的 JSON 后，一次性将结果 push 到 `chatHistory`。
+    
+
+### 3.4 辅助功能
+
+- **Markdown 渲染**:
+    
+    - 引入 `markdown-it` 库。
+        
+    - `renderMarkdown` 函数将 AI 的文本转换为 HTML（例如将 `**加粗**` 转为 `<b>加粗</b>`，将代码块转为 `<pre><code>...`).
+        
+    - 在 Template 中使用 `v-html` 指令渲染。
+        
+- **自动滚动 (`scrollToBottom`)**:
+    
+    - 每次对话更新后，聊天窗口需要滚到最下方。
+        
+    - **关键点**: 使用 `await nextTick()`。必须等待 Vue 完成 DOM 更新后，再去设置 `scrollTop`，否则滚动位置会不准确。
+        
+
+---
+
+## 4. UI 布局结构
+
+使用了 Element Plus 的 Container 布局系统：
+
+代码段
+
+```
+graph TD
+    Container[el-container: 垂直布局]
+    
+    Header[el-header: 顶部栏] --> Title[标题: RAG 助手]
+    Header --> Switch[开关: 流式模式切换]
+    
+    Main[el-main: 聊天区域] --> HistoryList[v-for 渲染 chatHistory]
+    HistoryList --> UserMsg[用户气泡 (右侧 + 蓝色)]
+    HistoryList --> AIMsg[AI 气泡 (左侧 + 白色 + Markdown)]
+    
+    Footer[el-footer: 底部栏] --> Input[el-input: 文本域]
+    Footer --> SendBtn[el-button: 发送按钮]
+    
+    Container --> Header
+    Container --> Main
+    Container --> Footer
+```
+
+## 5. CSS 样式设计
+
+- **Flexbox**: 广泛用于聊天气泡的布局。
+    
+    - `.user-row`: 使用 `flex-direction: row-reverse` 让用户头像和气泡靠右显示。
+        
+- **Deep Selector**: 使用 `:deep(.markdown-body pre)` 穿透 Vue 的 scoped 样式，专门美化 Markdown 渲染出来的代码块背景色。
+    
+
+## 6. 如何运行与调试
+
+1. **启动后端**: 确保 FastAPI 服务运行在 `http://localhost:8000`。
+    
+2. **启动前端**:
+    
+    Bash
+    
+    ```
+    npm run dev
+    ```
+    
+3. **交互测试**:
+    
+    - 打开开关（绿色）：体验字一个个蹦出来的效果。
+        
+    - 关闭开关（灰色）：体验传统的“转圈等待 -> 突然显示全部”的效果。
+        
+
+## 7. 潜在优化建议
+
+目前代码是一个最小可行性版本 (MVP)，在生产环境中可以考虑：
+
+- **Markdown 样式库**: 引入 `github-markdown-css` 让代码高亮和表格更漂亮。
+    
+- **异常重试**: 网络断开时的自动重连机制。
+    
+- **历史记录持久化**: 目前刷新页面记录会丢失，可以结合 `localStorage` 或调用后端接口拉取历史记录。
