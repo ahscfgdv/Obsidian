@@ -1186,3 +1186,51 @@ graph TD
         
     - 关闭开关（灰色）：体验传统的“转圈等待 -> 突然显示全部”的效果。
         
+
+```mermaid
+mindmap
+  root((本地 RAG 系统<br/>全链路 Demo))
+    1. 数据处理层<br/>(ETL & 入库)
+      输入源
+        本地 PDF 文件夹
+      清洗器 (Loader)
+        RapidOCRPDFLoader
+        PyMuPDF: 提取基础文本/图片
+        RapidOCR: 识别图片中的文字
+        混合策略: 原文 + OCR 补充
+      入库服务 (KnowledgeBase)
+        MD5 去重: 防止重复入库
+        文本切分: RecursiveCharacterTextSplitter
+        向量化: Ollama Embeddings
+        存储: ChromaDB (本地持久化)
+    2. 核心业务层<br/>(RAG Service)
+      向量服务 (VectorStore)
+        加载 ChromaDB
+        转换为 Retriever (Top-K)
+      记忆模块 (History)
+        FileChatMessageHistory
+        基于 SessionID 的 JSON 读写
+      链路编排 (LangChain LCEL)
+        RunnableParallel: 并行处理 (输入/检索)
+        PromptTemplate: 注入 Context/History
+        ChatModel: ChatOllama (Qwen/Llama)
+    3. 接口服务层<br/>(FastAPI)
+      基础设施
+        单例模式初始化 Service
+        CORS 跨域配置
+      API 接口
+        POST /chat: 同步返回 (JSON)
+        POST /chat/stream: 异步流式 (SSE)
+      数据模型
+        Pydantic: 参数校验
+    4. 前端展示层<br/>(Vue3 + Element Plus)
+      交互逻辑
+        普通模式: Await 等待
+        流式模式: Fetch API + Reader
+      渲染
+        Markdown-it: 代码高亮/排版
+        自动滚动: DOM 操作
+      状态管理
+        SessionID 生成
+        聊天记录数组
+```
