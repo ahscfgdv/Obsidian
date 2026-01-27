@@ -7,7 +7,8 @@
 
 ```bash
 
-npm config set registry https://registry.npmmirror.com #配置镜像源
+npm config set registry https://registry.npmmirror.com 
+#配置镜像源
 
 ```
 
