@@ -18,3 +18,9 @@ ssh 192.168.100.27 -l hbyb #指定连接用户名
 ```
 
 # scp传输文件
+
+```bash
+
+scp example.txt user@remote_host:/home/user/
+
+```
