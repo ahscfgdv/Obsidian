@@ -16,3 +16,5 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 ssh 192.168.100.27 -l hbyb #指定连接用户名
 
 ```
+
+# scp传输文件
