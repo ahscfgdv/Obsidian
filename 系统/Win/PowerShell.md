@@ -11,3 +11,6 @@ Remove-Item Env:\变量名 #删除环境变量
 [Environment]::SetEnvironmentVariable("变量名", "值", "User")
 [Environment]::SetEnvironmentVariable("变量名", $null, "User")
 ```
+
+## 设置代理
+
