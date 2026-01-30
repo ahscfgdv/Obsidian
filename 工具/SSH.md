@@ -21,6 +21,6 @@ ssh 192.168.100.27 -l hbyb #指定连接用户名
 
 ```bash
 
-scp -p 22 example.txt user@remote_host:/home/user/
+scp -P 22 example.txt user@remote_host:/home/user/
 
 ```
