@@ -66,3 +66,7 @@ git remote -v
 ## .gitignore
 
 设置某些文件不经由git管理
+
+# 常见问题
+
+## master分支无法推送
