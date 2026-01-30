@@ -14,3 +14,9 @@ Remove-Item Env:\变量名 #删除环境变量
 
 ## 设置代理
 
+```powershell
+
+$env:HTTP_PROXY = "http://127.0.0.1:10808"
+$env:HTTPS_PROXY = "http://127.0.0.1:10808"
+
+```
