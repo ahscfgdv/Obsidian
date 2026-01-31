@@ -29,7 +29,7 @@
 ## docker
 
 **version**：29.1.5
-
+**安装方式**：[Ubuntu安装Docker](../../工具/Docker.md#Ubuntu安装Docker)
 
 
 

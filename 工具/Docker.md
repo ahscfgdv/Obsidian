@@ -1,7 +1,7 @@
 
 # 安装
 
-## Ubuntu安装
+## Ubuntu安装Docker
 
 ### 1. 卸载旧版本（可选）
 
@@ -64,6 +64,15 @@ sudo docker run hello-world
 如果看到 "Hello from Docker!" 的字样，说明安装成功。
 
 ---
+
+# Command
+
+
+```bash
+
+docker version
+
+```
 
 # 配置
 
