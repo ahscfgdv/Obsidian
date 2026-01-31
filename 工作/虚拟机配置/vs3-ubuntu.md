@@ -26,7 +26,8 @@
 
 ## Ollama
 
-
+- **Version**：0.14.2
+- **安装方式**：
 
 ## docker
 
