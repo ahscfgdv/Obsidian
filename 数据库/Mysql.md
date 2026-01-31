@@ -1,5 +1,10 @@
 # 安装部署
 
+
+## 普通安装Mysql
+
+
+
 ## Docker部署Mysql
 
 部署 MySQL 通常有两种方式：**快速启动（命令行）** 和 **项目化部署（Docker Compose）**。
