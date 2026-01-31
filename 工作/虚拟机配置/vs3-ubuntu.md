@@ -40,6 +40,13 @@
 - **安装方式**：`curl -LsSf https://astral.sh/uv/install.sh | sh`
 - **全局工具**：ruff
 
+## Nvm
+
+- **version**：0.40.3
+- **安装方式**：`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash`
+## Nodejs
+
+- **version**：
 
 
 
