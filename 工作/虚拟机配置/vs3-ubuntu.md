@@ -37,7 +37,10 @@
 ## UV
 
 - **version**：0.9.26
-- **安装方式**：
+- **安装方式**：`curl -LsSf https://astral.sh/uv/install.sh | sh`
+- **全局工具**：ruff
+
+
 
 
 
