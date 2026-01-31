@@ -19,6 +19,7 @@
 
 - **Version**：2.43.0
 - **安装方式**：`apt install git`
+
 ## Xrdp
 
 - **Version**：0.9.24
@@ -28,6 +29,7 @@
 
 - **Version**：0.14.2
 - **安装方式**：`curl -fsSL https://ollama.com/install.sh | sh`
+
 ## docker
 
 - **version**：29.1.5
@@ -44,10 +46,15 @@
 
 - **version**：0.40.3
 - **安装方式**：`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash`
+
 ## Nodejs
 
-- **version**：
+- **version**：v20.20.0
+- **安装方式**：`nvm install 20`
 
+## V2raya
+
+- **Version**：
 
 
 
