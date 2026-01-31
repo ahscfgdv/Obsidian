@@ -24,7 +24,7 @@
 - **Version**：0.9.24
 - **安装方式**：`apt install xrdp -y`
 
-## ollama
+## Ollama
 
 
 
