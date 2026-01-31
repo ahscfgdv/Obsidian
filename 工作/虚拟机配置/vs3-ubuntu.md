@@ -7,15 +7,15 @@
 
 **lcx**
 **remoteuser**
-## 系统软件
+# 软件
 
-### Miniconda
+## Miniconda
 
 **Version**：25.11.1
 **安装位置**：/home/remoteuser/miniconda3
 **安装方式** ：[Linux安装Minicoda](../../Python/环境管理/Conda.md#Linux安装Minicoda)
 
-### Git
+## Git
 
 **Version**：2.43.0
 **安装方式**：`apt install git`
@@ -25,6 +25,8 @@
 **安装方式**：`apt install xrdp -y`
 
 ## ollama
+
+## docker
 
 
 
