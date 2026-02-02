@@ -1,6 +1,10 @@
 # 安装部署
 
+## Linux安装客户端
 
+```bash
+sudo apt install 
+```
 ## 普通安装Mysql
 
 
