@@ -3,7 +3,7 @@
 ## Linux安装客户端
 
 ```bash
-sudo apt install 
+sudo apt install mariadb-client
 ```
 ## 普通安装Mysql
 
