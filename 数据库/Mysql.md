@@ -1,3 +1,4 @@
+
 # 安装部署
 
 ## Linux安装客户端
@@ -174,3 +175,11 @@ docker exec mysql-server mysqldump -u root -pYourPassword --all-databases > dump
 ```
 
 你需要我演示如何配置一个自定义的 `my.cnf` 文件来优化 MySQL 性能吗？
+
+# 客户端
+
+```bash
+
+mysql -P 3306 -u root -p
+
+```
