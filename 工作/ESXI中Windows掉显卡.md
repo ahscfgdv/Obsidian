@@ -1,6 +1,7 @@
 
 ESXI版本：8.0.3
 windows版本：
+![](assets/ESXI中Windows掉显卡/file-20260204162249554.png)
 
 ![](assets/ESXI中Windows掉显卡/file-20260204161935369.png)
 
