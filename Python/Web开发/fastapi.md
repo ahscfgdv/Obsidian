@@ -9,6 +9,7 @@ uvicorn main:app --reload --port 8000 --host 0.0.0.0
 # --reload 热重载
 # --port 端口
 # --host 监听端口
+uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 ```
 
