@@ -9,7 +9,8 @@
 2026-02-07T09:29:18.734Z In(182) vmkernel: cpu59:2099897)PCIPassthru: 1039: pcipdevInfo: 0x4314737b68e0 (0000:05:00.0), state 0, destroyed
 ```
 
-bios
+修改bios设置
+
 
 
 
