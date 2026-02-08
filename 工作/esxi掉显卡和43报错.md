@@ -1,4 +1,8 @@
 
+查看vmkernel.log
+
+
+
 bios
 
 
