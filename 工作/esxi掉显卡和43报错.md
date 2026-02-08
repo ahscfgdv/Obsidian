@@ -1,5 +1,10 @@
+## 显卡报错43
 
-问题描述
+应该是windows更新的原因
+
+## 掉显卡
+
+问题描述：虚拟机正常运行但是显卡会自动掉线
 
 查看vmkernel.log
 
@@ -25,6 +30,4 @@ PCI Devices Option ROM Setting
 ```
 
 
-
-cat /var/log/vmkernel.log | grep "0000:05:00.0"
 
