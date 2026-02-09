@@ -2,9 +2,20 @@
 https://docs.astral.sh/uv/
 ## 安装
 
+### 使用命令行
+
 * window：`powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
 * linux：`curl -LsSf https://astral.sh/uv/install.sh | sh`
 
+### 使用编译好的二进制文件
+
+在GitHub上下载对应版本发布包
+
+![](assets/UV/file-20260209110105303.png)
+
+然后配置环境变量
+
+![](assets/UV/file-20260209110158193.png)
 # 基础功能
 
 ## Python版本
