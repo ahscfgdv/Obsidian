@@ -26,9 +26,19 @@ PCI Devices Option ROM Setting
 
 将所有的Legacy换成EFI
 
-
 ```
 
 
-## 设置
+## Linux系统设置
 
+- **开启持久化模式**：`sudo nvidia-smi -pm 1`。
+    
+- **锁定高性能频率**：`sudo nvidia-smi -lgc 1000,2500`。
+    
+- **禁用内核 ASPM**：
+    
+    - 编辑 `/etc/default/grub`。
+        
+    - 修改行：`GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pcie_aspm=off"`。
+        
+    - 运行 `sudo update-grub` 并重启。
