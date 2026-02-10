@@ -74,3 +74,12 @@ git remote -v
 # 常见问题
 
 ## master分支无法推送
+
+修改分支名称为main
+
+## 无法推送到映射到公网的gitea
+
+关闭http代理
+
+
+
