@@ -42,3 +42,7 @@ PCI Devices Option ROM Setting
     - 修改行：`GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pcie_aspm=off"`。
         
     - 运行 `sudo update-grub` 并重启。
+
+## ESXI系统设置
+
+
