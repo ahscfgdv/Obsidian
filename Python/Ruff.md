@@ -1,4 +1,3 @@
-https://docs.astral.sh/ruff/
 # Commend
 
 ```
