@@ -58,7 +58,7 @@ _%>
 
 **时间跨度**：[[<% monday.format("YYYY-MM-DD") %>]] 至 [[<% sunday.format("YYYY-MM-DD") %>]]
 **导航**：[[<% prevWeek %>|⏪ 上一周]] | [[<% nextWeek %>|⏩ 下一周]]
-**标签**：#Weekly #Review
+**标签**： #Weekly #Review
 
 ---
 
