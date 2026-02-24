@@ -19,3 +19,10 @@ npm config set registry https://registry.npmmirror.com
 nodejs -v
 
 ```
+
+# 命令
+
+```bash
+npm list -g --depth=0 
+# 查看安装的所有全局工具
+```
