@@ -111,19 +111,43 @@ docker info #查看docker配置
 
 ## 配置Http代理
 
+在 Docker 中配置 HTTP 代理其实比想象中复杂一点，因为你可能需要在**三个不同的层面**进行配置：**Docker 守护进程（拉取镜像）**、**容器运行环境（运行时）**以及 **Build 阶段（构建镜像）**。
+
 ---
 
-为 Docker Daemon 配置代理 (用于 `docker pull`)
+### 1. 为 Docker Daemon 配置代理 (用于 `docker pull`)
 
 如果你发现 `docker pull` 镜像非常慢或者报错，你需要配置守护进程代理。这是最常用的配置。
 
 1. **创建目录：**
     
+    Bash
+    
+    ```
+    sudo mkdir -p /etc/systemd/system/docker.service.d
+    ```
+    
 2. **创建配置文件：** `sudo nano /etc/systemd/system/docker.service.d/http-proxy.conf`
     
 3. **写入以下内容：**
     
+    Ini, TOML
+    
+    ```
+    [Service]
+    Environment="HTTP_PROXY=http://proxy.example.com:8080/"
+    Environment="HTTPS_PROXY=http://proxy.example.com:8080/"
+    Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com"
+    ```
+    
 4. **重启 Docker：**
+    
+    Bash
+    
+    ```
+    sudo systemctl daemon-reload
+    sudo systemctl restart docker
+    ```
     
 
 ---
@@ -134,6 +158,20 @@ docker info #查看docker配置
 
 **在你的宿主机当前用户目录下修改：**
 
+JSON
+
+```
+{
+ "proxies": {
+   "default": {
+     "httpProxy": "http://proxy.example.com:8080",
+     "httpsProxy": "http://proxy.example.com:8080",
+     "noProxy": "localhost,127.0.0.1"
+   }
+ }
+}
+```
+
 _配置完成后，之后新建的容器会自动注入这些环境变量。_
 
 ---
@@ -143,6 +181,16 @@ _配置完成后，之后新建的容器会自动注入这些环境变量。_
 如果在 `Dockerfile` 里执行 `npm install` 或 `pip install` 需要代理，建议在执行命令时动态传入，避免把代理地址写死在镜像里。
 
 **执行构建命令时：**
+
+Bash
+
+```
+docker build \
+  --build-arg "HTTP_PROXY=http://127.0.0.1:20171/" \
+  --build-arg "HTTPS_PROXY=http://127.0.0.1:20171/" \
+  --build-arg "NO_PROXY=localhost,127.0.0.1" \
+  -t my-app .
+```
 
 ---
 
