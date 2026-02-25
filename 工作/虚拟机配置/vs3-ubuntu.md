@@ -33,7 +33,7 @@
 ## docker
 
 - **version**：29.1.5
-- **安装方式**：[Ubuntu安装Docker](../../工具/Docker.md#Ubuntu安装Docker)
+- **安装方式**：[Ubuntu安装Docker](../../工具/Docker/Docker.md#Ubuntu安装Docker)
 - **配置**：将用户添加到docker用户组，免sudo执行命令
 
 ## UV
