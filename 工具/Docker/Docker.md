@@ -127,9 +127,9 @@ docker info #查看docker配置
     sudo mkdir -p /etc/systemd/system/docker.service.d
     ```
     
-2. **创建配置文件：** `sudo nano /etc/systemd/system/docker.service.d/http-proxy.conf`
+1. **创建配置文件：** `sudo vim /etc/systemd/system/docker.service.d/http-proxy.conf`
     
-3. **写入以下内容：**
+2. **写入以下内容：**
     
     Ini, TOML
     
@@ -140,7 +140,7 @@ docker info #查看docker配置
     Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com"
     ```
     
-4. **重启 Docker：**
+3. **重启 Docker：**
     
     Bash
     
