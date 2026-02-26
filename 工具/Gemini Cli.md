@@ -11,7 +11,11 @@ Preview Features (e.g., models) = true
 选择gemini3
 ```
 
-## 使用Gemini.md
+# 使用Gemini.md
 
 当修改了Gemini.md时使用
 `/memory refresh`
+
+# 换行
+
+输入`\`之后回车 
