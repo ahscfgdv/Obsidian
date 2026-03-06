@@ -39,7 +39,8 @@ alembic upgrade +2 #相对标识符修改版本
 INFO  [alembic.runtime.migration] Context impl MySQLImpl.
 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
 
-alembic current #cha
+alembic current #查看当前版本
+alembic history #查看历史变动
 ```
 
 ```python
