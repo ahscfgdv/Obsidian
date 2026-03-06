@@ -45,6 +45,14 @@ alembic downgrade base # 降级到base标识符
 alembic revision --autogenerate -m "Added account table" #自动生成脚本
 ```
 
+
+### 生成多个元数据的集合
+
+from myapp.mymodel1 import Model1Base
+from myapp.mymodel2 import Model2Base
+target_metadata = [Model1Base.metadata, Model2Base.metadata]
+
+
 ```python
 """create account table
 Revision ID: 140d9616ec4c
