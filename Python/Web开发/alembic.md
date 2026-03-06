@@ -10,6 +10,8 @@ alembic init alembic
 # 初始化名为alembic的项目
 
 alembic list_templates #列出可用的模板
+
+alembic init --template pyproject alembic #以pyproject.toml作为配置文件
 ```
 
 ## 项目结构
