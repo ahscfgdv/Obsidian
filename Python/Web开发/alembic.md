@@ -1,3 +1,6 @@
+
+`https://alembic.sqlalchemy.org/`
+
 管理数据库
 ## command
 
@@ -10,8 +13,8 @@ alembic init alembic
 ## 项目结构
 
 ```
-alembic.ini
-alembic
+alembic.ini #配置文件
+alembic #迁移环境的主目录，可以取任何名称
 ├── env.py
 ├── __pycache__
 │   └── env.cpython-311.pyc
