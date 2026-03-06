@@ -22,6 +22,12 @@ alembic list_templates #列出可用的模板
 alembic init --template pyproject alembic #以pyproject.toml作为配置文件
 
 alembic revision -m "create account table" #创建一个脚本
+
+alembic upgrade head #运行脚本
+(Alembic_l) PS D:\Project\Python-learn\Alembic_l> alembic upgrade head     
+INFO  [alembic.runtime.migration] Context impl MySQLImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> 140d9616ec4c, create account table
 ```
 
 ```python
