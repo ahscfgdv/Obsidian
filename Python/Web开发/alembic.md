@@ -28,6 +28,13 @@ alembic upgrade head #运行脚本
 INFO  [alembic.runtime.migration] Context impl MySQLImpl.
 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
 INFO  [alembic.runtime.migration] Running upgrade  -> 140d9616ec4c, create account table
+
+alembic upgrade 140 #改变版本到140d9616ec4c
+(Alembic_l) PS D:\Project\Python-learn\Alembic_l> alembic upgrade 140
+INFO  [alembic.runtime.migration] Context impl MySQLImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+alembic upgrade +2
 ```
 
 ```python
