@@ -20,6 +20,8 @@ alembic init alembic
 alembic list_templates #列出可用的模板
 
 alembic init --template pyproject alembic #以pyproject.toml作为配置文件
+
+alembic revision -m "create account table" #创建一个脚本
 ```
 
 ## 项目结构
