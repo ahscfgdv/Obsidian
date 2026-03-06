@@ -39,8 +39,12 @@ uv venv --python 3.11 #创建虚拟环境并指定python版本
 uv init server #创建一个项目
 uv python pin 3.11 #固定python版本不会直接添加到虚拟环境中
 uv sync #同步配置文件和虚拟环境
+
 uv add fastapi uvicorn langchain #安装包
+uv add alembic --active #拥有多个uv环境下在激活的环境下安装包
+
 source .venv/bin/activate #激活虚拟环境不推荐使用
+
 
 ```
 
@@ -69,6 +73,4 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 default = true
 
 ```
-
-## warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
 
