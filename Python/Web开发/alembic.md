@@ -2,6 +2,14 @@
 `https://alembic.sqlalchemy.org/`
 
 管理数据库
+
+## 配置文件
+
+```bash
+script_location = "%(here)s/alembic" #Migration文件的位置
+
+
+```
 ## command
 
 ```bash
