@@ -8,6 +8,8 @@
 
 alembic init alembic
 # 初始化名为alembic的项目
+
+alembic list_templates #列出可用的模板
 ```
 
 ## 项目结构
