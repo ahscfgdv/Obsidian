@@ -34,7 +34,12 @@ alembic upgrade 140 #改变版本到140d9616ec4c
 INFO  [alembic.runtime.migration] Context impl MySQLImpl.
 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
 
-alembic upgrade +2
+alembic upgrade +2 #相对标识符修改版本
+(Alembic_l) PS D:\Project\Python-learn\Alembic_l> alembic upgrade 140+1
+INFO  [alembic.runtime.migration] Context impl MySQLImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+
+alembic current #cha
 ```
 
 ```python
