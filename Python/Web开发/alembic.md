@@ -41,6 +41,8 @@ INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
 
 alembic current #查看当前版本
 alembic history #查看历史变动
+alembic downgrade base # 降级到base标识符
+
 ```
 
 ```python
