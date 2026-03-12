@@ -47,9 +47,7 @@ if p.exists():
 
 提取文件名、后缀、主文件名变得极其简单。
 
-Python
-
-```
+```Python
 p = Path("/home/user/data/report.tar.gz")
 
 print(p.name)    # report.tar.gz (文件名)
@@ -65,9 +63,7 @@ print(p.parent)  # /home/user/data (父目录)
 
 以前用 `os.makedirs` 经常记不住 `exist_ok` 参数？`pathlib` 的语义更清晰。
 
-Python
-
-```
+```Python
 log_dir = Path("logs/2024/march")
 
 # parents=True: 如果父目录(logs, 2024)不存在，自动创建
@@ -81,9 +77,7 @@ log_dir.mkdir(parents=True, exist_ok=True)
 
 寻找目录下特定的文件，支持递归搜索。
 
-Python
-
-```
+```Python
 from pathlib import Path
 
 current_dir = Path(".")
@@ -98,15 +92,3 @@ for img in current_dir.rglob("*.jpg"):
 ```
 
 ---
-
-### 总结对照表
-
-|**需求**|**pathlib 实现**|
-|---|---|
-|**重命名**|`p.rename("new_name.txt")`|
-|**删除文件**|`p.unlink(missing_ok=True)`|
-|**删除空目录**|`p.rmdir()`|
-|**转为字符串**|`str(p)`|
-|**判断是否是目录**|`p.is_dir()`|
-
-**你可以尝试把手里现有的一个 Python 脚本中的 `os.path` 替换掉，如果遇到报错（比如某些库硬性要求字符串类型），我可以教你如何处理兼容性，要试试吗？**
