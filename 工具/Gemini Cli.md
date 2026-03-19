@@ -19,3 +19,9 @@ Preview Features (e.g., models) = true
 # 换行
 
 输入`\`之后回车 
+
+## 命令
+
+### /compress
+
+**说明**：将整个聊天上下文替换为摘要，节省 token，同时保留内容概要。
