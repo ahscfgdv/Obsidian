@@ -1,6 +1,7 @@
 ## 数据类型与变量
 
 ### 命名规范
+
 - **变量/函数**: 小写加下划线 (`snake_case`)。
 - **类**: 大驼峰 (`PascalCase`)。
 - **常量**: 全大写加下划线 (`UPPER_SNAKE_CASE`)。
@@ -11,6 +12,7 @@
 - **避免冲突**: 不要使用 Python 内置函数（如 `list`, `str`）或模块名作为变量/文件名。
 
 ### 类型标注
+
 ```python
 """
 str | None
@@ -33,6 +35,7 @@ def find_user(user_id: int) -> str | None:
 ## 控制流
 
 ### Match-Case (Python 3.10+)
+
 ```python
 def http_error(status):
     match status:
