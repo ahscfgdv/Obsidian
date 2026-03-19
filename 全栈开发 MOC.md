@@ -13,6 +13,7 @@
 - **构建与部署**：[[01-Frontend/Nginx/Nginx部署前端服务|Nginx 部署]]
 
 ## 🐍 3. 后端开发 (Backend - Python 生态)
+- **核心语言**：[[02-Backend/Python基础|Python 基础语法与规范]]
 - **核心框架**：[[02-Backend/Web开发/Fastapi|FastAPI]]
 - **工程化工具**：[[02-Backend/Web开发/Pydantic|Pydantic (验证)]] | [[02-Backend/Web开发/SQLAlchemy|SQLAlchemy (ORM)]] | [[02-Backend/Web开发/Alembic|Alembic (迁移)]]
 - **环境管理**：[[02-Backend/环境管理/UV|UV (推荐)]] | [[02-Backend/环境管理/Conda|Conda]] | [[02-Backend/环境管理/pip|Pip]]
