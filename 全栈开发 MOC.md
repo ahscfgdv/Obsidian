@@ -8,7 +8,7 @@
 
 ## 🎨 2. 前端架构 (Frontend - Vue3 生态)
 
-- **核心框架**：[[01-Frontend/Vue3|Vue 3 核心]] | [[01-Frontend/Element UI|Element UI (Plus)]]
+- **核心框架**：[[01-Frontend/Vue/Vue3|Vue 3 核心]] | [[01-Frontend/Element UI|Element UI (Plus)]]
 - **运行环境**：[[01-Frontend/Nodejs/Nodejs|Node.js]] | [[01-Frontend/Nodejs/Npm|NPM 包管理]] | [[01-Frontend/Nodejs/Nvm|NVM 版本切换]]
 - **构建与部署**：[[01-Frontend/Nginx/Nginx部署前端服务|Nginx 部署]]
 
