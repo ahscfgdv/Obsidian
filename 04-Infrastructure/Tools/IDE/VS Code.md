@@ -1,4 +1,6 @@
+## 在项目中查找
 
+ctrl+shift+f
 ## Python
 
 ### 推荐拓展
