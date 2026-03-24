@@ -45,6 +45,10 @@ gemini --delete-session 1
 
 使用感叹号`!`进入Shell模式
 
+沙盒模式
+
+gemini --sandbox
+
 ## 设置Gemini Cli使用gemini3
 
 ```
