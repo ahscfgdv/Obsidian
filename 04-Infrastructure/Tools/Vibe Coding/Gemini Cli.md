@@ -49,6 +49,14 @@ gemini --delete-session 1
 
 gemini --sandbox
 
+## 计划
+
+通过计划可以避免LLM超出上下文遗忘最初的目标
+
+## 网络搜索和抓取
+
+
+
 ## 设置Gemini Cli使用gemini3
 
 ```
