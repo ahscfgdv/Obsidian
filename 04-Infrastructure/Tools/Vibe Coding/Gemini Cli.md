@@ -24,6 +24,11 @@
 
 gemini -r 恢复上一场对话
 
+**删除会话**
+
+gemini --list-sessions
+gemini --delete-session 1
+
 
 
 ## 设置Gemini Cli使用gemini3
