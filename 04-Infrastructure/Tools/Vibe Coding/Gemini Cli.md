@@ -20,6 +20,9 @@
 3. **Subdirectory:** `./src/GEMINI.md` (Rules specific to the `src` folder).  
     **子目录：**`./src/GEMINI.md`（`src` 文件夹特定的规则）。
 
+## 管理会话和历史记录
+
+
 
 ## 设置Gemini Cli使用gemini3
 
