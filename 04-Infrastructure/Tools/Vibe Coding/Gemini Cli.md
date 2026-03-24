@@ -29,8 +29,14 @@ gemini -r 恢复上一场对话
 gemini --list-sessions
 gemini --delete-session 1
 
+**倒带**
 
+/rewind 或按两下esc
 
+**分叉对话**
+
+/resume save decision-point 保存当前节点
+ 
 ## 设置Gemini Cli使用gemini3
 
 ```
