@@ -13,6 +13,13 @@
 
 通过`Gemini.md`实现长期记忆
 
+1. **Global:** `~/.gemini/GEMINI.md` (Rules for _every_ project you work on).  
+    **全球：**`~/.gemini/GEMINI.md`（适用于您工作的每个项目的规则）。
+2. **Project Root:** `./GEMINI.md` (Rules for the current repository).  
+    **项目根：**`./GEMINI.md`（当前存储库的规则）。
+3. **Subdirectory:** `./src/GEMINI.md` (Rules specific to the `src` folder).  
+    **子目录：**`./src/GEMINI.md`（`src` 文件夹特定的规则）。
+
 
 ## 设置Gemini Cli使用gemini3
 
