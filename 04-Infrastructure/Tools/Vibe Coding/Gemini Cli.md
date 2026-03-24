@@ -57,6 +57,10 @@ gemini --sandbox
 
 可以读取网络上的文档来辅助编码
 
+## 无头模式
+
+运行一次Gemini Cli就退出
+cat error.log | gemini -p "Explain why this failed"
 ## 设置Gemini Cli使用gemini3
 
 ```
