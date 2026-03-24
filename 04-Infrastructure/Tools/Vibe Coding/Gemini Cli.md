@@ -11,7 +11,7 @@
 
 ## 管理上下文和内存
 
-通过`Gemini.md`实现长期记忆
+通过`Gemini.md`实现长期记忆，在`Gemini.md`中要使用确定的语句如**不要**
 
 1. **Global:** `~/.gemini/GEMINI.md` (Rules for _every_ project you work on).  
     **全球：**`~/.gemini/GEMINI.md`（适用于您工作的每个项目的规则）。
