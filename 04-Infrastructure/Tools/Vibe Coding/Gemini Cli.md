@@ -55,7 +55,7 @@ gemini --sandbox
 
 ## 网络搜索和抓取
 
-
+可以读取网络上的文档来辅助编码
 
 ## 设置Gemini Cli使用gemini3
 
