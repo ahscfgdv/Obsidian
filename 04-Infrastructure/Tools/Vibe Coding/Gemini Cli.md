@@ -22,6 +22,8 @@
 
 ## 管理会话和历史记录
 
+gemini -r 恢复上一场对话
+
 
 
 ## 设置Gemini Cli使用gemini3
