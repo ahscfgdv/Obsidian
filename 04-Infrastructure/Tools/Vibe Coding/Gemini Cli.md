@@ -36,7 +36,11 @@ gemini --delete-session 1
 **分叉对话**
 
 /resume save decision-point 保存当前节点
- 
+
+## 使用 Agent Skills 开始
+
+
+
 ## 设置Gemini Cli使用gemini3
 
 ```
