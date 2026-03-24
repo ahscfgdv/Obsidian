@@ -43,7 +43,7 @@ gemini --delete-session 1
 
 ## 执行 shell 命令
 
-使用感叹号直接运行命令`!`
+使用感叹号`!`进入Shell模式
 
 ## 设置Gemini Cli使用gemini3
 
