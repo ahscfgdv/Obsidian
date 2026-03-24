@@ -9,7 +9,9 @@
 创建geminiignore可以让Gemini Cli忽略指定文件，Gemini Cli也不会读取被gitignore忽视的文件
 
 
+## 管理上下文和内存
 
+通过`Gemini.md`实现长期记忆
 
 
 ## 设置Gemini Cli使用gemini3
