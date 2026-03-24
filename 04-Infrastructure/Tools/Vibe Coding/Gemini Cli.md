@@ -6,6 +6,7 @@
 
 如果不指定可能会读取整个项目浪费Token
 
+创建geminiignore可以让Gemini Cli忽略指定文件，Gemini Cli也不会读取被gitignore忽视的文件
 
 
 
