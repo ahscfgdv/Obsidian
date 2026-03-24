@@ -39,7 +39,11 @@ gemini --delete-session 1
 
 ## 使用 Agent Skills 开始
 
+创建Skills供Gemini Cli调用
 
+## 执行 shell 命令
+
+使用感叹号直接运行命令`!`
 
 ## 设置Gemini Cli使用gemini3
 
