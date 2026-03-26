@@ -1,90 +1,65 @@
-可以调用工具自动完成编程
+# Gemini CLI 使用指南
 
-## 管理文件
+Gemini CLI 是一款专为软件工程师设计的交互式命令行 AI 助手，能够深度集成开发环境，通过自动化工具调用实现高效的代码编写、重构与系统管理。
 
-使用`@`直接读取指定文件或文件夹
+## 1. 文件与上下文管理
 
-如果不指定可能会读取整个项目浪费Token
+### 精确上下文控制
+*   **指定读取 (`@`)**：使用 `@path/to/file` 或 `@directory` 直接将特定内容读入上下文。
+    *   *提示：避免不带路径的提问，以减少 Token 浪费。*
+*   **忽略文件**：
+    *   `.geminiignore`：自定义 Gemini CLI 忽略的文件或文件夹。
+    *   `.gitignore`：Gemini CLI 默认遵循 git 的忽略规则。
 
-创建geminiignore可以让Gemini Cli忽略指定文件，Gemini Cli也不会读取被gitignore忽视的文件
+## 2. 长期记忆与规则约束 (GEMINI.md)
 
+通过编写 `GEMINI.md` 文件来设定 AI 的行为准则。建议使用明确的指令（如“不要使用...”，“始终包含...”）。
 
-## 管理上下文和内存
+### 规则层级
+1.  **全局级 (`~/.gemini/GEMINI.md`)**：适用于所有项目的通用规则。
+2.  **项目级 (`./GEMINI.md`)**：当前仓库的特定开发规范。
+3.  **目录级 (`./src/GEMINI.md`)**：针对特定子目录（如前端、后端）的局部规则。
 
-通过`Gemini.md`实现长期记忆，在`Gemini.md`中要使用确定的语句如**不要**
+*   **同步更新**：修改规则文件后，输入 `/memory refresh` 强制刷新 AI 的记忆。
 
-1. **Global:** `~/.gemini/GEMINI.md` (Rules for _every_ project you work on).  
-    **全球：**`~/.gemini/GEMINI.md`（适用于您工作的每个项目的规则）。
-2. **Project Root:** `./GEMINI.md` (Rules for the current repository).  
-    **项目根：**`./GEMINI.md`（当前存储库的规则）。
-3. **Subdirectory:** `./src/GEMINI.md` (Rules specific to the `src` folder).  
-    **子目录：**`./src/GEMINI.md`（`src` 文件夹特定的规则）。
+## 3. 会话与历史控制
 
-## 管理会话和历史记录
+### 状态恢复与分支
+*   `gemini -r`：快速恢复上一次的对话状态。
+*   `/resume save [name]`：在当前节点创建快照，方便后续分叉尝试不同的方案。
 
-gemini -r 恢复上一场对话
+### 历史操作
+*   **倒带 (`/rewind`)**：撤销上一步操作（快捷键：连续按两次 `Esc`）。
+*   **删除会话**：
+    *   `gemini --list-sessions`：查看所有历史会话。
+    *   `gemini --delete-session [ID]`：清理指定会话。
 
-**删除会话**
+### 优化上下文
+*   **压缩 (`/compress`)**：将之前的聊天历史转化为摘要，清理过期的冗余信息以节省 Token。
 
-gemini --list-sessions
-gemini --delete-session 1
+## 4. 命令与执行模式
 
-**倒带**
+### Shell 交互
+*   **单次执行**：使用感叹号 `!command` 直接运行系统命令。
+*   **沙盒模式**：使用 `gemini --sandbox` 在受限环境中安全测试代码。
 
-/rewind 或按两下esc
+### 自动化与脚本
+*   **无头模式 (Headless)**：支持管道输入，运行一次即退出。
+    *   示例：`cat error.log | gemini -p "分析此错误原因"`
+*   **多行输入**：在行尾输入反斜杠 `\` 后按回车，继续编写内容。
 
-**分叉对话**
+## 5. 高级功能
 
-/resume save decision-point 保存当前节点
+*   **计划模式 (Planning)**：通过 `enter_plan_mode` 或复杂指令启动。AI 会先制定详细计划并获得用户确认后再执行，防止因任务过大导致的上下文偏移。
+*   **网络搜索与抓取**：实时读取网络文档或抓取 API 页面，辅助解决依赖库版本更新等问题。
+*   **Agent Skills**：通过创建 Skills 扩展 Gemini CLI 的原生能力，使其具备特定的专业技能（如自动化测试生成）。
 
-## 使用 Agent Skills 开始
+## 6. 配置与模型设置
 
-创建Skills供Gemini Cli调用
+*   **设置界面**：输入 `/settings` 进入交互式配置。
+*   **开启预览模型**：
+    1. 在 `/settings` 中开启 `Preview Features`。
+    2. 输入 `/model` 并选择 `gemini3` 或最新发布的预览版模型。
 
-## 执行 shell 命令
-
-使用感叹号`!`进入Shell模式
-
-沙盒模式
-
-gemini --sandbox
-
-## 计划
-
-通过计划可以避免LLM超出上下文遗忘最初的目标
-
-## 网络搜索和抓取
-
-可以读取网络上的文档来辅助编码
-
-## 无头模式
-
-运行一次Gemini Cli就退出
-cat error.log | gemini -p "Explain why this failed"
-## 设置Gemini Cli使用gemini3
-
-```
-
-/settings
-
-Preview Features (e.g., models) = true
-
-/model
-
-选择gemini3
-```
-
-## 使用Gemini.md
-
-当修改了Gemini.md时使用
-`/memory refresh`
-
-## 换行
-
-输入`\`之后回车 
-
-## 命令
-
-### /compress
-
-**说明**：将整个聊天上下文替换为摘要，节省 token，同时保留内容概要。
+---
+*更新日期：2026年3月26日*
