@@ -1,65 +1,87 @@
-# Gemini CLI 使用指南
+# Gemini CLI 深度使用指南
 
-Gemini CLI 是一款专为软件工程师设计的交互式命令行 AI 助手，能够深度集成开发环境，通过自动化工具调用实现高效的代码编写、重构与系统管理。
+Gemini CLI 是一款专为软件工程师打造的交互式 AI 助手，深度集成开发环境，通过自动化工具调用（Tool Calling）实现高效的代码编写、重构与系统管理。
 
-## 1. 文件与上下文管理
+## 1. 上下文与规则管理 (Context & Rules)
 
 ### 精确上下文控制
-*   **指定读取 (`@`)**：使用 `@path/to/file` 或 `@directory` 直接将特定内容读入上下文。
-    *   *提示：避免不带路径的提问，以减少 Token 浪费。*
-*   **忽略文件**：
-    *   `.geminiignore`：自定义 Gemini CLI 忽略的文件或文件夹。
-    *   `.gitignore`：Gemini CLI 默认遵循 git 的忽略规则。
+*   **资源引用 (`@`)**：在对话中使用 `@path/to/file` 或 `@directory` 直接引入特定文件或目录内容。
+*   **忽略规则**：
+    *   `.geminiignore`：自定义忽略规则，防止不必要的文件进入 AI 上下文。
+    *   `.gitignore`：默认遵循 Git 忽略规则。
+    *   可在 `settings.json` 中通过 `context.fileFiltering` 调整。
 
-## 2. 长期记忆与规则约束 (GEMINI.md)
+### 行为准则 (Custom Instructions)
+通过编写规则文件设定 AI 的行为准则（如编码风格、架构模式）：
+*   **文件命名**：默认识别 `GEMINI.md` 和 `CONTEXT.md`。
+*   **层级结构**：
+    1.  **全局级** (`~/.gemini/GEMINI.md`)：通用开发偏好。
+    2.  **项目级** (`./GEMINI.md`)：仓库特定规范。
+    3.  **目录级** (`./src/GEMINI.md`)：针对特定模块的规则。
+*   **记忆刷新**：修改规则后使用 `/memory refresh` 同步。
 
-通过编写 `GEMINI.md` 文件来设定 AI 的行为准则。建议使用明确的指令（如“不要使用...”，“始终包含...”）。
+## 2. 核心模式与执行 (Execution Modes)
 
-### 规则层级
-1.  **全局级 (`~/.gemini/GEMINI.md`)**：适用于所有项目的通用规则。
-2.  **项目级 (`./GEMINI.md`)**：当前仓库的特定开发规范。
-3.  **目录级 (`./src/GEMINI.md`)**：针对特定子目录（如前端、后端）的局部规则。
+### 计划模式 (Plan Mode)
+解决复杂任务的首选模式。AI 会先制定详尽计划并获取用户确认后再执行。
+*   **启动**：通过 `enter_plan_mode` 触发或在指令中明确要求。
+*   **查看/复制**：使用 `/plan` 查看当前计划，`/plan copy` 复制到剪贴板。
+*   **非交互执行**：`gemini --approval-mode plan -p "任务描述"` 自动处理所有步骤。
 
-*   **同步更新**：修改规则文件后，输入 `/memory refresh` 强制刷新 AI 的记忆。
+### 无头模式 (Headless)
+适用于脚本自动化或 CI/CD。
+*   **管道操作**：`cat error.log | gemini -p "分析错误原因"`。
 
-## 3. 会话与历史控制
+### 沙盒环境 (Sandbox)
+*   **隔离执行**：在 `settings.json` 中配置 `"tools": { "sandbox": "docker" }`，在容器中安全运行生成的脚本。
 
-### 状态恢复与分支
-*   `gemini -r`：快速恢复上一次的对话状态。
-*   `/resume save [name]`：在当前节点创建快照，方便后续分叉尝试不同的方案。
+## 3. 配置系统 (Settings)
 
-### 历史操作
-*   **倒带 (`/rewind`)**：撤销上一步操作（快捷键：连续按两次 `Esc`）。
-*   **删除会话**：
-    *   `gemini --list-sessions`：查看所有历史会话。
-    *   `gemini --delete-session [ID]`：清理指定会话。
+配置文件位于 `~/.gemini/settings.json` (用户级) 或 `.gemini/settings.json` (项目级)。
 
-### 优化上下文
-*   **压缩 (`/compress`)**：将之前的聊天历史转化为摘要，清理过期的冗余信息以节省 Token。
+```json
+{
+  "general": {
+    "vimMode": true,
+    "checkpointing": { "enabled": true }, // 自动创建会话快照
+    "defaultApprovalMode": "default"      // "default", "auto_edit", "plan"
+  },
+  "model": {
+    "name": "gemini-3-pro-preview",
+    "compressionThreshold": 0.5          // 上下文压缩阈值
+  },
+  "tools": {
+    "useRipgrep": true,                   // 使用 rg 提高搜索效率
+    "exclude": ["run_shell_command(rm)"]  // 禁用高危命令
+  },
+  "experimental": {
+    "plan": true,
+    "jitContext": true                    // 即时上下文注入
+  }
+}
+```
 
-## 4. 命令与执行模式
+## 4. 会话与历史控制
 
-### Shell 交互
-*   **单次执行**：使用感叹号 `!command` 直接运行系统命令。
-*   **沙盒模式**：使用 `gemini --sandbox` 在受限环境中安全测试代码。
+*   **快照与分叉**：`/resume save [name]` 保存当前状态，方便在不同方案间切换。
+*   **状态恢复**：`gemini -r` 恢复最后一次对话。
+*   **历史清理**：
+    *   `/rewind` (或连按两次 `Esc`)：撤销上一步。
+    *   `/compress`：压缩冗余历史以节省 Token。
+    *   `gemini --delete-session [ID]`：清理磁盘上的历史记录。
 
-### 自动化与脚本
-*   **无头模式 (Headless)**：支持管道输入，运行一次即退出。
-    *   示例：`cat error.log | gemini -p "分析此错误原因"`
-*   **多行输入**：在行尾输入反斜杠 `\` 后按回车，继续编写内容。
+## 5. 高级特性
 
-## 5. 高级功能
+*   **MCP 服务器集成**：支持模型上下文协议 (Model Context Protocol)，可连接外部工具（如数据库、API 服务）。
+*   **搜索增强 (Grounding)**：实时调用 Google Search 校验技术文档，避免 AI 幻觉。
+*   **自动化钩子 (Hooks)**：通过 `BeforeTool` 或 `AfterTool` 在工具执行前后触发自定义逻辑（如自动归档计划）。
 
-*   **计划模式 (Planning)**：通过 `enter_plan_mode` 或复杂指令启动。AI 会先制定详细计划并获得用户确认后再执行，防止因任务过大导致的上下文偏移。
-*   **网络搜索与抓取**：实时读取网络文档或抓取 API 页面，辅助解决依赖库版本更新等问题。
-*   **Agent Skills**：通过创建 Skills 扩展 Gemini CLI 的原生能力，使其具备特定的专业技能（如自动化测试生成）。
+## 6. 安全与最佳实践
 
-## 6. 配置与模型设置
-
-*   **设置界面**：输入 `/settings` 进入交互式配置。
-*   **开启预览模型**：
-    1. 在 `/settings` 中开启 `Preview Features`。
-    2. 输入 `/model` 并选择 `gemini3` 或最新发布的预览版模型。
+*   **禁用 YOLO 模式**：除非完全信任，否则不要开启自动执行敏感命令。
+*   **Token 优化**：优先使用 `@` 精确指向，避免盲目读取大目录。
+*   **检查点**：在进行大规模代码重构前，手动触发快照。
 
 ---
 *更新日期：2026年3月26日*
+*文档来源：Context7 /google-gemini/gemini-cli*
