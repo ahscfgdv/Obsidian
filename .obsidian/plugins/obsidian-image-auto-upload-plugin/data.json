@@ -1,0 +1,34 @@
+{
+  "uploadByClipSwitch": true,
+  "uploader": "PicGo",
+  "uploadServer": "http://127.0.0.1:36677/upload",
+  "deleteServer": "http://127.0.0.1:36677/delete",
+  "imageSizeSuffix": "",
+  "picgoCorePath": "",
+  "workOnNetWork": false,
+  "fixPath": false,
+  "applyImage": true,
+  "newWorkBlackDomains": "",
+  "deleteSource": false,
+  "imageDesc": "origin",
+  "remoteServerMode": false,
+  "uploadedImages": [
+    {
+      "isEncrypted": 1,
+      "EncryptedData": "4f391faf46280f38cc5727da6bfc21f1:137673580403678261f2f52d967277d6e6d43f38651dc2e361a1b7f027e359bae9a262cdf386351a6417fa1fe22807ee0ca2c3fc8976b99ee69cbc2f1afcc1f0d93c349f1d16fc4af926ab1a57b2d973118e2bb5d823317093f2f0ee57bc699c5b9e9e81064ad1646fd1ec1f8c787cbf6fb073e8b0633950681708404a03052bf697508439e1bb46dd775589adbb00d4db3a82f6aa8520fa1e20248a2d430f6cecd444d1758c138645259d02bd502c59cf2ced3ecd8eba16368794ce512ed6bf49f1711023ee4df48ae9f88852aae57d4a7e4c2bfd35e36b570ef707c4df1c6a5ee69ccf97aab52533d096bd66ee299cc4f6f3cae400d90d43516067e889ba6d3f719b1b6bed453655b325627c69bf5ddcea00c05364a8f6f67a1907b00b7b77986af338b6807b5af79fac883109ec0810cd59bdcc0595249de3e5f27d06738df4d5ec84d412b5bf649b7ac050c141f2d5158d81e693071a158f02a8e547141b80e014f5017f11e90cbc858215e05c64ee87f319439dd8c59ff8dbaf303246feefbdd451ca8dfb4afd02793a2f5ed1df519146f2863bd1191fe3a34725a5e847c1da1221d08dfc9e26e01718f7223ecf922ad9209d77d210cf85121b58138d46cd8b4d68b8f3b175b5ab12dfa7d928f523674065b26ec054379ab217540a8a63c3d26099dee51e61e403cb85c4928cb6fe44a4a8d05973c2853e7409a021381c7a23949c98eafdfaa2aeb5fbfbc6dea5d360e615a4a098eed8b483bb447b24175ac3df29784bf480b7936e1af3268e39d98351992b92a125d4b2f9f7ddab1794439b5e1970774ab1cf7daec1eec9ea72de05c2e9d92d59735cd3bafb987e14d5f54ae26ded43889d9437fa1e01ed0ccf3dde93c070de63b0250de9e81c83c8c079e79fe8204e7cf27b59fab5f34be54e88bb3140553313cc33a87ed3f020b102615b54012bd3a13d78f549dd97324ae3401fb07ff1d2c43579682c4e097ae2c25eb857d89b5f358610070272fb90ab50987801d131ca5fda056af413e2933cd89b56a8df2ee3bb55ce05683f0ece62692548f30ba65a603cf1aaf029588a2b16fc330cdbc4acfb4efebca3b1fe411676c6616a54ebf7ef66c59b4f3c0e2c488a8127c83548956d261b3577c5e0d8790e",
+      "fileName": "2026/20260330151004960_2026-03-30_151004.png",
+      "width": 367,
+      "height": 360,
+      "filePath": "C:\\Users\\ljx\\AppData\\Roaming\\piclist\\piclist-clipboard-images\\20260330151004960.png",
+      "extname": ".png",
+      "mimeType": "image/png",
+      "imgUrl": "https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260330151004960_2026-03-30_151004.png",
+      "hash": "cac7915a252ab4a07a32287ad9ba99d898c77643",
+      "type": "github",
+      "shortUrl": "",
+      "id": "c08e5102-d5d6-4686-8011-56d261e7901e",
+      "createdAt": 1774854606962,
+      "updatedAt": 1774854606962
+    }
+  ]
+}
