@@ -14,7 +14,7 @@ tags:
 
 `OpenClaw` 的名字经历了三次变更，第一次叫做 `ClawdBot` ，后来因为名字跟 `Claude` 太过相似，被 `CLaude` 告侵权，遂改名 `MoltBot` 。
 
-但是后来在改名过程中遭遇 [域名](https://cloud.tencent.com/product/domain?from_column=20065&from=20065) 和社交账号被抢注，甚至出坑同名加密货币割韭菜的情况，导致名称传播受阻。
+但是后来在改名过程中遭遇域名和社交账号被抢注，甚至出坑同名加密货币割韭菜的情况，导致名称传播受阻。
 
 最终定名为： **OpenClaw** 。
 
@@ -117,15 +117,15 @@ iwr -useb https://openclaw.ai/install.ps1 | iex
 
 选择ollama作为模型提供商
 
-![](assets/【保姆级教程】手把手教你安装OpenClaw并接入飞书，让AI在聊天软件里帮你干活-腾讯云开发者社区-腾讯云/file-20260330141559231.png)
+![](assets/安装OpenClaw并接入飞书/file-20260330142807018%201.png)
 
 输入地址
 
-![](assets/【保姆级教程】手把手教你安装OpenClaw并接入飞书，让AI在聊天软件里帮你干活-腾讯云开发者社区-腾讯云/file-20260330141701755.png)
+![](assets/安装OpenClaw并接入飞书/file-20260330142807018.png)
 
 ### 四）选择 AI 模型
 
-![](assets/【保姆级教程】手把手教你安装OpenClaw并接入飞书，让AI在聊天软件里帮你干活-腾讯云开发者社区-腾讯云/file-20260330141741186.png)
+![](assets/安装OpenClaw并接入飞书/file-20260330142807017.png)
 
 ### 五）连接即时通讯平台
 
@@ -325,13 +325,7 @@ openclaw config
 
 ![](https://developer.qcloudimg.com/http-save/11970718/3635651a264194c78fdb899255269a70.png)
 
-以下是openclaw文件夹下面的文档内的内容：
-
-![](https://developer.qcloudimg.com/http-save/11970718/a684fc55523ceb76535afd37e8374b07.png)
-
-现在我跟飞书机器人对话，让他告诉我指定文档内是什么内容：
-
-![](https://developer.qcloudimg.com/http-save/11970718/70b53ea02ee14ccdb382cda40cad600b.jpg)
+![](assets/安装OpenClaw并接入飞书/file-20260330142807015.png)
 
 ---
 
@@ -351,16 +345,17 @@ Control UI: http://127.0.0.1:18789
 
 ## 七、常用命令速查
 
-| 命令 | 功能 |
-| --- | --- |
-| `openclaw onboard` | 重新进入配置向导 |
-| `openclaw status` | 查看运行状态 |
-| `openclaw health` | 健康检查 |
-| `openclaw gateway start` | 启动服务 |
-| `openclaw gateway stop` | 停止服务 |
-| `openclaw update` | 更新到最新版本 |
-| `openclaw doctor` | 诊断问题 |
-| `openclaw uninstall` | 卸载 OpenClaw |
+| 命令                       | 功能             |
+| ------------------------ | -------------- |
+| `openclaw onboard`       | 重新进入配置向导       |
+| `openclaw status`        | 查看运行状态         |
+| `openclaw health`        | 健康检查           |
+| `openclaw gateway start` | 启动服务           |
+| `openclaw gateway stop`  | 停止服务           |
+| `openclaw update`        | 更新到最新版本        |
+| `openclaw doctor`        | 诊断问题           |
+| `openclaw uninstall`     | 卸载 OpenClaw    |
+| `openclaw dashboard`     | 启动一个可视化 Web 界面 |
 
 ---
 
@@ -451,65 +446,3 @@ openclaw gateway --port 18790
 ## 九、成本说明
 
 OpenClaw 软件本身完全免费，主要成本来自 AI 模型 API 调用，可选择国产大模型，降低成本。
-
----
-
-## 结语
-
-OpenClaw 代表了个人 AI 助理的未来趋势——从"聊天工具"进化为"执行工具"。虽然目前的配置过程对小白用户有一定门槛，但一旦完成设置，您将拥有一个 24/7 待命的超级助手。
-
----
-
-**修改说明** ：
-
-- 为所有代码块添加了正确的语言标识：
-	- PowerShell 命令使用 `powershell`
-		- 文件路径使用 `text`
-		- JavaScript 代码使用 `javascript`
-- 保持文章其他内容不变。
-
-本文系外文翻译，前往查看
-
-如有侵权，请联系 [cloudcommunity@tencent.com](mailto:cloudcommunity@tencent.com) 删除。
-
-本文系外文翻译，前往查看
-
-如有侵权，请联系 [cloudcommunity@tencent.com](mailto:cloudcommunity@tencent.com) 删除。
-
-[阿坡RPA](https://cloud.tencent.com/developer/user/11970718) 0
-
-LV.1
-
-这个人很懒，什么都没有留下～
-
-目录
-
-交个朋友
-
-加入架构与运维趋势交流群
-
-技术趋势前瞻 架构演进方向
-
-![](https://cs.cloud.tencent.com/group1/M00/2E/70/C6E9n2gN3fOAUGhxAAAeAFnkNhw529.png)
-
-加入架构与运维工作实战群
-
-高并发系统设计 运维自动化实践
-
-![](https://cs.cloud.tencent.com/group1/M00/2E/70/C6E9n2gN6ZSAPTalAAAeEz-29Rw505.png)
-
-加入架构与运维学习入门群
-
-系统架构设计入门 运维体系构建指南
-
-![](https://cs.cloud.tencent.com/group1/M00/2E/70/C6E9n2gN6cqANy6bAAAeB7K8Zhw564.png)
-
-换一批
-
-相关产品与服务
-
-即时通信 IM
-
-即时通信 IM（Instant Messaging）基于腾讯二十余年的 IM 技术积累，支持 Android、iOS、Mac、Windows、Web、H5、小程序平台且跨终端互通，低代码 UI 组件助您30分钟集成单聊、群聊、好友与资料、消息漫游、群组管理、会话管理、直播弹幕、内容审核和推送等能力。适用于直播互动、电商带货、客服咨询、社交沟通、企业办公、互动游戏、医疗健康等场景。
-
-[腾讯云 IM，全球通信，1折起](https://cloud.tencent.com/act/pro/imnew?from=21344&from_column=21344)
