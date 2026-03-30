@@ -7,14 +7,6 @@ created: 2026-03-30
 description: OpenClaw是一款开源AI助手，能24/7执行电脑操作任务，支持钉钉、飞书等通讯平台接入。本文详细介绍从安装Node.js到配置飞书机器人的完整教程，包含常见问题解决方案。OpenClaw具备文件整理、邮件处理等自动化能力，数据完全自主掌控，是真正的智能办公助手。
 tags:
 ---
-[社区首页](https://cloud.tencent.com/developer) > [专栏](https://cloud.tencent.com/developer/column) >【保姆级教程】手把手教你安装OpenClaw并接入飞书，让AI在聊天软件里帮你干活
-
-285.5K
-
-举报
-
-根据您的要求，我已将文章内容中的所有代码块设置好对应的代码语言。以下是修改后的完整文章内容：
-
 ---
 
 这里先做一下简单的科普：
