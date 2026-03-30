@@ -40,12 +40,18 @@ tags:
 
 ## 二、安装nodejs
 
-后面执行一键安装命令，可以自动安装nodejs，但是如果为了加快速度，防止安装意外，可以先安装nodejs：
+### Nvm
 
-官方下载地址： [https://nodejs.org/zh-cn/download](https://cloud.tencent.com/developer/tools/blog-entry?target=https%3A%2F%2Fnodejs.org%2Fzh-cn%2Fdownload&objectId=2626160&objectType=1&contentType=undefined)
+下载Nvm安装程序
+`https://gh-proxy.org/https://github.com/coreybutler/nvm-windows/releases/download/1.2.2/nvm-setup.zip`
+解压后安装
 
-![](https://developer.qcloudimg.com/http-save/11970718/d1396425d8d4091851286c7655ca68c6.png)
+### Nodejs
 
+安装Nvm后打开Powershell
+`nvm install 22`
+使用Nodejs
+`nvm use 22`
 ## 三、开始安装
 
 #### 一）设置 PowerShell 执行权限
