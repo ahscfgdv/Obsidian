@@ -7,6 +7,7 @@ created: 2026-03-30
 description: OpenClaw是一款开源AI助手，能24/7执行电脑操作任务，支持钉钉、飞书等通讯平台接入。本文详细介绍从安装Node.js到配置飞书机器人的完整教程，包含常见问题解决方案。OpenClaw具备文件整理、邮件处理等自动化能力，数据完全自主掌控，是真正的智能办公助手。
 tags:
 ---
+
 ---
 
 这里先做一下简单的科普：
@@ -40,8 +41,11 @@ tags:
 
 ## 二、安装nodejs
 
+后面执行一键安装命令，可以自动安装nodejs，但是如果为了加快速度，防止安装意外，可以先安装nodejs：
 
+官方下载地址： [https://nodejs.org/zh-cn/download](https://cloud.tencent.com/developer/tools/blog-entry?target=https%3A%2F%2Fnodejs.org%2Fzh-cn%2Fdownload&objectId=2626160&objectType=1&contentType=undefined)
 
+![](https://developer.qcloudimg.com/http-save/11970718/d1396425d8d4091851286c7655ca68c6.png)
 
 ## 三、开始安装
 
@@ -87,7 +91,7 @@ iwr -useb https://openclaw.ai/install.ps1 | iex
 - 配置环境变量
 - 启动配置向导
 
-> 注意：如果命令执行后，还是报错，可以自己到官网下载node安装包，自己安装node环境，注意版本最好在 node v22.x 以上，node官网下载地址： [https://nodejs.org/zh-cn/download](https://cloud.tencent.com/developer/tools/blog-entry?target=https%3A%2F%2Fnodejs.org%2Fzh-cn%2Fdownload&objectId=2626160&objectType=1&contentType=undefined) ，若还是不懂怎么安装，点头像进我主页找到我，拉你进交流群
+> 注意：如果命令执行后，还是报错，可以自己到官网下载node安装包，自己安装node环境，注意版本最好在 node v22.x 以上，node官网下载地址： [https://nodejs.org/zh-cn/download](https://cloud.tencent.com/developer/tools/blog-entry?target=https%3A%2F%2Fnodejs.org%2Fzh-cn%2Fdownload&objectId=2626160&objectType=1&contentType=undefined) 
 
 ![](https://developer.qcloudimg.com/http-save/11970718/551a3aa7bbe198f9fe0d237391815fe0.png)
 
@@ -109,11 +113,8 @@ iwr -useb https://openclaw.ai/install.ps1 | iex
 
 ![](https://developer.qcloudimg.com/http-save/11970718/bca550a66426b3a1db6af995013d39f6.png)
 
-### 三）配置 AI 模型 API Key
+### 三）配置 Ollama本地模型
 
-OpenClaw 需要连接到大语言模型才能工作。Openclaw 比较费token，国外模型成本高，门槛也高，这里我选择国内的智谱的 GLM 4.7
-
-> 如果没有智谱的API Key，点击官方地址自己注册账号获取API key： [https://www.bigmodel.cn/glm-coding?ic=RBSKXMPNJP](https://cloud.tencent.com/developer/tools/blog-entry?target=https%3A%2F%2Fwww.bigmodel.cn%2Fglm-coding%3Fic%3DRBSKXMPNJP&objectId=2626160&objectType=1&contentType=undefined)
 
 ![](https://developer.qcloudimg.com/http-save/11970718/10fcfd0f783085daa1f8924e25d9d460.png)
 
