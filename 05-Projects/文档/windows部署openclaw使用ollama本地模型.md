@@ -13,3 +13,12 @@
 使用Nodejs
 `nvm use 20`
 
+## Openclaw
+
+`npm install -g openclaw`
+
+## 配置OpenClaw
+
+运行配置引导
+`openclaw onboard`
+
