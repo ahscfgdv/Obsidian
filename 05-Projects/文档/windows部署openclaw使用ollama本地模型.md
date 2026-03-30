@@ -19,6 +19,10 @@
 
 ## 配置OpenClaw
 
+验证是否安装成功
+`openclaw --version`
 运行配置引导
 `openclaw onboard`
+
+
 
