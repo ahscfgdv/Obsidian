@@ -117,15 +117,15 @@ iwr -useb https://openclaw.ai/install.ps1 | iex
 
 选择ollama作为模型提供商
 
-![](assets/安装OpenClaw并接入飞书/file-20260330142807018%201.png)
+![](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260330151118319_2026-03-30_151118.png)
 
 输入地址
 
-![](assets/安装OpenClaw并接入飞书/file-20260330142807018.png)
+![](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260330151251975_2026-03-30_151251.png)
 
 ### 四）选择 AI 模型
 
-![](assets/安装OpenClaw并接入飞书/file-20260330142807017.png)
+![](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260330151322611_2026-03-30_151322.png)
 
 ### 五）连接即时通讯平台
 
@@ -325,7 +325,7 @@ openclaw config
 
 ![](https://developer.qcloudimg.com/http-save/11970718/3635651a264194c78fdb899255269a70.png)
 
-![](assets/安装OpenClaw并接入飞书/file-20260330142807015.png)
+![](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260330151410554_2026-03-30_151410.png)
 
 ---
 
