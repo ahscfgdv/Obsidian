@@ -20,3 +20,5 @@ nvm use 20
 
 ### Windows
 
+下载nvm安装程序
+`https://gh-proxy.org/https://github.com/coreybutler/nvm-windows/releases/download/1.2.2/nvm-setup.zip`
