@@ -115,18 +115,17 @@ iwr -useb https://openclaw.ai/install.ps1 | iex
 
 ### 三）配置 Ollama本地模型
 
+选择ollama作为模型提供商
 
-![](https://developer.qcloudimg.com/http-save/11970718/10fcfd0f783085daa1f8924e25d9d460.png)
+![](assets/【保姆级教程】手把手教你安装OpenClaw并接入飞书，让AI在聊天软件里帮你干活-腾讯云开发者社区-腾讯云/file-20260330141559231.png)
 
-输入自己的 API Key：
+输入地址
 
-![](https://developer.qcloudimg.com/http-save/11970718/e9965f9944b31e8aefe5061ff4741e90.png)
+![](assets/【保姆级教程】手把手教你安装OpenClaw并接入飞书，让AI在聊天软件里帮你干活-腾讯云开发者社区-腾讯云/file-20260330141701755.png)
 
 ### 四）选择 AI 模型
 
-> 这里我选择默认的GLM 4.7，也是智普当前的旗舰模型
-
-![](https://developer.qcloudimg.com/http-save/11970718/8368cb667c52c648f932a4facfed9051.png)
+![](assets/【保姆级教程】手把手教你安装OpenClaw并接入飞书，让AI在聊天软件里帮你干活-腾讯云开发者社区-腾讯云/file-20260330141741186.png)
 
 ### 五）连接即时通讯平台
 
@@ -134,7 +133,7 @@ iwr -useb https://openclaw.ai/install.ps1 | iex
 
 ![](https://developer.qcloudimg.com/http-save/11970718/ef05ad5c714b98ba8c9f3233d8982c97.png)
 
-> OpenClaw 原生支持的 [即时通信](https://cloud.tencent.com/product/im?from_column=20065&from=20065) 平台主要是海外的 WhatsApp、Telegram、Discord、Slack、iMessage 等，国内用户不习惯，这里国产即时通信软件大厂也跟进了，现在钉钉，飞书等都已支持接入OpenClaw
+> OpenClaw 原生支持的即时通信平台主要是海外的 WhatsApp、Telegram、Discord、Slack、iMessage 等，国内用户不习惯，这里国产即时通信软件大厂也跟进了，现在钉钉，飞书等都已支持接入OpenClaw
 
 后面会带领大家把飞书机器人接入 OpenClaw，使大家可以通过飞书即可指挥OpenClaw为我们干活，但是飞书配置比较复杂，这里我们先选择跳过，后面我们可以通过继续进行配置：
 
