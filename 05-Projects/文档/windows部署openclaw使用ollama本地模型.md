@@ -24,5 +24,7 @@
 运行配置引导
 `openclaw onboard`
 
+先跳过其他设置只在模型提供者`Model/auth provider`选择Ollama
+地址为`http://27.185.79.10:11434`
 
 
