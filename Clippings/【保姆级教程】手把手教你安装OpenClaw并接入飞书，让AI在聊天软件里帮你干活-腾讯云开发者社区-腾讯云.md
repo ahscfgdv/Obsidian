@@ -153,15 +153,17 @@ iwr -useb https://openclaw.ai/install.ps1 | iex
 
 ### 八）启动服务并打开UI界面
 
-此时它会自动再打开一个命令窗口来启动服务:
+```powershell
+openclaw gateway
+```
 
 ![](https://developer.qcloudimg.com/http-save/11970718/f707189e151dd94d0866b4aeef2977d0.png)
 
 > 这个过程是在启动服务，可能会需要等一点时间
 
-同时，大约过30秒左右，我们回到刚才的设置窗口，选择 `Open the Web UI` ，打开 `OpenClaw` 的UI界面：
-
-![](https://developer.qcloudimg.com/http-save/11970718/d9b5573b91b1d23e055e5c14e137b0e0.png)
+```powershell
+openclaw dashboard
+```
 
 浏览器自动打开Web UI界面：
 
