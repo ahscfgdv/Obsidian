@@ -80,25 +80,14 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 ![](https://developer.qcloudimg.com/http-save/11970718/c8779ffa0b6a72c6b91c3c1825453f58.png)
 
-#### 二）执行一键安装命令
+#### 二）执行安装命令
 
 复制以下命令，粘贴到 PowerShell 窗口中，按 **Enter** 执行：
 
 ```powershell
-iwr -useb https://openclaw.ai/install.ps1 | iex
+npm install -g openclaw@latest
 ```
 
-**安装过程会自动完成：**
-
-- 检测系统环境
-- 安装必要依赖（Node.js 等）
-- 下载 OpenClaw 核心文件
-- 配置环境变量
-- 启动配置向导
-
-> 注意：如果命令执行后，还是报错，可以自己到官网下载node安装包，自己安装node环境，注意版本最好在 node v22.x 以上，node官网下载地址： [https://nodejs.org/zh-cn/download](https://cloud.tencent.com/developer/tools/blog-entry?target=https%3A%2F%2Fnodejs.org%2Fzh-cn%2Fdownload&objectId=2626160&objectType=1&contentType=undefined) ，若还是不懂怎么安装，点头像进我主页找到我，拉你进交流群
-
-![](https://developer.qcloudimg.com/http-save/11970718/551a3aa7bbe198f9fe0d237391815fe0.png)
 
 ![](https://developer.qcloudimg.com/http-save/11970718/95ecbe13b5ef3059c0a52142a3cb2456.png)
 
