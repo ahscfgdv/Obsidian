@@ -9,13 +9,13 @@
 ### Nodejs
 
 安装Nvm后打开Powershell
-`nvm install 20`
+`nvm install 22`
 使用Nodejs
-`nvm use 20`
+`nvm use 22`
 
 ## Openclaw
 
-`npm install -g openclaw`
+`npm install -g openclaw@latest`
 
 ## 配置OpenClaw
 
