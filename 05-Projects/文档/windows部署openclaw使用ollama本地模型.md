@@ -29,3 +29,6 @@
 
 ## 连接飞书平台
 
+![](assets/windows部署openclaw使用ollama本地模型/file-20260330104859160.png)
+
+![](assets/windows部署openclaw使用ollama本地模型/file-20260330104944826.png)
