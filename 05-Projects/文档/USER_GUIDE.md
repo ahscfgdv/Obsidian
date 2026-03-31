@@ -70,15 +70,19 @@
 
 ### 3.3 工单闭环处理 (Ticket Management)
 
+![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260331164921408_2026-03-31_164921.png)
 
 
-- **领取与响应**：在列表中点击“处理”按钮。
+- **领取与响应**：在列表中点击“去处理”按钮。
 - **解决方案填写**：
   - 填写处理结果描述。
   - **上传处理文档**：若无成熟解决方案可以上传解决文档。
-  - **状态流转**：处理完成后，将状态从 `processing` 更新为 `resolved`。
 
 ### 3.4 用户与安全 (User)
+
+![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260331165010624_2026-03-31_165010.png)
+
+
 - **用户维护**：管理员可以手动创建账号、启用/禁用用户、修改客户名称。
 - **登录鉴权**：系统采用 JWT 校验，管理员长时间未操作会自动登出。
 
