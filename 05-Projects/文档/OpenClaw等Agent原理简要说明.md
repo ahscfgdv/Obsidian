@@ -12,4 +12,5 @@ openclaw和claude code的主要区别：
 - claude code可能让人意会为只能编写代码其实是通用的agent
 
 openclaw的特殊能力
-- 通过spawn分出两个子
+- 通过spawn分出子openclaw处理单独的独立任务，将结果返回给父任务，可以节省context window
+- 心跳ji
