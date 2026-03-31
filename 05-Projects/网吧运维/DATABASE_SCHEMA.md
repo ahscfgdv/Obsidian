@@ -65,13 +65,13 @@
 ### 3.1 聊天消息表 (`chat_messages`)
 持久化存储用户的对话历史，用于 RAG 上下文维持。
 
-| 字段名 | 类型 | 描述 |
-| :--- | :--- | :--- |
-| `id` | Integer | 消息唯一 ID (主键) |
-| `user_id` | Integer | 关联的用户 ID |
+| 字段名          | 类型          | 描述                                     |
+| :----------- | :---------- | :------------------------------------- |
+| `id`         | Integer     | 消息唯一 ID (主键)                           |
+| `user_id`    | Integer     | 关联的用户 ID                               |
 | `session_id` | String(255) | 会话唯一标识符 (通常格式为 `{user_id}_{yyyymmdd}`) |
-| `message` | JSON | 消息内容 (包含 `role` 和 `content` 等结构) |
-| `created_at` | DateTime | 消息生成时间 |
+| `message`    | JSON        | 消息内容 (包含 `role` 和 `content` 等结构)       |
+| `created_at` | DateTime    | 消息生成时间                                 |
 
 ---
 
@@ -80,16 +80,16 @@
 ### 4.1 技术支持工单表 (`app_ticket`)
 记录用户手动提交的技术问题支持请求。
 
-| 字段名 | 类型 | 描述 |
-| :--- | :--- | :--- |
-| `id` | Integer | 工单唯一 ID (主键) |
-| `user_id` | Integer | 提交人的用户 ID |
-| `customer_name` | String(100) | 提交时自动关联的客户名称 |
-| `machine_number` | String(50) | 涉及的问题机器号 |
-| `question` | Text | 问题简述/工单标题 |
-| `description` | Text | 详细的问题背景描述 |
-| `problem_image` | String(255) | 描述问题的截图文件路径 |
-| `solution_pdf` | String(255) | 最终生成的解决方案 PDF 文档路径 |
-| `status` | String(20) | 当前状态: `pending`, `processing`, `resolved`, `closed` |
-| `resolution` | Text | 管理员填写的处理闭环总结 |
-| `created_at` | DateTime | 工单创建时间 |
+| 字段名              | 类型          | 描述                                                  |
+| :--------------- | :---------- | :-------------------------------------------------- |
+| `id`             | Integer     | 工单唯一 ID (主键)                                        |
+| `user_id`        | Integer     | 提交人的用户 ID                                           |
+| `customer_name`  | String(100) | 提交时自动关联的客户名称                                        |
+| `machine_number` | String(50)  | 涉及的问题机器号                                            |
+| `question`       | Text        | 问题简述/工单标题                                           |
+| `description`    | Text        | 详细的问题背景描述                                           |
+| `problem_image`  | String(255) | 描述问题的截图文件路径                                         |
+| `solution_pdf`   | String(255) | 最终生成的解决方案 PDF 文档路径                                  |
+| `status`         | String(20)  | 当前状态: `pending`, `processing`, `resolved`, `closed` |
+| `resolution`     | Text        | 管理员填写的处理闭环总结                                        |
+| `created_at`     | DateTime    | 工单创建时间                                              |
