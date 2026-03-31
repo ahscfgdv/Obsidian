@@ -15,4 +15,4 @@ openclaw的特殊能力
 - 心跳机制：每隔一段时间就发送固定的prompt到llm
 - Cron Job：可以执行定时任务，
 
-通过这些agent进行vibe coding的缺点，编写prompt时只注意功能的实现，而忽视后续的维护迭代等等。agent缺乏工程化的能力，而在细节的编码上绝对bu'shu
+通过这些agent进行vibe coding的缺点，编写prompt时只注意功能的实现，而忽视后续的维护迭代等等。agent缺乏工程化的能力，而在细节的编码上绝对不输顶尖的开发者。
