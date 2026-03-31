@@ -9,26 +9,26 @@
 ### 1.1 系统管理员表 (`sys_admin`)
 记录拥有后台管理权限的人员。
 
-| 字段名 | 类型 | 描述 |
-| :--- | :--- | :--- |
-| `id` | Integer | 管理员唯一 ID (主键) |
-| `username` | String(50) | 登录用户名 (唯一索引) |
-| `nickname` | String(50) | 管理员昵称 |
-| `hashed_password` | String(255) | 加密后的密码哈希 |
-| `is_active` | Boolean | 账号是否启用 (默认 True) |
+| 字段名               | 类型          | 描述               |
+| :---------------- | :---------- | :--------------- |
+| `id`              | Integer     | 管理员唯一 ID (主键)    |
+| `username`        | String(50)  | 登录用户名 (唯一索引)     |
+| `nickname`        | String(50)  | 管理员昵称            |
+| `hashed_password` | String(255) | 加密后的密码哈希         |
+| `is_active`       | Boolean     | 账号是否启用 (默认 True) |
 
 ### 1.2 普通用户表 (`app_user`)
 系统的前端使用者，即提问和提交工单的主体。
 
-| 字段名 | 类型 | 描述 |
-| :--- | :--- | :--- |
-| `id` | Integer | 用户唯一 ID (主键) |
-| `username` | String(50) | 登录用户名 (唯一索引) |
-| `hashed_password` | String(255) | 加密后的密码哈希 |
-| `is_active` | Boolean | 账号是否启用 (默认 True) |
-| `customer_name` | String(100) | 客户真实姓名/昵称 |
-| `create_time` | DateTime | 账户创建时间 |
-| `update_time` | DateTime | 最后一次修改时间 |
+| 字段名               | 类型          | 描述               |
+| :---------------- | :---------- | :--------------- |
+| `id`              | Integer     | 用户唯一 ID (主键)     |
+| `username`        | String(50)  | 登录用户名 (唯一索引)     |
+| `hashed_password` | String(255) | 加密后的密码哈希         |
+| `is_active`       | Boolean     | 账号是否启用 (默认 True) |
+| `customer_name`   | String(100) | 客户真实姓名/昵称        |
+| `create_time`     | DateTime    | 账户创建时间           |
+| `update_time`     | DateTime    | 最后一次修改时间         |
 
 ---
 
@@ -37,26 +37,26 @@
 ### 2.1 文档分类表 (`document_category`)
 对知识库中的 PDF/Word 文档进行分类管理。
 
-| 字段名 | 类型 | 描述 |
-| :--- | :--- | :--- |
-| `id` | Integer | 分类唯一 ID (主键) |
-| `name` | String(50) | 分类名称 (唯一索引) |
-| `create_time` | DateTime | 分类创建时间 |
+| 字段名           | 类型         | 描述           |
+| :------------ | :--------- | :----------- |
+| `id`          | Integer    | 分类唯一 ID (主键) |
+| `name`        | String(50) | 分类名称 (唯一索引)  |
+| `create_time` | DateTime   | 分类创建时间       |
 
 ### 2.2 文档元数据表 (`document`)
 记录已上传或待审核的知识库文档信息。
 
-| 字段名 | 类型 | 描述 |
-| :--- | :--- | :--- |
-| `id` | Integer | 文档唯一 ID (主键) |
-| `filename` | String(255) | 文件名称 |
-| `source_path` | String(512) | 源文件在服务器上的存储路径 |
-| `category_id` | Integer | 关联的分类 ID |
-| `md5` | String(32) | 文件的 MD5 哈希值，用于快速查重 |
-| `status` | String(20) | 审核状态: `pending` (待审), `published` (已发布), `rejected` (驳回) |
-| `reviewer_id` | Integer | 审核人 ID (对应 `sys_admin.id`) |
-| `create_time` | DateTime | 上传时间 |
-| `update_time` | DateTime | 更新时间 |
+| 字段名           | 类型          | 描述                                                       |
+| :------------ | :---------- | :------------------------------------------------------- |
+| `id`          | Integer     | 文档唯一 ID (主键)                                             |
+| `filename`    | String(255) | 文件名称                                                     |
+| `source_path` | String(512) | 源文件在服务器上的存储路径                                            |
+| `category_id` | Integer     | 关联的分类 ID                                                 |
+| `md5`         | String(32)  | 文件的 MD5 哈希值，用于快速查重                                       |
+| `status`      | String(20)  | 审核状态: `pending` (待审), `published` (已发布), `rejected` (驳回) |
+| `reviewer_id` | Integer     | 审核人 ID (对应 `sys_admin.id`)                               |
+| `create_time` | DateTime    | 上传时间                                                     |
+| `update_time` | DateTime    | 更新时间                                                     |
 
 ---
 
