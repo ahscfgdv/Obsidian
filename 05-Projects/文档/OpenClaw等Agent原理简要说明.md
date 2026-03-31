@@ -13,4 +13,4 @@ openclaw和claude code的主要区别：
 
 openclaw的特殊能力
 - 通过spawn分出子openclaw处理单独的独立任务，将结果返回给父任务，可以节省context window
-- 心跳ji
+- 心跳机制：每隔一段时间就发送固定的prompt
