@@ -9,4 +9,6 @@ agent构建了更特殊的系统提示词，
 
 openclaw和claude code的主要区别：
 - 多了接入社交媒体的接口，便于使用。
-- claude code可能让人意会为只b
+- claude code可能让人意会为只能编写代码其实是通用的agent
+
+
