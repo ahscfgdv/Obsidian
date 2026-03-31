@@ -15,3 +15,4 @@ openclaw的特殊能力
 - 心跳机制：每隔一段时间就发送固定的prompt到llm
 - Cron Job：可以执行定时任务，
 
+通过这些
