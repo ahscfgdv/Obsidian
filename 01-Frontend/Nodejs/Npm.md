@@ -25,4 +25,6 @@ nodejs -v
 ```bash
 npm list -g --depth=0 
 # 查看安装的所有全局工具
+npm update -g @google/gemini-cli
+# 更新全局工具
 ```
