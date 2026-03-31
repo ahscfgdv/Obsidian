@@ -51,6 +51,7 @@
 
 ### 3.1 知识库管理 (Knowledge)
 
+![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260331165232967_2026-03-31_165233.png)
 
 
 - **文档上传与入库**：
@@ -63,9 +64,10 @@
 
 ### 3.2 知识模板生成 (Template)
 
+![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260331165307638_2026-03-31_165307.png)
 
 
-- **规范化文档**：提供标准的 Word 模板填充功能。
+- **规范化文档**：提供标准的模板填充功能。
 - 管理员可输入问题背景、操作步骤及关键要点，系统自动生成符合规范的解决方案文档并上传到知识库。
 
 ### 3.3 工单闭环处理 (Ticket Management)
