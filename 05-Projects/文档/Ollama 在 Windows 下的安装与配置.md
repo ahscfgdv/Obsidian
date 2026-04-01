@@ -19,10 +19,10 @@
    > 
    > Ollama 官方 GitHub 源代码仓库：[https://github.com/ollama/ollama/](https://github.com/ollama/ollama)
 
-   
-2. 等待浏览器下载文件 OllamaSetup.exe，完成后双击该文件，出现如下弹窗，点击 `Install` 等待下载完成即可。
+   ![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260401142901122_2026-04-01_142901.png)
 
-   ![img](../images/C2-2-2.png)
+2. 等待浏览器下载文件 OllamaSetup.exe，完成后双击该文件，出现如下弹窗，点击 `Install` 等待下载完成即可。	  ![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260401142941708_2026-04-01_142941.png)
+
 3. 安装完成后，可以看到 Ollama 已经默认运行了。可以通过底部的导航栏找到 Ollama 标志，并右键后点击 `Quit Ollama` 退出Ollama或者查看 `logs`。
 
    ![](../images/C2-2-3.png)
