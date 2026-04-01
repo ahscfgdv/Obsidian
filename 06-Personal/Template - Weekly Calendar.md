@@ -1,7 +1,15 @@
-# 📅 2026-W12 周记
+<%*
+// 获取当前文件名的周数信息，如果没有则使用当前日期
+let currentMoment = moment(tp.file.title, "YYYY-[W]ww", true).isValid() ? moment(tp.file.title, "YYYY-[W]ww") : moment();
+let startOfWeek = currentMoment.clone().startOf('isoWeek');
+let endOfWeek = currentMoment.clone().endOf('isoWeek');
+let prevWeek = currentMoment.clone().subtract(1, 'weeks').format("YYYY-[W]ww");
+let nextWeek = currentMoment.clone().add(1, 'weeks').format("YYYY-[W]ww");
+-%>
+# 📅 <% currentMoment.format("YYYY-[W]ww") %> 周记
 
-**时间跨度**：[[2026-03-16]] 至 [[2026-03-22]]
-**导航**：[[2026-W11|⏪ 上一周]] | [[2026-W13|⏩ 下一周]]
+**时间跨度**：[[<% startOfWeek.format("YYYY-MM-DD") %>]] 至 [[<% endOfWeek.format("YYYY-MM-DD") %>]]
+**导航**：[[<% prevWeek %>|⏪ 上一周]] | [[<% nextWeek %>|⏩ 下一周]]
 **标签**： #Weekly #Review
 
 ---
@@ -19,26 +27,24 @@
 ---
 ## 📅 本周作息与习惯追踪打卡
 
-|   星期   | ☀️ 起床时间 | 🌙 睡觉时间 | 11点前关闭手机 | 回家先做饭 | leetcode |
-| :----: | :-----: | :-----: | :------: | :---: | :------: |
-| **周一** |         |         |          |       |          |
-| **周二** |         |         |          |       |          |
-| **周三** |         |         |          |       |          |
-| **周四** |         |         |          |       |          |
-| **周五** |         |         |          |       |          |
-| **周六** |         |         |          |       |          |
-| **周日** |         |         |          |       |          |
+|   星期   | ☀️ 起床时间 | 🌙 睡觉时间 | 刷牙  |     |     |
+| :----: | :-----: | :-----: | :-: | :-: | :-: |
+| **周一** |         |         |     |     |     |
+| **周二** |         |         |     |     |     |
+| **周三** |         |         |     |     |     |
+| **周四** |         |         |     |     |     |
+| **周五** |         |         |     |     |     |
+| **周六** |         |         |     |     |     |
+| **周日** |         |         |     |     |     |
 
 ## 📅 每日记录 (Daily Log)
 
 ### 03-16 星期一
 
 - [ ] 
-
 ### 03-17 星期二
 
 - [ ] 
-
 ### 03-18 星期三
 
 - [ ] 
@@ -70,28 +76,3 @@
 > - **改进**：
 
 ---
-
-## 🚀 项目推进 (Tracker)
-
-| 项目                                                  | 进度    | 状态     | 备注            |
-| :-------------------------------------------------- | :---- | :----- | :------------ |
-| **15-445 Fall 2025, CMU Intro to Database Systems** | 0%    | 学习中    | 数据库学习         |
-| **Linux/运维**                                        | ⬛⬛⬛⬜⬜ | 🟢 正常  | *ESXi维护*      |
-| **AI学习**                                            | ⬛⬜⬜⬜⬜ | 🔴 待启动 | *LangChain研究* |
-
----
-
-## 📥 输入与输出
-
-- 📚 **阅读/学习**：
-	
-- 📝 **代码/笔记**：
-	
-
----
-
-## 🔭 下周规划 (Next Week)
-
-### 🎯 核心目标
-1. [ ] 
-2. [ ] 
