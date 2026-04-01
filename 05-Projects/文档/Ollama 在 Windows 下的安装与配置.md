@@ -1,5 +1,3 @@
-# Ollama 安装与配置 - Windows 系统篇
-
 ## 简介
 
 本节学习如何在 Windows 系统中完成 Ollama 的安装与配置，主要分为以下几个部分:
@@ -40,7 +38,7 @@
 | OLLAMA_DEBUG             | 表示输出 Debug 日志，应用研发阶段可以设置成**1** （即输出详细日志信息，便于排查问题）                                                                                  |
 | OLLAMA_MAX_LOADED_MODELS | 表示最多同时加载到内存中模型的数量，默认为**1** （即只能有 1 个模型在内存中）                                                                                        |
 
-**对于初学者，我们强烈建议你配置 `OLLAMA_MODELS` 来更改模型存储位置。** 默认情况下，Ollama 模型会存储在 C 盘用户目录下的 `.ollama/models` 文件夹，占用 C 盘空间。  将其更改到其他分区可以更好地管理你的存储。
+**建议配置 `OLLAMA_MODELS` 来更改模型存储位置。** 默认情况下，Ollama 模型会存储在 C 盘用户目录下的 `.ollama/models` 文件夹，占用 C 盘空间。  将其更改到其他分区可以更好地管理你的存储。
 
 **步骤 1：找到系统环境变量的设置入口。**
 
@@ -60,10 +58,6 @@
     * **注意：**  请确保你输入的路径是 **已经存在的文件夹** 或者 **你希望创建的文件夹的父目录存在**。  Ollama 在首次运行时可能会自动创建 `models` 文件夹，但最好提前创建好 `ollama` 文件夹，确保路径的正确性。
     * **示例：**  为了将模型存储到 E 盘的 `ollama\models` 文件夹，你可以在 “变量值(V)” 中输入：  `E:\ollama\models`
 4. 点击 “**确定**” 按钮，关闭 “**新建系统变量**” (或者 “新建用户变量”) 窗口。
-
-> **注意：** 如果你不知道如何设置 `OLLAMA_MODELS` 环境变量，可以参考下面的示例。
-
-![](../images/C2-2-7.png)
 
 **(可选) 设置 `OLLAMA_HOST` 环境变量 (修改监听地址)。**
 
@@ -95,7 +89,7 @@ echo %OLLAMA_MODELS%
 
 > 输出：`E:\ollama\models`  (如果你设置的是 `E:\ollama\models`)
 
-![](../images/C2-2-8.png)
+![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260401143518833_2026-04-01_143518.png)
 
 ## 三、运行Ollama
 
@@ -113,7 +107,8 @@ ollama serve
 
 1. 快捷键 `Win+X` 打开任务管理器，点击 `启动`，禁用 Ollama，并在**进程**中结束 Ollama 的任务。
 
-   ![](../images/C2-2-4.png)
+   ![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260401143628868_2026-04-01_143628.png)
+
 2. 再次使用 `ollama serve`打开 Ollama。
 
 - 验证成功启动：
@@ -183,21 +178,3 @@ ollama run llama3
 ```
 
 > 下载速度取决于你的带宽，下载完毕即可使用✌记得使用 `control + D` 退出聊天
-
-![XIA](../images/C2-2-5.png)
-
-
-## 五、如何取消开机自启
-
-（截至2024-08-19）目前 Ollama 在 Windows 系统下默认开机自启，如果不需要开机自启，可以通过以下步骤取消。
-
-打开任务管理器，点击 `启动应用`，找到 `ollama.exe` ，右键点击 `禁用` 即可。
-
-![](../images/C2-2-6.png)
-
-
-
-
-## 参考链接
-
-- [Ollama完整教程：本地LLM管理、WebUI对话、Python/Java客户端API应用](https://www.cnblogs.com/obullxl/p/18295202/NTopic2024071001)
