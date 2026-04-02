@@ -42,12 +42,13 @@ let nextWeek = currentMoment.clone().add(1, 'weeks').format("YYYY-[W]ww");
 ### 03-16 星期一
 
 - [ ] Epic领游戏
+- [ ] 洗头
 ### 03-17 星期二
 
 - [ ] 
 ### 03-18 星期三
 
-- [ ] 
+- [ ] 洗头
 
 ### 03-19 星期四
 
@@ -55,7 +56,7 @@ let nextWeek = currentMoment.clone().add(1, 'weeks').format("YYYY-[W]ww");
 
 ### 03-20 星期五
 
-- [ ] 
+- [ ] 洗头
 
 ### 03-21 星期六
 
