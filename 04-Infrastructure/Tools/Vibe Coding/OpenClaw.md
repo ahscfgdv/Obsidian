@@ -11,7 +11,8 @@ pnpm approve-builds -g
 openclaw onboard --install-daemon
 
 pnpm add -g grammy #安装缺失的包
-
+pnpm add -g @aws-sdk/client-bedrock @aws-sdk/client-bedrock-runtime
+pnpm add -g @buape/carbon
 ```
 
 ## Command
