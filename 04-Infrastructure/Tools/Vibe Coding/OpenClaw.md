@@ -18,5 +18,7 @@ pnpm add -g grammy #安装缺失的包
 
 ```powershell
 openclaw gateway #运行网关
+openclaw gateway restart #重启网关
+
 openclaw update #升级openclaw 推荐使用管理员执行
 ```
