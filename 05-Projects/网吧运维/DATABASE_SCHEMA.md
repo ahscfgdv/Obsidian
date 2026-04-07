@@ -74,6 +74,7 @@
 | `session_id` | String(255) | 会话唯一标识符 (通常格式为 `{user_id}_{yyyymmdd}`) |
 | `message`    | JSON        | 消息内容 (包含 `role` 和 `content` 等结构)       |
 | `created_at` | DateTime    | 消息生成时间                                 |
+| `image_url`  | String(500) | 图片上传路径                                 |
 
 ---
 
