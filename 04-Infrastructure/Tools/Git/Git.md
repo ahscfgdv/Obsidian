@@ -64,7 +64,7 @@ git push -u origin <branch-name>
 
 git fetch
 
-git remote -v
+git remote -v #查看git远程仓库地址
 
 ```
 ## .gitignore
