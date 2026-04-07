@@ -20,15 +20,17 @@
 ### 1.2 普通用户表 (`app_user`)
 系统的前端使用者，即提问和提交工单的主体。
 
-| 字段名               | 类型          | 描述               |
-| :---------------- | :---------- | :--------------- |
-| `id`              | Integer     | 用户唯一 ID (主键)     |
-| `username`        | String(50)  | 登录用户名 (唯一索引)     |
-| `hashed_password` | String(255) | 加密后的密码哈希         |
-| `is_active`       | Boolean     | 账号是否启用 (默认 True) |
-| `customer_name`   | String(100) | 客户真实姓名/昵称        |
-| `create_time`     | DateTime    | 账户创建时间           |
-| `update_time`     | DateTime    | 最后一次修改时间         |
+| 字段名                | 类型          | 描述               |
+| :----------------- | :---------- | :--------------- |
+| `id`               | Integer     | 用户唯一 ID (主键)     |
+| `username`         | String(50)  | 登录用户名 (唯一索引)     |
+| `hashed_password`  | String(255) | 加密后的密码哈希         |
+| `is_active`        | Boolean     | 账号是否启用 (默认 True) |
+| `customer_name`    | String(100) | 客户真实姓名/昵称        |
+| `customer_ip`      | String(50)  | 客户公网IP           |
+| `customer_address` | String(225) | 客户地址             |
+| `create_time`      | DateTime    | 账户创建时间           |
+| `update_time`      | DateTime    | 最后一次修改时间         |
 
 ---
 
