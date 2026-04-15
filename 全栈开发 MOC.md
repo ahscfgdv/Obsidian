@@ -2,9 +2,9 @@
 
 ## 🏗️ 1. 开发基石 (Fundamentals)
 
-- **协议与规范**：[[00-Fundamentals/全栈开发/RESTful API|RESTful API 设计规范]]
-- **通用知识**：[[00-Fundamentals/常见术语|常见术语]] | [[00-Fundamentals/数据库导论|数据库导论]]
-- **开发规范**：[[00-Fundamentals/Standards/开发|代码与项目开发规范]]
+- **协议与规范**：[[基础/全栈开发/RESTful API|RESTful API 设计规范]]
+- **通用知识**：[[基础/常见术语|常见术语]] | [[基础/数据库导论|数据库导论]]
+- **开发规范**：[[基础/Standards/开发|代码与项目开发规范]]
 
 ## 🎨 2. 前端架构 (Frontend - Vue3 生态)
 
