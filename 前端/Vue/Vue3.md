@@ -34,3 +34,33 @@ my-vue-app/
 └── README.md            # 项目说明文档
 
 ```
+
+### package.json
+
+```json
+{
+
+  "name": "vue-project",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  //类似linux取别名
+  "scripts": { 
+    "dev": "vite --host --port 4567",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.5.31"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.5",
+    "vite": "^8.0.3",
+    "vite-plugin-vue-devtools": "^8.1.1"
+
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  }
+}
+```
