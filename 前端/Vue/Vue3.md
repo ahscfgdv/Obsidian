@@ -45,6 +45,7 @@ my-vue-app/
   "private": true,
   "type": "module",
   //类似linux取别名
+  //npm run dev 相当于 npx vite --host --port 4567
   "scripts": { 
     "dev": "vite --host --port 4567",
     "build": "vite build",
