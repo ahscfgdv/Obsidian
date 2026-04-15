@@ -9,7 +9,7 @@
 ## 🎨 2. 前端架构 (Frontend - Vue3 生态)
 
 - **核心框架**：[[前端/框架/Vue3|Vue 3 核心]] | [[前端/Element UI|Element UI (Plus)]]
-- **运行环境**：[[前端/工具/Nodejs|Node.js]] | [[前端/工具/Npm|NPM 包管理]] | [[前端/工具/Nvm|NVM 版本切换]]
+- **运行环境**：[[前端/工程化工具/Nodejs|Node.js]] | [[前端/工程化工具/Npm|NPM 包管理]] | [[前端/工程化工具/Nvm|NVM 版本切换]]
 - **构建与部署**：[[前端/Nginx/Nginx部署前端服务|Nginx 部署]]
 
 ## 🐍 3. 后端开发 (Backend - Python 生态)
