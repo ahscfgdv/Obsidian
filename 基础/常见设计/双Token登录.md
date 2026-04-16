@@ -114,6 +114,8 @@ service.interceptors.response.use(
 
 ## 5. 安全性补充：如何主动让用户掉线？
 
+
+
 由于 JWT 是无状态的，如果你只是简单校验签名，一旦 Token 签发就无法收回。在主流应用中，通常会配合 **Redis** 使用：
 
 1. 后端在 Redis 中存储 `refresh_token` 的白名单或版本号。
@@ -125,10 +127,3 @@ service.interceptors.response.use(
 
 ---
 
-### 总结建议
-
-如果你要做一个**移动端 App**，推荐：**双 Token + 滑动过期**。
-
-如果你要做一个**内部管理后台**，推荐：**长效 Token（如 24 小时）+ 简单的响应拦截器处理 401 跳转**即可，安全要求高的场景不建议保持过长登录。
-
-**你目前的后端是用 FastAPI 还是 Node.js 实现的？我可以根据你的后端语言给你提供更具体的 `create_token` 逻辑。**
