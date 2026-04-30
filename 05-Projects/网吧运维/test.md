@@ -49,7 +49,3 @@
 	
 	-组件嵌入：将这个生成的 URL 赋值给 previewUrl。在 HTML 模板中，这个 URL 被绑定到 <iframe> 的 src 属性上。
 
-### test
-
-### test
-### test
