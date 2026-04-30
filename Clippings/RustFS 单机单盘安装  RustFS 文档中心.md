@@ -9,4 +9,3 @@ description: "在单台服务器的单个磁盘上安装 RustFS, 数据将存储
 tags:
   - "clippings"
 ---
-/etc/default/rustfs
