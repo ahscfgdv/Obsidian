@@ -25,9 +25,14 @@ adb_server shell
 
 1、点开HBuilderX的“设置”
 
+![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260509091258401_2026-05-09_091258.png)
+
   
 2、点击“运行配置”，把“1”中的adb路径复制在图中的位置，端口号设置为7555，和“4”中的端口号一致  
-  
+
+![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20260509091315799_2026-05-09_091315.png)
+
+
 3、开始真机运行  
   
 此时可以成功把项目运行到模拟器。
