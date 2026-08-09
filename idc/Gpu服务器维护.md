@@ -13,4 +13,6 @@ NVSwitch是GPU桥接芯片
 
 lspci | grep -i nvidia
 
+lsmod | grep nouvea
+
 ```
