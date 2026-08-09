@@ -7,6 +7,8 @@ NVSwitch是GPU桥接芯片
 
 ## 驱动和CUDA
 
+nvidia-fabricmanager
+
 ## 常用命令
 
 ```bash
