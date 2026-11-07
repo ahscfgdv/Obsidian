@@ -27,3 +27,30 @@
 #### 💡 总结记忆法
 *   遇到这类未指明代际的题，如果选项中有 `16` 和 `32`，大概率是在考 **PCIe 3.0 x16**。
 *   记住：**16GB/s 是单向（只发或只收），32GB/s 是全双工双向（同时发和收）**。题干问“最高传输带宽”，全双工总线必须算双向总吞吐量。
+
+## 2
+
+![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20261107165045152_2026-11-07_165045.png)
+
+虚拟交换机是软件定义的
+
+## 3
+
+![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20261107165128457_2026-11-07_165128.png)
+
+
+## 3
+
+![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20261107165404105_2026-11-07_165404.png)
+
+三层交换机可以工作在网络层
+
+## 4
+
+![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20261107165512426_2026-11-07_165512.png)
+
+**A. IEEE802.1w下所有VLAN使用一棵生成树**
+
+- **解析**：IEEE 802.1w 是 **RSTP（快速生成树协议）**。它的核心改进是**加快了网络拓扑变化的收敛速度**（从传统的几十秒缩短到几秒甚至毫秒级）。
+    
+- 但是，RSTP 在实例划分上继承了最早的 IEEE 802.1D（传统 STP），它**依然是单实例的**。也就是说，无论你的交换机上划分了多少个 VLAN，它们**全部共用这一棵生成树**。因此，A 的描述是完全正确的。
