@@ -66,3 +66,12 @@
 ## 6
 
 ![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20261107182406211_2026-11-07_182406.png)
+**NVDIMM = Non-Volatile Dual In-line Memory Module**，中文通常译为“**非易失性双列直插内存模组**”
+
+## 7
+
+![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20261107182754645_2026-11-07_182754.png)
+
+## 8
+
+![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20261107182830048_2026-11-07_182830.png)
