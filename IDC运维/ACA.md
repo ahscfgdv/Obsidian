@@ -75,3 +75,11 @@
 ## 8
 
 ![image.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/20261107182830048_2026-11-07_182830.png)
+
+
+
+## ACA题库
+
+PCle总线作为主要的扩展总线常连接各种存储设备,如使用独立RAID卡,则应将RAID卡安装在以下哪一种PCle插槽
+
+**答案**：x8
