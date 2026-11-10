@@ -20,13 +20,6 @@ tags:
 
 ```
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-5.repo
-        
-          
-        
-        
-        
-          
-          AI 代码解读
 ```
 
 > - CentOS 6
