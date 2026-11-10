@@ -18,32 +18,18 @@ tags:
 
 > - CentOS 5
 
-```
+```shell
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-5.repo
 ```
 
 > - CentOS 6
 
-```
+```shell
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
-        
-          
-        
-        
-        
-          
-          AI 代码解读
 ```
 
 > - CentOS 7
 
-```
+```shell
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-        
-          
-        
-        
-        
-          
-          AI 代码解读
 ```
