@@ -1,14 +1,3 @@
----
-title: "CentOS7配置SSH远程登录_centos7配置ssh跨网段登录"
-source: "https://blog.csdn.net/qq_40308101/article/details/108534788"
-author:
-  - "[[萌翻天]]"
-published: 2020-09-11
-created: 2026-11-10
-description: "文章浏览阅读6.8k次。本文详细介绍如何在Linux系统中安装及配置SSH服务，包括使用yum安装openssh-server，修改sshd_config配置文件允许root登录和密码认证，以及启动、重启网络和设置SSH服务开机启动的方法。"
-tags:
-  - "clippings"
----
 1.安装 openssh-server  
 `yum install -y openssl openssh-server`
 

@@ -1,19 +1,7 @@
----
-title: "两台电脑通过FTP服务进行传输文件_两台电脑通过ftp传输文件"
-source: "https://blog.csdn.net/Cream_Cicilian/article/details/119063800"
-author:
-  - "[[一只大喵喵]]"
-published: 2021-07-24
-created: 2026-11-06
-description: "文章浏览阅读2.2w次，点赞33次，收藏160次。本文档介绍了如何在Windows系统中启用FTP服务，并设置IIS管理器，确保文件夹权限正确，以便两台电脑之间进行文件传输。步骤包括打开FTP服务器服务、配置IIS、设置文件夹权限、确保两台电脑在同一局域网下并关闭防火墙，以及使用Xftp进行连接。遇到无法连接问题时，检查主动/被动模式设置。"
-tags:
-  - "clippings"
----
 这篇博客不讲ftp服务的原理，如果想要学习原理可以去看看其他人的博客，这里就是简单的拿来主义
 
 ### 1.扫盲： windows 系统自带的ftp服务
 
-如何使用windows系统自带的ftp服务： [\[1\]](https://www.bilibili.com/video/BV1qs411x7EB?from=search&seid=4199619210740383626) ， [\[2\]](https://blog.csdn.net/yetugeng/article/details/85992336), [\[3\]](https://www.cnblogs.com/zwqh/p/11579264.html)
 
 #### 1.1 打开windows的 FTP服务器 服务
 

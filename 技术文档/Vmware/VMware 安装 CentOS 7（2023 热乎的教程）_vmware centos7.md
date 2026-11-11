@@ -1,15 +1,4 @@
----
-title: "VMware 安装 CentOS 7（2023 热乎的教程）_vmware centos7"
-source: "https://blog.csdn.net/m0_51913750/article/details/131594908"
-author:
-  - "[[mortalོ]]"
-published: 2023-07-07
-created: 2026-11-05
-description: "文章浏览阅读1.6w次，点赞43次，收藏100次。本文详细介绍了如何下载CentOS镜像文件，使用VWware安装虚拟机，以及在安装CentOS7后如何配置网络，包括选择NAT模式，设置DHCP自动获取IP，并验证网络连通性。"
-tags:
-  - "clippings"
----
-## 1\. 下载 CentOS 镜像文件
+## 1. 下载 CentOS 镜像文件
 
 - 下载网址： [阿里云开源镜像站](http://mirrors.aliyun.com/centos/7/isos/x86_64/)
 

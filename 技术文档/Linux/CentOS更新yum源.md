@@ -1,14 +1,3 @@
----
-title: "CentOS更新yum源-阿里云开发者社区"
-source: "https://developer.aliyun.com/article/319268"
-author:
-published:
-created: 2026-11-10
-description: "本教程提供CentOS 5/6/7各版本的一键配置命令与详细步骤，助您快速将yum源更换为高速阿里云镜像，彻底解决官方源下载更新缓慢的问题。"
-tags:
-  - "clippings"
----
-
 ### 解决方案：更换为阿里云 yum 源
 
 请按顺序执行以下命令：

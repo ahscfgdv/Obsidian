@@ -1,14 +1,3 @@
----
-title: "CentOS7如何进入单用户模式？_centos7进入单用户"
-source: "https://blog.csdn.net/xiaoyao_zhy/article/details/126722834"
-author:
-  - "[[浩淇害死猫]]"
-published: 2022-09-06
-created: 2026-11-09
-description: "文章浏览阅读2.7w次，点赞6次，收藏82次。本文详细介绍了如何在CentOS7系统中进入单用户模式，包括在开机界面通过按e键编辑启动选项，添加`init=/bin/sh`，然后使用Ctrl+x执行进入单用户模式。在此模式下，用户拥有root权限，可无需密码修改忘记的root密码。退出单用户模式时，执行`exec /sbin/init`即可。"
-tags:
-  - "clippings"
----
 centos 7进入单用户模式的方法：首先进入开机界面，按e进行选择；然后找到相关的行，在行尾添加【init=/bin/sh】；最后按住【Ctrl+x】执行就可以进入单用户模式。
 
 具体步骤：

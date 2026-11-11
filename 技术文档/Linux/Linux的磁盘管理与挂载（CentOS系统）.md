@@ -1,14 +1,3 @@
----
-title: "实验二 Linux的磁盘管理与挂载（CentOS系统）_linux_Kangkang12139-openEuler 社区"
-source: "https://openeuler.csdn.net/6aa6368861de6467390ede74.html"
-author:
-published:
-created: 2026-11-09
-description: "Linux操作系统学习入门（CentOS） Kangkang12139 openEuler 社区"
-tags:
-  - "clippings"
----
-
 ## 实验二 Linux的磁盘管理与挂载（CentOS系统）
 
 **一、实验要求**
