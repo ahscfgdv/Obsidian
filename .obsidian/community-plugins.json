@@ -4,7 +4,5 @@
   "templater-obsidian",
   "calendar",
   "obsidian-image-auto-upload-plugin",
-  "obsidian-pandoc",
-  "smart-fold",
-  "outline-collapse"
+  "obsidian-pandoc"
 ]
