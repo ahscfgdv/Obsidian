@@ -8,3 +8,4 @@ https://github.com/maotoumao/MusicFree/releases
 
 **pc**
 
+![屏幕截图 2026-11-12 134948.png](https://raw.githubusercontent.com/ahscfgdv/obsidian-images/main/test/2026/屏幕截图 2026-11-12 134948_2026-11-12_135221.png)
