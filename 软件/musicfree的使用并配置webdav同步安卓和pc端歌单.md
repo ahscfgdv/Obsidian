@@ -6,3 +6,5 @@ https://github.com/maotoumao/MusicFree/releases
 
 ## 2.安装插件配置音乐源
 
+**pc**
+
