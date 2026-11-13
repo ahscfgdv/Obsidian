@@ -40,7 +40,58 @@ Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 
 ###
+# Disk 磁盘物理信息
+# Disk /dev/sda: 42.9 GB, 42949672960 bytes, 83886080 sectors
+# /dev/sda: 第一块物理硬盘（系统盘）
+# 42.9 GB: 总容量
+# 42949672960 bytes: 精确字节数
+# 83886080 sectors: 总扇区数（字节数 ÷ 512）
 
+# Units = sectors of 1 * 512 = 512 bytes
+# Units: 单位。表示下方分区表中的数字以“扇区”为单位，1扇区=512字节
+
+# Sector size (logical/physical): 512 bytes / 512 bytes
+# 扇区大小（逻辑/物理）：传统硬盘通常都是 512/512
+
+# I/O size (minimum/optimal): 512 bytes / 512 bytes
+# I/O 大小（最小/最优）：读写块大小
+
+# Disk label type: dos
+# 分区表类型：dos 代表 MBR 分区表（最大支持 2TB，最多 4 个主分区）
+
+# Disk identifier: 0x000b874e
+# 磁盘标识符（MBR 磁盘的唯一 ID）
+
+# 分区表详情（表格）
+#   Device Boot      Start         End      Blocks   Id  System
+# /dev/sda1   *        2048     2099199     1048576   83  Linux
+# /dev/sda2         2099200    83886079    40893440   8e  Linux LVM
+
+# Device: 分区名称（如 /dev/sda1 是第一块盘的第一个分区）
+# Boot: 启动标志，带 * 号表示活动分区（BIOS 从这里找引导程序）
+# Start: 分区起始扇区号
+# End: 分区结束扇区数
+# Blocks: 分区占用的块数量（1块=1KB）
+# Id: 分区类型的十六进制代码（83=标准Linux分区，8e=Linux LVM）
+# System: Id 对应的可读名称
+
+# ---------------------------------------------------------
+# 第二块物理硬盘（新加的空盘，尚未初始化，无分区表）
+# ---------------------------------------------------------
+# Disk /dev/sdb: 5368 MB, 5368709120 bytes, 10485760 sectors
+# /dev/sdb: 第二块硬盘（常用于测试或扩容）
+# 5368 MB: 总容量（约 5GB）
+
+# Units = sectors of 1 * 512 = 512 bytes
+# Sector size (logical/physical): 512 bytes / 512 bytes
+# I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+# 注意：/dev/sdb 下方没有任何分区信息，说明它是一块全新的裸盘。
+# 可以直接用 fdisk /dev/sdb 进行分区练习。
+Disk /dev/sdb: 5368 MB, 5368709120 bytes, 10485760 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
 ###
 
 ```
