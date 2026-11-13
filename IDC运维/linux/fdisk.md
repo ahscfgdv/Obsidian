@@ -104,6 +104,38 @@ I/O size (minimum/optimal): 512 bytes / 512 bytes
 *   **作用**：进入针对 `/dev/sdb` 这块磁盘的交互式操作界面。
 *   **参数解释**：直接接设备名。进入后，你可以输入 `m`（帮助）、`p`（打印分区表）、`n`（新建）、`d`（删除）、`w`（保存写盘）、`q`（不保存退出）等交互指令。
 
+```shell
+
+[root@localhost ~]# fdisk /dev/sdb
+Welcome to fdisk (util-linux 2.23.2).
+
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table
+Building a new DOS disklabel with disk identifier 0xec4b11ce.
+
+Command (m for help): n
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): p
+Partition number (1-4, default 1):
+First sector (2048-10485759, default 2048):
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-10485759, default 10485759):
+Using default value 10485759
+Partition 1 of type Linux and of size 5 GiB is set
+
+Command (m for help): w
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+
+```
+
 #### 4. `fdisk -u /dev/sdb` 【有风险】
 *   **作用**：进入交互模式，但在显示和接受扇区时，以“扇区（Sector）”为单位，而不是传统的“柱面（Cylinder）”。
 *   **参数解释**：`-u` 代表 units。现代大容量磁盘通常按扇区对齐更精准。
