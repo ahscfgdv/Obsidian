@@ -19,6 +19,29 @@
 *   **作用**：列出系统中所有能被识别的磁盘及其分区的详细信息。
 *   **参数解释**：`-l`（小写 L）代表 list（列出）。
 
+```shell
+
+[root@localhost ~]# fdisk -l
+
+Disk /dev/sda: 42.9 GB, 42949672960 bytes, 83886080 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x000b874e
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *        2048     2099199     1048576   83  Linux
+/dev/sda2         2099200    83886079    40893440   8e  Linux LVM
+
+Disk /dev/sdb: 5368 MB, 5368709120 bytes, 10485760 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+```
+
 #### 2. `fdisk -l /dev/sdb` 【只读】
 *   **作用**：仅列出指定磁盘（此处为 `/dev/sdb`）的分区信息。
 *   **参数解释**：后面直接跟设备路径，用于精准查看。在不确定自己插的是哪块盘时，非常有用。
