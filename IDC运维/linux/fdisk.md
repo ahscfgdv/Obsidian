@@ -107,32 +107,54 @@ I/O size (minimum/optimal): 512 bytes / 512 bytes
 ```shell
 
 [root@localhost ~]# fdisk /dev/sdb
+
+# 欢迎信息和警告：所有修改目前只在内存中生效，直到你执行写盘命令（w）
 Welcome to fdisk (util-linux 2.23.2).
 
 Changes will remain in memory only, until you decide to write them.
 Be careful before using the write command.
 
+# 系统提示：这块盘（/dev/sdb）没有可识别的分区表
 Device does not contain a recognized partition table
+# 系统自动为它创建了一个新的 DOS 格式（即 MBR）分区表
 Building a new DOS disklabel with disk identifier 0xec4b11ce.
 
+# 输入 n，表示新建（new）一个分区
 Command (m for help): n
+# 选择分区类型：
+# p 代表主分区（primary），e 代表扩展分区（extended）
+# 括号里提示：目前 0 个主分区，0 个扩展分区，还剩 4 个空位
 Partition type:
    p   primary (0 primary, 0 extended, 4 free)
    e   extended
+# 输入 p，选择创建主分区
 Select (default p): p
-Partition number (1-4, default 1):
-First sector (2048-10485759, default 2048):
-Using default value 2048
-Last sector, +sectors or +size{K,M,G} (2048-10485759, default 10485759):
-Using default value 10485759
+
+# 提示选择分区号（1-4，默认1）
+Partition number (1-4, default 1): 
+# （直接回车，使用了默认的 1 号分区）
+
+# 提示选择起始扇区（2048-10485759，默认2048）
+First sector (2048-10485759, default 2048): 
+# （直接回车，使用了默认的 2048 扇区起点，这是标准的 1MB 对齐，利于性能）
+
+# 提示选择结束扇区
+Last sector, +sectors or +size{K,M,G} (2048-10485759, default 10485759): 
+# （直接回车，使用了默认的 10485759，即把这 5GB 的空间全部分给这个分区）
+# 也可以输入类似 +2G 来指定大小，这里你选择了全盘分配
+
+# 系统确认：分区 1 已创建，类型为 Linux，大小为 5 GiB
 Partition 1 of type Linux and of size 5 GiB is set
 
+# 输入 w，表示将刚才所有的修改写入（write）磁盘并退出
 Command (m for help): w
+
+# 系统提示：分区表已被改变！
 The partition table has been altered!
 
+# 正在调用系统接口重新读取分区表并同步磁盘
 Calling ioctl() to re-read partition table.
 Syncing disks.
-
 
 ```
 
