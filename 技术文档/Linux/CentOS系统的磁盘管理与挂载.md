@@ -1,69 +1,153 @@
-## 实验二 Linux的磁盘管理与挂载（CentOS系统）
+#### 适用场景与安全红线
 
-**一、实验要求**
+本 SOP 适用于在 CentOS 7 系统中，将一块**全新的、尚未被系统使用的物理磁盘**（或云盘扩容后的新分区）挂载到操作系统目录中，以便业务能够存取数据。
 
-1、在虚拟机中添加一块新的虚拟硬盘；
+🚨 **绝对红线**：操作前必须使用 `lsblk` 或 `fdisk -l` 确认目标磁盘，**严禁对系统盘（通常是 `/dev/sda`）执行分区或格式化操作**，否则系统将直接崩溃、数据永久丢失。如果在云环境或 IDC 生产环境中，请确保已获授权并完成数据备份。
 
-2、使用fdisk，根据需求将虚拟硬盘分区并格式化、挂载；
+---
 
-3、熟悉和磁盘管理相关的命令，如fdisk, mkfs, mount, df等，以及使用/etc/fstab控制分区的自动挂载；
+#### 第一阶段：环境检查与设备确认
 
-**二、实验内容**
+**1. 确认磁盘是否被系统识别**
+```bash
+# 查看当前系统的块设备树状图
+lsblk
+```
+*预期结果*：找到新插入的盘（假设是 `/dev/sdb`）。注意看它的 `MOUNTPOINT` 列和它下面有没有子节点。如果是一块裸盘，它下面没有任何 `sdb1`、`sdb2` 这样的分区。
 
-1、打开虚拟机的管理设置，为Centos7添加一块新的虚拟磁盘。
+**2. 确认分区表类型**
+```bash
+# 查看指定磁盘的详细信息
+fdisk -l /dev/sdb
+```
+*预判*：确认它是 MBR（`dos`）还是 GPT（`gpt`）。如果是小于 2TB 的盘，用 MBR 即可；若大于 2TB，必须使用 `parted` 或 `gdisk` 建立 GPT 分区表。
 
-![](https://i-blog.csdnimg.cn/direct/ac75ca8afdff4999b1f96957a6a5401b.png)
+---
 
-![](https://i-blog.csdnimg.cn/direct/d45229b3b1b24c8da44b4da5967a812f.png)
+#### 第二阶段：磁盘分区
 
-![](https://i-blog.csdnimg.cn/direct/e42c8fe74d9540949215406184781c1b.png)
+**1. 进入 fdisk 交互界面**
+```bash
+# 对空盘 /dev/sdb 进行分区操作
+fdisk /dev/sdb
+```
 
-![](https://i-blog.csdnimg.cn/direct/ad62903850dd4474abc10084109066df.png)
+**2. 交互式操作步骤**
+进入界面后，按以下顺序输入指令：
+```text
+Command (m for help): n       # n 代表新建分区
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): p         # p 代表创建主分区
+Partition number (1-4, default 1): 1  # 分区号，默认1即可
+First sector (2048-xxxxx, default 2048): [直接回车] # 起始扇区，使用默认值（保证1MB对齐）
+Last sector, +sectors or +size{K,M,G} (2048-xxxxx, default xxxxx): [直接回车] # 结束扇区，直接回车代表把全盘空间都分给这个区。如果只想分 2TB，输入 +2T
 
-2、查看虚拟机管理设置，新的虚拟磁盘已创建完成。
+Command (m for help): p       # 打印确认一下分区信息是否创建成功
+Command (m for help): w       # 写入并退出
+```
 
-![](https://i-blog.csdnimg.cn/direct/b9b098f3917a4032a082734d2d675a6b.png)
+**3. 让内核重新识别分区表**
+```bash
+# 刷新内核分区表（如果提示找不到设备时执行）
+partprobe /dev/sdb
+# 再次查看，应该能看到 /dev/sdb1 了
+lsblk
+```
 
-3、对新创建的磁盘进行格式化、分区和挂载。
+---
 
-（1）使用“fdisk -l”指令查看当前磁盘分区状态,此时可以看到新磁盘/dev/sdb已存在。
+#### 第三阶段：格式化文件系统
 
-![](https://i-blog.csdnimg.cn/direct/e36f3289bcc74ffb9579e1befd6def60.png)
+CentOS 7 推荐的默认文件系统是 **XFS**（处理大文件性能好），也可以选择 EXT4。
 
-（2）使用“fdisk /dev/sdb”指令开始对磁盘进行分区,根据获取的命令帮助按照需要对磁盘进行相应的操作（一般情况下按默认即可）。
+```bash
+# 将 /dev/sdb1 格式化为 XFS 文件系统
+mkfs.xfs /dev/sdb1
 
-![](https://i-blog.csdnimg.cn/direct/c7a09c49e8ae46c9a48899450db8b18d.png)
+# （可选）如果业务明确要求使用 EXT4，则执行：
+# mkfs.ext4 /dev/sdb1
+```
+*注意*：格式化会清除磁盘上的所有数据，执行前请再次确认盘符是否绝对正确。
 
-![](https://i-blog.csdnimg.cn/direct/49565ea8515a4d46816ac5f9895edb07.png)
+---
 
-（3）再次查看当前磁盘分区状态，此时我们已经将/dev/sdb划分成一个分区，该分区为/dev/sdb1。
+#### 第四阶段：挂载与验证
 
-![](https://i-blog.csdnimg.cn/direct/882570f9aace4c24b5a50175f6cd9dc4.png)
+**1. 创建挂载点目录**
+```bash
+# 假设我们要把这块盘挂载到 /data 目录
+mkdir -p /data
+```
 
-（4）使用“mkfs -t ext3 /dev/sdb1”指令对分区sdb1格式化成为ext3的文件系统。
+**2. 临时挂载（重启后会失效）**
+```bash
+mount /dev/sdb1 /data
+```
 
-![](https://i-blog.csdnimg.cn/direct/b0bf3b44f5234ea999fa5e0d9ee20d19.png)
+**3. 验证挂载结果**
+```bash
+# 查看容量和挂载点
+df -Th
+```
+*预期结果*：输出中应包含一行 `/dev/sdb1 xfs [容量] [已用] [可用] 1% /data`。
 
-（5）使用“mkdir /data && mount /dev/sdb1 /data”指令对分区sdb1进行手动挂载，挂载点为/data目录，使用“df -h”指令查看挂载结果，此时sdb1已成功挂载到/data目录上。
+---
 
-![](https://i-blog.csdnimg.cn/direct/7f05c9aa8f7a464ea34f1ef8fa9cb4ba.png)
+#### 第五阶段：配置开机自动挂载（关键步骤）
 
-（6）我们将虚拟机 **重启** 再次查看挂载情况，发现sdb1挂载项目消失。原因是 **手动挂载是临时的** ，Linux的磁盘分区都必须挂载到目录树中的某个具体的目录上才能进行读写操作，在Linux操作系统中由fstab负责配置。 **如果手动挂载不修改fstab文件，那么在开机的时候操作系统会调用fstab配置文件，将手动挂载配置覆盖，这是重启后挂载的分区丢失的根本原因，所以我们需要修改/etc/fstab文件解决这个问题。**
+**千万不要直接在 `/etc/fstab` 中写 `/dev/sdb1`**，因为服务器的磁盘顺序可能会因插拔而改变（比如插拔了一块系统盘，sdb 可能会变成 sdc），导致重启时由于找不到盘而**无法开机**。必须使用**UUID**。
 
-![](https://i-blog.csdnimg.cn/direct/04ecafb3b5ca4060a2324f0009b89d6f.png)
+**1. 获取分区的 UUID**
+```bash
+# 查看 sdb1 的 UUID 和文件系统类型
+blkid /dev/sdb1
+# 输出示例：/dev/sdb1: UUID="f3b1a2c4-1234-5678-90ab-cdef01234567" TYPE="xfs"
+```
+*复制 UUID 字段里的字符，不要带引号。*
 
-（7）使用“ vim /etc/fstab”指令在fstab配置文件中添加一条有关sdb1的挂载配置。
+**2. 编辑 /etc/fstab**
+```bash
+vi /etc/fstab
+```
 
-![](https://i-blog.csdnimg.cn/direct/30dd9654505a47cfa26d27fbb42dcfd0.png)
+在文件末尾添加一行（请替换为你刚刚复制的 UUID）：
+```ini
+UUID=f3b1a2c4-1234-5678-90ab-cdef01234567 /data xfs defaults 0 0
+```
+*字段解释*：
+*   `UUID=...`：设备标识。
+*   `/data`：挂载点。
+*   `xfs`：文件系统类型。
+*   `defaults`：挂载参数（读写、允许执行等）。
+*   `0`：是否使用 `dump` 备份（0代表不备份）。
+*   `0`：开机时是否使用 `fsck` 检查（根目录通常写1，其他目录写0）。
 
-（8）再次查看磁盘分区的挂载情况，sdb1成功挂载，挂载点为/media目录，至此， **新磁盘分区永久挂载成功。**
+**3. 测试 fstab 文件是否写错（救命操作）**
+```bash
+# 先卸载刚才的临时挂载
+umount /data
 
-![](https://i-blog.csdnimg.cn/direct/2667f193956047ba9abddbb1679d78a1.png)
+# 重新加载 fstab 文件中的所有挂载项（如果报错，千万不要重启！立刻回去改 fstab）
+mount -a
 
-[openEuler 社区](https://openeuler.csdn.net/)
+# 再次验证是否挂载成功
+df -h /data
+```
 
-openEuler 是由开放原子开源基金会孵化的全场景开源操作系统项目，面向数字基础设施四大核心场景（服务器、云计算、边缘计算、嵌入式），全面支持 ARM、x86、RISC-V、loongArch、PowerPC、SW-64 等多样性计算架构
+---
 
-已为社区贡献7条内容
+#### 第六阶段：常见故障排查
 
-开源官网
+**1. 报错 `mount: wrong fs type, bad option, bad superblock`**
+*   **原因**：没有格式化就直接挂载了，或者文件系统类型写错了。
+*   **解决**：先 `lsblk -f` 确认是否有 FSTYPE，如果没有，先执行 `mkfs.xfs`。
+
+**2. 重启后服务器进入紧急模式（Emergency Mode）**
+*   **原因**：`/etc/fstab` 写错了（比如 UUID 写错、挂载点写错），系统在开机时找不到这块盘，卡死了。
+*   **解决**：在控制台输入 root 密码进入系统，执行 `vi /etc/fstab` 删除或注释掉错误的那行，重启即可。
+
+**3. `mount: /data: target is busy`（无法卸载）**
+*   **原因**：有进程正在占用 `/data` 目录。
+*   **解决**：执行 `lsof /data` 查看占用进程，或用 `fuser -mv /data` 找出占用者并终止相关进程，然后再 `umount`。
