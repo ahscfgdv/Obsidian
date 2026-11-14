@@ -1,4 +1,5 @@
 {
   "accentColor": "#111112",
-  "cssTheme": "Border"
+  "cssTheme": "Border",
+  "showRibbon": true
 }
