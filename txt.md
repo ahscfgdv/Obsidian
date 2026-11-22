@@ -161,3 +161,4 @@ nas das fas san
 胖树架构（传统三层架构）
 
 RDMA
+infiniband
