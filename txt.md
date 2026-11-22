@@ -162,3 +162,5 @@ nas das fas san
 
 RDMA
 infiniband
+
+巡检登记随工
