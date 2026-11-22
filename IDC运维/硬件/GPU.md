@@ -1,3 +1,7 @@
+dcgm
+
+
+
 nvidia-smi（NVIDIA System Management Interface）是随NVIDIA驱动一同安装的命令行工具，用于监控和管理服务器上的NVIDIA GPU。对IDC运维而言，它的核心价值在于**快速判断GPU是否在健康地工作**——“利用率100%”不等于“健康”，降频、ECC计数增长、PCIe链路缩水都不会直接报错，但nvidia-smi能看到。
 
 
