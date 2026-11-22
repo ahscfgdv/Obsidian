@@ -143,3 +143,7 @@
 
 
 asic fpga
+
+存储设备
+外置存储
+nas das fas san
