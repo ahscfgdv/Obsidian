@@ -16,6 +16,35 @@
 *   **作用**：以整齐的表格输出 CPU 的全套关键信息。
 *   **参数解释**：无参数直接运行，信息来自 `/proc/cpuinfo` 和 sysfs，无需 root。
 
+```shell
+[root@localhost ~]# lscpu
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                1
+On-line CPU(s) list:   0
+Thread(s) per core:    1
+Core(s) per socket:    1
+Socket(s):             1
+NUMA node(s):          1
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 165
+Model name:            Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz
+Stepping:              2
+CPU MHz:               2592.008
+BogoMIPS:              5184.01
+Hypervisor vendor:     VMware
+Virtualization type:   full
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              256K
+L3 cache:              12288K
+NUMA node0 CPU(s):     0
+Flags:                 fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon nopl xtopology tsc_reliable nonstop_tsc eagerfpu pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single ssbd ibrs ibpb stibp fsgsbase tsc_adjust bmi1 avx2 smep bmi2 invpcid rdseed adx smap clflushopt xsaveopt xsavec xgetbv1 arat md_clear spec_ctrl intel_stibp flush_l1d arch_capabilities
+
+```
+
 #### 2. `lscpu -e` 【只读/安全】
 *   **作用**：以"每个 CPU 核心一行"的扩展表格显示 NUMA 节点、核心、插槽、线程的对应关系。
 *   **参数解释**：`-e` = extend。做绑核（`taskset`）、看哪几个核在同一个 NUMA 节点时用。
