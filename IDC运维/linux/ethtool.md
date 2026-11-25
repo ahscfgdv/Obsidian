@@ -12,9 +12,81 @@
 
 ### B. 最常用的 5 个命令形式
 
-#### 1. `ethtool eth0` 【只读/安全】
+#### 1. `ethtool ens33` 【只读/安全】
 *   **作用**：查看网卡的链路状态、速率、双工、自协商等核心信息。
 *   **参数解释**：`eth0` 换成实际网卡名（用 `[[ip命令]]` 的 `ip link` 先查）。最常用的形式。
+
+```shell
+[root@localhost ~]# ethtool ens33
+# 命令：查看网卡 ens33 的驱动、链路、速率、双工、自协商、唤醒等设置
+Settings for ens33:
+# 以下是网卡 ens33 的设置信息
+        Supported ports: [ TP ]
+        # 网卡支持的端口类型：[ TP ]
+        # TP = Twisted Pair，双绞线（常见以太网网线）
+        Supported link modes:   10baseT/Half 10baseT/Full
+                                100baseT/Half 100baseT/Full
+                                1000baseT/Full
+        # 网卡硬件支持的链路模式：
+        # 10baseT/Half：10Mbps，双绞线，半双工
+        # 10baseT/Full：10Mbps，双绞线，全双工
+        # 100baseT/Half：100Mbps，双绞线，半双工
+        # 100baseT/Full：100Mbps，双绞线，全双工
+        # 1000baseT/Full：1000Mbps（1Gbps），双绞线，全双工
+        Supported pause frame use: No
+        # 是否支持暂停帧（PAUSE frame）流控：不支持
+        Supports auto-negotiation: Yes
+        # 是否支持自动协商：支持
+        # 自动协商用于和链路对端协商速率、双工模式等
+        Supported FEC modes: Not reported
+        # 支持的 FEC（前向纠错）模式：未报告
+        # FEC 常用于高速以太网中降低误码率
+        Advertised link modes:  10baseT/Half 10baseT/Full
+                                100baseT/Half 100baseT/Full
+                                1000baseT/Full
+        # 网卡当前向链路对端“通告”的链路模式：
+        # 即本端告诉对端自己支持并愿意协商哪些速率/双工模式
+        Advertised pause frame use: No
+        # 当前通告的暂停帧流控能力：不支持/未启用
+        Advertised auto-negotiation: Yes
+        # 当前通告的自动协商能力：开启
+        # 表示本端会参与自动协商
+        Advertised FEC modes: Not reported
+        # 当前通告的 FEC 模式：未报告
+        Speed: 1000Mb/s
+        # 当前实际链路速率：1000Mb/s，即 1Gbps
+        Duplex: Full
+        # 当前双工模式：Full，全双工
+        # 表示可以同时发送和接收数据
+        Port: Twisted Pair
+        # 当前使用的端口类型：Twisted Pair，双绞线
+        PHYAD: 0
+        # PHY 地址：0
+        # PHY 是物理层收发器芯片，PHYAD 是其地址标识
+        Transceiver: internal
+        # 收发器类型：internal，内置收发器
+        Auto-negotiation: on
+        # 自动协商状态：开启
+        MDI-X: off (auto)
+        # MDI-X（介质相关接口交叉）状态：off，自动模式
+        # 用于处理直通线和交叉线的自动适配；off(auto) 表示当前关闭，但处于自动模式
+        Supports Wake-on: d
+        # 支持的 Wake-on-LAN 唤醒方式：d
+        # d 通常表示 disable，即支持“禁用唤醒”这一选项
+        Wake-on: d
+        # 当前 Wake-on-LAN 状态：d
+        # d = disable，表示当前未启用网络唤醒
+        Current message level: 0x00000007 (7)
+                               drv probe link
+        # 当前 ethtool 消息级别：0x00000007，即十进制 7
+        # 对应的消息类别为：
+        # drv：驱动相关消息
+        # probe：设备探测相关消息
+        # link：链路状态相关消息
+        Link detected: yes
+        # 是否检测到链路：yes
+        # 表示网卡与对端/交换机之间的物理链路已连接
+```
 
 #### 2. `ethtool -i eth0` 【只读/安全】
 *   **作用**：查看网卡驱动名、驱动版本、固件版本（firmware-version）。
