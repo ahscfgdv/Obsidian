@@ -54,7 +54,7 @@ systemctl disable NetworkManager
 **2. bond0 配置（balance-rr）**
 创建 `/etc/sysconfig/network-scripts/ifcfg-bond0`：
 ```ini
-CE=bond0
+DEVICECE=bond0
 NAME=bond0
 TYPE=Bond
 BONDING_MASTER=yes
