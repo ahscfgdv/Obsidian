@@ -54,15 +54,15 @@ systemctl disable NetworkManager
 **2. bond0 配置（balance-rr）**
 创建 `/etc/sysconfig/network-scripts/ifcfg-bond0`：
 ```ini
-DEVICE=bond0
+CE=bond0
 NAME=bond0
 TYPE=Bond
 BONDING_MASTER=yes
 BOOTPROTO=static
 ONBOOT=yes
-IPADDR=192.168.1.100
+IPADDR=192.168.184.137
 PREFIX=24
-GATEWAY=192.168.1.1
+GATEWAY=192.168.184.2
 # mode=0 表示轮询；miimon=100 表示每100ms检测一次链路
 BONDING_OPTS="mode=0 miimon=100"
 NM_CONTROLLED=no
