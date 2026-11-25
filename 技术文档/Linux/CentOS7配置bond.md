@@ -173,5 +173,7 @@ cat /proc/net/bonding/bond4  # 验证内核层状态
 #### ⚠️ 常见排错与避坑
 
 1.  **“Device or resource busy” 报错**：通常是因为你在 NetworkManager 运行的情况下，尝试用 `systemctl restart network` 重启网络。**务必确认你只使用了其中一种方法。**
-2.  **bond4 不通**：99% 的原因是交换机侧没开 LACP，或者两端 `lacp_rate` 不一致。可以查看 `cat /proc/net/bonding/bond4` 里的 `LACP rate` 和 `Aggregator ID`。
+2.  **bond4 和 bond0不通**：99% 的原因是交换机侧没开 LACP，或者两端 `lacp_rate` 不一致。可以查看 `cat /proc/net/bonding/bond4` 里的 `LACP rate` 和 `Aggregator ID`。
 3.  **虚拟化环境坑点**：在 VMware 等虚拟机中做实验，**千万别用 bond0**。虚拟交换机不支持静态链路聚合，bond0 会导致网络频繁中断。虚拟机实验请优先用 **bond1（免配置）** 或 **bond4（需在虚拟交换机开启 LACP）**。
+4. 配置了bond0之后因为又配置了bond1，没有删除bond0的的配置文件或者两个配置文件都是启动的状态导致网络无法正常使用
+
