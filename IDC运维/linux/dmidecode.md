@@ -26,6 +26,10 @@ DMI（Desktop Management Interface，桌面管理接口）是一套由DMTF制定
 *   **作用**：查看主板信息——厂商、型号、主板序列号。
 *   **参数解释**：`baseboard` 即主板，对应 `[[主板]]`。
 
+```bash
+
+```
+
 #### 4. `dmidecode -t bios` 【只读/需 root】
 *   **作用**：查看 BIOS 厂商、版本、发布日期。
 *   **参数解释**：升级 BIOS、核对是否有已知漏洞/微码问题时先看版本。
