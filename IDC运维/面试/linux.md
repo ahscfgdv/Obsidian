@@ -1,6 +1,2 @@
-### 绝对路径用什么符号表示？[当前目录](https://zhida.zhihu.com/search?content_id=104781549&content_type=Article&match_order=1&q=%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95&zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3OTU3NjI5MzcsInEiOiLlvZPliY3nm67lvZUiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDQ3ODE1NDksImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.OSl1GIKnMKXcxBvSY4M1KPy-l_iZyTh0MfOjw_ehswg&zhida_source=entity)、上层目录用什么表示？[主目录](https://zhida.zhihu.com/search?content_id=104781549&content_type=Article&match_order=1&q=%E4%B8%BB%E7%9B%AE%E5%BD%95&zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3OTU3NjI5MzcsInEiOiLkuLvnm67lvZUiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDQ3ODE1NDksImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.N10TooDRxwHgmFS0aChg8jNMyWoCHPqCXvhaZApAp1w&zhida_source=entity)用什么表示? [切换目录](https://zhida.zhihu.com/search?content_id=104781549&content_type=Article&match_order=1&q=%E5%88%87%E6%8D%A2%E7%9B%AE%E5%BD%95&zd_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6aGlkYV9zZXJ2ZXIiLCJleHAiOjE3OTU3NjI5MzcsInEiOiLliIfmjaLnm67lvZUiLCJ6aGlkYV9zb3VyY2UiOiJlbnRpdHkiLCJjb250ZW50X2lkIjoxMDQ3ODE1NDksImNvbnRlbnRfdHlwZSI6IkFydGljbGUiLCJtYXRjaF9vcmRlciI6MSwiemRfdG9rZW4iOm51bGx9.wSS53Ti8vI8nc58wZl83ojasWXMBNShemJkpCwJCALY&zhida_source=entity)用什么命令？
+## Unix 和 Linux 有什么区别
 
-绝对路径：如/etc/init.d  
-当前目录和上层目录：./ ../  
-主目录：~/  
-切换目录：cd
