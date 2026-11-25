@@ -18,6 +18,19 @@
 *   **作用**：以人类可读的格式（Human-readable）显示磁盘空间。
 *   **参数解释**：`-h` 会自动把字节换算成 K、M、G，比如把 `10485760` 变成 `10G`，这是最常用的形式。
 
+```shell
+[root@localhost ~]# df -h
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                 475M     0  475M   0% /dev
+tmpfs                    487M     0  487M   0% /dev/shm
+tmpfs                    487M  7.7M  479M   2% /run
+tmpfs                    487M     0  487M   0% /sys/fs/cgroup
+/dev/mapper/centos-root   37G  1.8G   36G   5% /
+/dev/sda1               1014M  138M  877M  14% /boot
+tmpfs                     98M     0   98M   0% /run/user/0
+
+```
+
 #### 2. `df -T` 【只读/安全】
 - `--print-type`
 *   **作用**：在输出中增加一列“文件系统类型（Type）”。
