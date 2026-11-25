@@ -27,7 +27,72 @@ DMI（Desktop Management Interface，桌面管理接口）是一套由DMTF制定
 *   **参数解释**：`baseboard` 即主板，对应 `[[主板]]`。
 
 ```bash
+[root@localhost ~]# dmidecode -t baseboard
+# 命令：只查看与“主板/基板（baseboard）”相关的 DMI/SMBIOS 信息
 
+dmidecode 3.2
+# dmidecode 工具版本为 3.2
+
+Getting SMBIOS data from sysfs.
+# 表示从 Linux 的 sysfs 文件系统中读取 SMBIOS 数据
+
+SMBIOS 2.7 present.
+# 表示当前系统固件提供的 SMBIOS 版本为 2.7
+
+Handle 0x0002, DMI type 2, 15 bytes
+# Handle 0x0002：该 SMBIOS 结构的句柄/标识符为 0x0002
+# DMI type 2：DMI 类型 2，表示“Base Board Information（基板/主板信息）”
+# 15 bytes：该结构数据长度为 15 字节
+
+Base Board Information
+# 基板/主板信息结构开始
+         Manufacturer: Intel Corporation
+# 主板制造商：Intel Corporation
+         Product Name: 440BX Desktop Reference Platform
+# 主板产品名称：440BX Desktop Reference Platform
+# 这是 VMware 虚拟机中常见的虚拟主板型号
+         Version: None
+# 主板版本：未提供/无
+         Serial Number: None
+# 主板序列号：未提供/无
+         Asset Tag: Not Specified
+# 资产标签：未指定
+         Features: None
+# 主板特性：无
+         Location In Chassis: Not Specified
+# 主板在机箱中的位置：未指定
+         Chassis Handle: 0x0000
+# 关联的机箱信息句柄：0x0000
+# 用于指向描述该主板所在机箱的 SMBIOS 结构
+         Type: Unknown
+# 主板类型：未知
+         Contained Object Handles: 0
+# 该主板包含的对象句柄数量：0
+# 表示没有包含对象句柄
+
+Handle 0x019F, DMI type 10, 8 bytes
+# Handle 0x019F：该 SMBIOS 结构的句柄为 0x019F
+# DMI type 10：DMI 类型 10，表示“On Board Devices Information（板载设备信息）”
+# 8 bytes：该结构数据长度为 8 字节
+
+On Board Device 1 Information
+# 第 1 个板载设备信息条目
+         Type: Video
+# 板载设备类型：视频/显示设备
+         Status: Disabled
+# 设备状态：已禁用
+         Description: VMware SVGA II
+# 设备描述：VMware SVGA II
+# 这是 VMware 虚拟机的虚拟显卡
+On Board Device 2 Information
+# 第 2 个板载设备信息条目
+         Type: Sound
+# 板载设备类型：声音/音频设备
+         Status: Disabled
+# 设备状态：已禁用
+         Description: ES1371
+# 设备描述：ES1371
+# 这是常见的虚拟音频设备型号
 ```
 
 #### 4. `dmidecode -t bios` 【只读/需 root】
